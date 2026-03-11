@@ -434,9 +434,62 @@
 
     .doc-footer p { color: rgba(255,255,255,0.4); font-size: 0.83rem; margin-bottom: 0; }
 
-    @media (max-width: 700px) {
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .features-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+      .toc-list { flex-wrap: wrap; gap: 8px; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-inner { height: 60px; padding: 0 16px; }
+      .logo-mark { width: 38px; height: 38px; }
+      .logo-name { font-size: 1rem; }
+      .logo-tagline { font-size: 0.54rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .mobile-menu { display: flex; }
+      .page-hero { padding: 48px 16px 36px; }
+      .page-title { font-size: clamp(1.6rem, 6vw, 2.4rem); }
+      .features-grid { grid-template-columns: 1fr; }
+      .step-section { padding: 32px 16px; }
+      .step-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .step-number { font-size: 2rem; }
+      .step-content-grid { grid-template-columns: 1fr; gap: 20px; }
+      pre, code { font-size: 0.8rem; border-radius: 8px; }
+      pre { padding: 16px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .support-table { font-size: 0.82rem; }
+      .toc-list { flex-direction: column; gap: 6px; }
+      .toc-link { width: 100%; text-align: left; }
+      .section-inner { padding: 56px 16px; }
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 28px; }
+      .footer-bottom { flex-direction: column; text-align: center; gap: 10px; }
       .feature-grid { grid-template-columns: 1fr; }
-      .toc-inner { gap: 0; }
+      .toc-inner { gap: 0; flex-direction: column; }
+      .doc-main { padding: 32px 16px 60px; }
+      .doc-header { padding: 40px 16px 32px; }
+    }
+
+    @media (max-width: 480px) {
+      .page-hero { padding: 36px 12px 28px; }
+      .step-section { padding: 24px 12px; }
+      pre { font-size: 0.75rem; padding: 12px; }
+      .feature-card { padding: 20px 16px; }
+      .section-inner { padding: 40px 12px; }
+      .footer-inner { grid-template-columns: 1fr; gap: 20px; }
+      .doc-main { padding: 24px 12px 48px; }
+      .feature-grid { gap: 10px; }
+    }
+
+    @media (max-width: 375px) {
+      .nav-inner { height: 52px; padding: 0 12px; }
+      .logo-tagline { display: none; }
+      .step-section { padding: 20px 10px; }
+      pre { font-size: 0.72rem; }
+      .doc-main { padding: 16px 10px 40px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
     }
   </style>
 </head>
