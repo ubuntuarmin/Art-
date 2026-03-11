@@ -165,11 +165,11 @@
       background: var(--charcoal);
       z-index: 2000;
       flex-direction: column;
-      padding: 90px 28px 32px;
+      padding: 84px 28px 32px;
       gap: 6px;
       overflow-y: auto;
       transition: right 0.38s cubic-bezier(0.25, 0.8, 0.25, 1);
-      border-left: 2px solid var(--terra);
+      border-left: 3px solid var(--terra);
       box-shadow: -8px 0 32px rgba(0,0,0,0.3);
     }
 
@@ -1192,7 +1192,11 @@
       .logo-tagline { font-size: 0.55rem; letter-spacing: 2px; }
       .nav-links { display: none; }
       .hamburger { display: flex; }
-      .hero { padding: 64px 16px 48px; min-height: auto; }
+      .hero { padding: 36px 16px 48px; min-height: auto; }
+      .hero-inner { gap: 28px; padding-top: 0; }
+      .hero-visual { order: 1; }
+      .art-canvas { max-height: 240px; aspect-ratio: auto; width: 100%; max-width: 320px; margin: 0 auto; }
+      .float-badge { display: none; }
       .hero-badge { font-size: 0.78rem; padding: 8px 16px; }
       .hero-title { font-size: clamp(2rem, 8vw, 3rem); }
       .hero-desc { font-size: 1rem; }
