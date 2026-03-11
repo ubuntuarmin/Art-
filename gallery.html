@@ -655,10 +655,22 @@
     const art   = document.getElementById('lightboxArt');
     const t     = document.getElementById('lightboxTitle');
     const m     = document.getElementById('lightboxMeta');
-    art.innerHTML = `<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;height:100%;opacity:0.55;"><div style="font-size:5rem;">${emoji}</div><div style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.5)">[ Photo goes here ]</div></div>`;
-    art.className   = 'lightbox-art ' + tileClasses[Math.floor(Math.random() * tileClasses.length)];
-    t.textContent   = title;
-    m.textContent   = meta;
+    // Use textContent for emoji to avoid XSS; build placeholder with safe DOM methods
+    art.className = 'lightbox-art ' + tileClasses[Math.floor(Math.random() * tileClasses.length)];
+    art.innerHTML = '';
+    const wrapper = document.createElement('div');
+    wrapper.style.cssText = 'display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;height:100%;opacity:0.55;';
+    const emojiEl = document.createElement('div');
+    emojiEl.style.fontSize = '5rem';
+    emojiEl.textContent = emoji;
+    const phEl = document.createElement('div');
+    phEl.style.cssText = 'font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.5)';
+    phEl.textContent = '[ Photo goes here ]';
+    wrapper.appendChild(emojiEl);
+    wrapper.appendChild(phEl);
+    art.appendChild(wrapper);
+    t.textContent = title;
+    m.textContent = meta;
     lb.classList.add('open');
     document.body.style.overflow = 'hidden';
   }

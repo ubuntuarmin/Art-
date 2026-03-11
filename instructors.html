@@ -659,10 +659,14 @@
     currentName  = radio.dataset.name;
     document.querySelectorAll('.class-option').forEach(opt => opt.classList.remove('selected'));
     radio.closest('.class-option').classList.add('selected');
+    if (promoDiscount > 0) {
+      const msgEl = document.getElementById('promoMsg');
+      msgEl.textContent = 'ℹ️ Promo code cleared — please re-apply for this class.';
+      msgEl.className = 'promo-msg';
+      msgEl.style.color = 'var(--text-muted)';
+    }
     promoDiscount = 0;
     document.getElementById('promoCode').value = '';
-    document.getElementById('promoMsg').textContent = '';
-    document.getElementById('promoMsg').className = 'promo-msg';
     recalcTotal();
   }
 
@@ -738,7 +742,9 @@
 
     setTimeout(() => {
       btn.classList.remove('loading');
-      const refNum = 'BTC-' + Date.now().toString(36).toUpperCase().slice(-6);
+      const refNum = 'BTC-' + (typeof crypto !== 'undefined' && crypto.randomUUID
+        ? crypto.randomUUID().replace(/-/g, '').slice(0, 8).toUpperCase()
+        : (Date.now().toString(36) + Math.random().toString(36).slice(2, 6)).toUpperCase().slice(-8));
       document.getElementById('successRef').textContent = 'Confirmation sent to: ' + email;
       document.getElementById('successBookingRef').textContent = 'Booking Ref: ' + refNum + ' · ' + currentName;
       document.getElementById('successOverlay').classList.add('show');

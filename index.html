@@ -1707,10 +1707,12 @@
 <script>
   function handleNewsletter(e) {
     e.preventDefault();
-    document.getElementById('newsletterSuccess').style.display = 'block';
-    document.getElementById('newsletterEmail').value = '';
-    document.getElementById('newsletterEmail').style.display = 'none';
-    document.querySelector('.newsletter-btn').style.display = 'none';
+    const emailInput = document.getElementById('newsletterEmail');
+    const successEl  = document.getElementById('newsletterSuccess');
+    successEl.style.display = 'block';
+    emailInput.value = '';
+    // Keep the form visible but show success; reset after 4 seconds so user can add another email
+    setTimeout(() => { successEl.style.display = 'none'; }, 4000);
   }
 
   function toggleMenu() {
