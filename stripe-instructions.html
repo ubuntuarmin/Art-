@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stripe Payment Setup Guide — Beyond the Canvas Art Studio (Owner Only)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --charcoal:   #1C1C1C;
+      --terra:      #C4622D;
+      --terra-dark: #A04E22;
+      --gold:       #D4A843;
+      --cream:      #FAF7F2;
+      --cream2:     #F0EBE3;
+      --white:      #FFFFFF;
+      --stripe:     #635BFF;
+      --stripe-dark:#4F49CC;
+      --green:      #22c55e;
+      --red:        #ef4444;
+      --text-dark:  #1C1C1C;
+      --text-mid:   #4A4A4A;
+      --text-muted: #7A7A7A;
+      --border:     #E5E0D8;
+      --code-bg:    #1e1e2e;
+      --code-text:  #cdd6f4;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--text-dark); line-height: 1.65; }
+
+    /* Header */
+    .doc-header {
+      background: linear-gradient(135deg, var(--charcoal) 0%, #2A1810 60%, #1A1A2E 100%);
+      padding: 56px 24px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .doc-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 50% 70% at 80% 30%, rgba(99,91,255,0.15) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 50% at 20% 70%, rgba(196,98,45,0.12) 0%, transparent 70%);
+    }
+
+    .header-inner { max-width: 760px; margin: 0 auto; position: relative; z-index: 1; }
+
+    .owner-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(239,68,68,0.2);
+      border: 1px solid rgba(239,68,68,0.4);
+      color: #fca5a5;
+      padding: 6px 16px;
+      border-radius: 50px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+
+    .doc-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 14px;
+      line-height: 1.2;
+    }
+
+    .doc-title .stripe-color { color: #a5b4fc; }
+
+    .doc-subtitle {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.58);
+      line-height: 1.8;
+      max-width: 560px;
+      margin: 0 auto 32px;
+    }
+
+    .doc-meta {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .doc-meta-item {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.45);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* TOC */
+    .toc-bar {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+
+    .toc-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .toc-inner::-webkit-scrollbar { display: none; }
+
+    .toc-link {
+      padding: 14px 16px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-decoration: none;
+      white-space: nowrap;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -1px;
+      transition: all 0.2s;
+    }
+
+    .toc-link:hover { color: var(--stripe); border-bottom-color: var(--stripe); }
+
+    /* Main content */
+    .doc-main { max-width: 900px; margin: 0 auto; padding: 56px 24px 80px; }
+
+    /* Section */
+    .doc-section { margin-bottom: 64px; }
+
+    .section-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--stripe);
+      color: var(--white);
+      font-size: 0.82rem;
+      font-weight: 800;
+      margin-right: 12px;
+      flex-shrink: 0;
+      vertical-align: middle;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      padding-bottom: 14px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .section-title .section-icon { margin-right: 10px; }
+
+    p { margin-bottom: 16px; font-size: 0.95rem; color: var(--text-mid); line-height: 1.8; }
+
+    /* Alert boxes */
+    .alert {
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 20px 0;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .alert-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
+    .alert-body { flex: 1; }
+    .alert-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 4px; }
+    .alert-text  { font-size: 0.87rem; line-height: 1.65; }
+
+    .alert-warning { background: #FFF7ED; border: 1px solid #FED7AA; }
+    .alert-warning .alert-title { color: #C2410C; }
+    .alert-warning .alert-text  { color: #7C2D12; }
+
+    .alert-info    { background: #EFF6FF; border: 1px solid #BFDBFE; }
+    .alert-info .alert-title { color: #1D4ED8; }
+    .alert-info .alert-text  { color: #1E3A5F; }
+
+    .alert-success { background: #F0FDF4; border: 1px solid #BBF7D0; }
+    .alert-success .alert-title { color: #15803D; }
+    .alert-success .alert-text  { color: #14532D; }
+
+    .alert-danger  { background: #FEF2F2; border: 1px solid #FECACA; }
+    .alert-danger .alert-title { color: #B91C1C; }
+    .alert-danger .alert-text  { color: #7F1D1D; }
+
+    /* Steps */
+    .steps-list { list-style: none; counter-reset: steps; }
+
+    .step-item {
+      counter-increment: steps;
+      position: relative;
+      padding: 0 0 36px 60px;
+    }
+
+    .step-item::before {
+      content: counter(steps);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--stripe), var(--stripe-dark));
+      color: var(--white);
+      font-size: 0.85rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .step-item::after {
+      content: '';
+      position: absolute;
+      left: 19px;
+      top: 38px;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--stripe), rgba(99,91,255,0.1));
+    }
+
+    .step-item:last-child::after { display: none; }
+    .step-item:last-child { padding-bottom: 0; }
+
+    .step-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+      line-height: 1.4;
+      padding-top: 6px;
+    }
+
+    .step-desc {
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      line-height: 1.72;
+      margin-bottom: 10px;
+    }
+
+    /* Code blocks */
+    .code-block {
+      background: var(--code-bg);
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 16px 0;
+    }
+
+    .code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 16px;
+      background: rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .code-lang { font-size: 0.72rem; font-weight: 700; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1.5px; }
+
+    .code-body {
+      padding: 18px 20px;
+      overflow-x: auto;
+    }
+
+    pre { margin: 0; }
+
+    code {
+      font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+      font-size: 0.83rem;
+      line-height: 1.65;
+      color: var(--code-text);
+    }
+
+    .code-inline {
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      background: rgba(99,91,255,0.1);
+      color: var(--stripe);
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 0.85em;
+      border: 1px solid rgba(99,91,255,0.2);
+    }
+
+    .tok-comment { color: #6272a4; font-style: italic; }
+    .tok-keyword { color: #ff79c6; }
+    .tok-string  { color: #f1fa8c; }
+    .tok-var     { color: #8be9fd; }
+    .tok-fn      { color: #50fa7b; }
+    .tok-num     { color: #bd93f9; }
+
+    /* Info table */
+    .info-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin: 16px 0;
+      background: var(--white);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+
+    .info-table th {
+      background: var(--charcoal);
+      color: var(--white);
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .info-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); color: var(--text-mid); vertical-align: top; }
+    .info-table tr:last-child td { border-bottom: none; }
+    .info-table tr:hover td { background: var(--cream); }
+
+    /* Checklist */
+    .checklist { list-style: none; }
+
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 0;
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      border-bottom: 1px dashed rgba(0,0,0,0.07);
+    }
+
+    .checklist li:last-child { border-bottom: none; }
+
+    .check-box {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--border);
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* Tags */
+    .tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 50px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .tag-test { background: rgba(212,168,67,0.15); color: #92650A; border: 1px solid rgba(212,168,67,0.3); }
+    .tag-live { background: rgba(34,197,94,0.15); color: #15803D; border: 1px solid rgba(34,197,94,0.3); }
+    .tag-req  { background: rgba(239,68,68,0.12); color: #B91C1C; border: 1px solid rgba(239,68,68,0.25); }
+    .tag-opt  { background: rgba(99,91,255,0.1); color: #4338CA; border: 1px solid rgba(99,91,255,0.25); }
+
+    /* Card */
+    .doc-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 3px 16px rgba(0,0,0,0.07);
+      margin: 16px 0;
+      border-left: 4px solid var(--stripe);
+    }
+
+    .doc-card-title { font-weight: 700; font-size: 0.95rem; color: var(--text-dark); margin-bottom: 8px; }
+
+    /* Feature grid */
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 20px 0; }
+
+    .feature-card {
+      background: var(--white);
+      border-radius: 10px;
+      padding: 18px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      border-top: 3px solid var(--stripe);
+    }
+
+    .feature-icon { font-size: 2rem; margin-bottom: 10px; }
+    .feature-title { font-size: 0.88rem; font-weight: 700; color: var(--text-dark); margin-bottom: 6px; }
+    .feature-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.55; }
+
+    /* Back button */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--charcoal);
+      color: var(--white);
+      text-decoration: none;
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 32px;
+      transition: all 0.2s;
+    }
+
+    .back-btn:hover { background: var(--terra); }
+
+    /* Footer */
+    .doc-footer {
+      background: var(--charcoal);
+      padding: 32px 24px;
+      text-align: center;
+      margin-top: 80px;
+    }
+
+    .doc-footer p { color: rgba(255,255,255,0.4); font-size: 0.83rem; margin-bottom: 0; }
+
+    @media (max-width: 700px) {
+      .feature-grid { grid-template-columns: 1fr; }
+      .toc-inner { gap: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="doc-header">
+  <div class="header-inner">
+    <div class="owner-badge">🔒 For Studio Owner Only</div>
+    <h1 class="doc-title">How to Connect <span class="stripe-color">Stripe Payments</span></h1>
+    <p class="doc-subtitle">
+      A complete, step-by-step guide to connect Stripe to your booking form on <strong style="color:rgba(255,255,255,0.8)">instructors.html</strong>. No advanced coding needed — just follow the steps.
+    </p>
+    <div class="doc-meta">
+      <div class="doc-meta-item">📄 instructors.html — Booking Page</div>
+      <div class="doc-meta-item">⏱ ~60 minutes to complete</div>
+      <div class="doc-meta-item">🔑 Stripe Account Required (Free)</div>
+    </div>
+  </div>
+</div>
+
+<!-- Table of Contents -->
+<div class="toc-bar">
+  <div class="toc-inner">
+    <a href="#overview"   class="toc-link">Overview</a>
+    <a href="#step1"      class="toc-link">1. Create Account</a>
+    <a href="#step2"      class="toc-link">2. Get API Keys</a>
+    <a href="#step3"      class="toc-link">3. Add Stripe.js</a>
+    <a href="#step4"      class="toc-link">4. Frontend Code</a>
+    <a href="#step5"      class="toc-link">5. Backend/Server</a>
+    <a href="#step6"      class="toc-link">6. Test Payments</a>
+    <a href="#step7"      class="toc-link">7. Go Live</a>
+    <a href="#checklist"  class="toc-link">Checklist</a>
+    <a href="#support"    class="toc-link">Support</a>
+  </div>
+</div>
+
+<!-- Main Document -->
+<div class="doc-main">
+
+  <a href="index.html" class="back-btn">← Back to Website</a>
+
+  <!-- Overview -->
+  <div class="doc-section" id="overview">
+    <div class="section-title">
+      <span class="section-icon">💳</span>
+      Overview — What is Stripe?
+    </div>
+
+    <p>
+      <strong>Stripe</strong> is the world's most popular payment platform, used by companies like Amazon, Shopify, and Airbnb. It allows you to <strong>accept credit cards, debit cards, and Apple Pay / Google Pay</strong> securely on your website — without ever touching sensitive card data.
+    </p>
+
+    <p>Stripe handles all the complex security (PCI compliance, encryption, fraud detection) for you. Your website simply sends a payment token to Stripe's servers — no card numbers are ever stored on your site.</p>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <div class="feature-title">Bank-Level Security</div>
+        <div class="feature-desc">PCI DSS Level 1 certified. Stripe holds card data — your site never does.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💰</div>
+        <div class="feature-title">Pricing</div>
+        <div class="feature-desc">2.9% + 30¢ per successful card charge. No monthly fees. No setup costs.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <div class="feature-title">Instant Payouts</div>
+        <div class="feature-desc">Money lands in your bank account in 2 business days (can be same-day with Instant Payouts).</div>
+      </div>
+    </div>
+
+    <div class="alert alert-info">
+      <div class="alert-icon">ℹ️</div>
+      <div class="alert-body">
+        <div class="alert-title">What Your Website Currently Does</div>
+        <div class="alert-text">
+          Your booking page (<strong>instructors.html</strong>) currently shows a mock payment form — it collects name/email/date but does NOT actually charge anyone. This guide will help you connect real payments. The code is already partially prepared in comments in your HTML file.
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-warning">
+      <div class="alert-icon">⚠️</div>
+      <div class="alert-body">
+        <div class="alert-title">You Will Need a Simple Backend Server</div>
+        <div class="alert-text">
+          Stripe requires a small server-side component to securely create payment intents. This can be a simple Node.js function, a PHP script, or even a free Netlify / Vercel serverless function. This guide covers all options. If you'd rather not set up a server, see the "No-Code Alternative" in Step 5.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 1 -->
+  <div class="doc-section" id="step1">
+    <div class="section-title">
+      <span class="section-num">1</span>
+      Create Your Stripe Account
+    </div>
+
+    <ul class="steps-list">
+      <li class="step-item">
+        <div class="step-title">Go to stripe.com and sign up</div>
+        <div class="step-desc">Visit <strong>https://stripe.com</strong> and click "Start now". Fill in your email address, full name, and a secure password. Stripe is free to create an account — you only pay the 2.9% + 30¢ fee when you successfully charge a customer.</div>
+      </li>
+      <li class="step-item">
+        <div class="step-title">Verify your email address</div>
+        <div class="step-desc">Stripe will send you a confirmation email. Click the link inside to verify your account.</div>
+      </li>
+      <li class="step-item">
+        <div class="step-title">Complete your business profile</div>
+        <div class="step-desc">Stripe will ask for:
+          <br>• <strong>Business type</strong> — Select "Individual / sole trader" if you're running the studio as yourself, or "Limited company" if you've registered a company.
+          <br>• <strong>Business name</strong> — "Beyond the Canvas Art Studio" or "Farnaz Amin"
+          <br>• <strong>Industry</strong> — Arts &amp; Crafts / Education
+          <br>• <strong>Your bank account details</strong> — for receiving payouts
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-title">Set up Two-Factor Authentication (strongly recommended)</div>
+        <div class="step-desc">Go to Settings → Profile → Two-step authentication. Enable it with your phone. This protects your account and your money.</div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Step 2 -->
+  <div class="doc-section" id="step2">
+    <div class="section-title">
+      <span class="section-num">2</span>
+      Get Your API Keys
+    </div>
+
+    <p>API keys are how your website proves to Stripe that it's authorised to process payments on your account. You need two types:</p>
+
+    <table class="info-table">
+      <thead>
+        <tr>
+          <th>Key Name</th>
+          <th>Prefix</th>
+          <th>Where It's Used</th>
+          <th>Can It Be Public?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Publishable Key</strong></td>
+          <td><span class="code-inline">pk_test_</span> or <span class="code-inline">pk_live_</span></td>
+          <td>Your HTML/JavaScript file (frontend)</td>
+          <td><span class="tag tag-live">✅ Yes</span></td>
+        </tr>
+        <tr>
+          <td><strong>Secret Key</strong></td>
+          <td><span class="code-inline">sk_test_</span> or <span class="code-inline">sk_live_</span></td>
+          <td>Your server/backend only — NEVER in HTML</td>
+          <td><span class="tag tag-req">🚫 NEVER</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="alert alert-danger">
+      <div class="alert-icon">🚨</div>
+      <div class="alert-body">
+        <div class="alert-title">CRITICAL SECURITY WARNING</div>
+        <div class="alert-text">
+          <strong>NEVER put your Secret Key (sk_live_...) in your HTML file, JavaScript, or anywhere a website visitor could see it.</strong> This would allow anyone to steal money from your account. The Secret Key must ONLY live on your server/backend, set as an environment variable.
+        </div>
+      </div>
+    </div>
+
+    <ul class="steps-list">
+      <li class="step-item">
+        <div class="step-title">Go to your Stripe Dashboard</div>
+        <div class="step-desc">Log in at <strong>dashboard.stripe.com</strong></div>
+      </li>
+      <li class="step-item">
+        <div class="step-title">Navigate to Developers → API Keys</div>
+        <div class="step-desc">You'll see two keys: a <span class="code-inline">pk_test_...</span> (Publishable) and a <span class="code-inline">sk_test_...</span> (Secret). While testing, use the test keys. They look identical but start with <code class="code-inline">test</code> instead of <code class="code-inline">live</code>.</div>
+      </li>
+      <li class="step-item">
+        <div class="step-title">Copy and save your Publishable Key</div>
+        <div class="step-desc">Copy the <code class="code-inline">pk_test_...</code> key — you'll need to paste it into your HTML. Keep the Secret Key safe for your server setup.</div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Step 3 -->
+  <div class="doc-section" id="step3">
+    <div class="section-title">
+      <span class="section-num">3</span>
+      Add Stripe.js to Your Booking Page
+    </div>
+
+    <p>Open your <code class="code-inline">instructors.html</code> file in a text editor (Notepad, VS Code, etc.). Find the <code class="code-inline">&lt;/body&gt;</code> tag near the very bottom of the file. Add the Stripe script <strong>just before</strong> that closing tag:</p>
+
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">HTML — Add to instructors.html before &lt;/body&gt;</span>
+      </div>
+      <div class="code-body">
+        <pre><code><span class="tok-comment">&lt;!-- Stripe.js — Add this BEFORE your closing &lt;/body&gt; tag --&gt;</span>
+&lt;<span class="tok-keyword">script</span> src=<span class="tok-string">"https://js.stripe.com/v3/"</span>&gt;&lt;/<span class="tok-keyword">script</span>&gt;</code></pre>
+      </div>
+    </div>
+
+    <p>Stripe.js is a JavaScript library that creates a secure card input field on your form. It loads from Stripe's servers (not yours), which is part of how it stays secure and PCI compliant.</p>
+  </div>
+
+  <!-- Step 4 -->
+  <div class="doc-section" id="step4">
+    <div class="section-title">
+      <span class="section-num">4</span>
+      Update the Frontend JavaScript (Your HTML File)
+    </div>
+
+    <p>In <code class="code-inline">instructors.html</code>, find the existing <code class="code-inline">&lt;script&gt;</code> block near the bottom. You need to replace the existing checkout function with the real Stripe version below.</p>
+
+    <div class="alert alert-info">
+      <div class="alert-icon">🔍</div>
+      <div class="alert-body">
+        <div class="alert-title">Search Tip</div>
+        <div class="alert-text">In your text editor, press <strong>Ctrl+F</strong> (or Cmd+F on Mac) and search for <code class="code-inline">handleCheckout</code> — that's the function you need to replace.</div>
+      </div>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">JavaScript — Replace your handleCheckout section in instructors.html</span>
+      </div>
+      <div class="code-body">
+        <pre><code><span class="tok-comment">// ── STRIPE SETUP ─────────────────────────────────────────────
+// Replace YOUR_PUBLISHABLE_KEY with your actual pk_test_... or pk_live_... key</span>
+
+<span class="tok-keyword">const</span> <span class="tok-var">stripe</span> = <span class="tok-fn">Stripe</span>(<span class="tok-string">'YOUR_PUBLISHABLE_KEY'</span>); <span class="tok-comment">// e.g. 'pk_test_51ABC...'</span>
+<span class="tok-keyword">const</span> <span class="tok-var">elements</span> = <span class="tok-var">stripe</span>.<span class="tok-fn">elements</span>();
+
+<span class="tok-comment">// Mount Stripe's secure card element into the #card-element div</span>
+<span class="tok-keyword">const</span> <span class="tok-var">cardElement</span> = <span class="tok-var">elements</span>.<span class="tok-fn">create</span>(<span class="tok-string">'card'</span>, {
+  style: {
+    base: {
+      fontFamily: <span class="tok-string">'Inter, sans-serif'</span>,
+      fontSize: <span class="tok-string">'15px'</span>,
+      color: <span class="tok-string">'#1A1A1A'</span>,
+      <span class="tok-string">'::placeholder'</span>: { color: <span class="tok-string">'#888'</span> }
+    },
+    invalid: { color: <span class="tok-string">'#e53e3e'</span> }
+  }
+});
+
+<span class="tok-var">cardElement</span>.<span class="tok-fn">mount</span>(<span class="tok-string">'#card-element'</span>); <span class="tok-comment">// mounts the real card form</span>
+
+<span class="tok-var">cardElement</span>.<span class="tok-fn">on</span>(<span class="tok-string">'change'</span>, ({ error }) =&gt; {
+  <span class="tok-keyword">const</span> <span class="tok-var">errorEl</span> = <span class="tok-fn">document</span>.<span class="tok-fn">getElementById</span>(<span class="tok-string">'card-errors'</span>);
+  <span class="tok-var">errorEl</span>.textContent = error ? error.message : <span class="tok-string">''</span>;
+});
+
+<span class="tok-comment">// ── CHECKOUT HANDLER ──────────────────────────────────────────</span>
+<span class="tok-keyword">async function</span> <span class="tok-fn">handleCheckout</span>(e) {
+  e.<span class="tok-fn">preventDefault</span>();
+
+  <span class="tok-keyword">const</span> <span class="tok-var">fname</span> = <span class="tok-fn">document</span>.<span class="tok-fn">getElementById</span>(<span class="tok-string">'firstName'</span>).value.<span class="tok-fn">trim</span>();
+  <span class="tok-keyword">const</span> <span class="tok-var">lname</span> = <span class="tok-fn">document</span>.<span class="tok-fn">getElementById</span>(<span class="tok-string">'lastName'</span>).value.<span class="tok-fn">trim</span>();
+  <span class="tok-keyword">const</span> <span class="tok-var">email</span> = <span class="tok-fn">document</span>.<span class="tok-fn">getElementById</span>(<span class="tok-string">'email'</span>).value.<span class="tok-fn">trim</span>();
+  <span class="tok-keyword">const</span> <span class="tok-var">date</span>  = <span class="tok-fn">document</span>.<span class="tok-fn">getElementById</span>(<span class="tok-string">'sessionDate'</span>).value;
+  <span class="tok-keyword">const</span> <span class="tok-var">time</span>  = <span class="tok-fn">document</span>.<span class="tok-fn">getElementById</span>(<span class="tok-string">'sessionTime'</span>).value;
+
+  <span class="tok-keyword">if</span> (!fname || !lname || !email || !date || !time) {
+    <span class="tok-fn">alert</span>(<span class="tok-string">'Please fill in all required fields.'</span>);
+    <span class="tok-keyword">return</span>;
+  }
+
+  <span class="tok-keyword">const</span> <span class="tok-var">btn</span> = <span class="tok-fn">document</span>.<span class="tok-fn">getElementById</span>(<span class="tok-string">'submitBtn'</span>);
+  <span class="tok-var">btn</span>.classList.<span class="tok-fn">add</span>(<span class="tok-string">'loading'</span>);
+
+  <span class="tok-keyword">try</span> {
+    <span class="tok-comment">// 1. Ask your server to create a PaymentIntent</span>
+    <span class="tok-keyword">const</span> <span class="tok-var">qty</span> = parseInt(<span class="tok-fn">document</span>.<span class="tok-fn">getElementById</span>(<span class="tok-string">'qtyInput'</span>).value) || <span class="tok-num">1</span>;
+    <span class="tok-keyword">const</span> <span class="tok-var">amountCents</span> = currentPrice * qty * <span class="tok-num">100</span>; <span class="tok-comment">// Stripe uses cents</span>
+
+    <span class="tok-keyword">const</span> <span class="tok-var">response</span> = <span class="tok-keyword">await</span> <span class="tok-fn">fetch</span>(<span class="tok-string">'/create-payment-intent'</span>, {
+      method: <span class="tok-string">'POST'</span>,
+      headers: { <span class="tok-string">'Content-Type'</span>: <span class="tok-string">'application/json'</span> },
+      body: <span class="tok-fn">JSON</span>.<span class="tok-fn">stringify</span>({
+        amount: <span class="tok-var">amountCents</span>,
+        currency: <span class="tok-string">'usd'</span>, <span class="tok-comment">// change to 'gbp', 'aud', 'cad' etc as needed</span>
+        metadata: {
+          class: currentName,
+          date: <span class="tok-var">date</span>,
+          time: <span class="tok-var">time</span>,
+          customer: `${<span class="tok-var">fname</span>} ${<span class="tok-var">lname</span>}`,
+          email: <span class="tok-var">email</span>
+        }
+      })
+    });
+
+    <span class="tok-keyword">const</span> { clientSecret } = <span class="tok-keyword">await</span> <span class="tok-var">response</span>.<span class="tok-fn">json</span>();
+
+    <span class="tok-comment">// 2. Confirm the payment with Stripe using the card element</span>
+    <span class="tok-keyword">const</span> { error, paymentIntent } = <span class="tok-keyword">await</span> <span class="tok-var">stripe</span>.<span class="tok-fn">confirmCardPayment</span>(<span class="tok-var">clientSecret</span>, {
+      payment_method: {
+        card: <span class="tok-var">cardElement</span>,
+        billing_details: {
+          name: `${<span class="tok-var">fname</span>} ${<span class="tok-var">lname</span>}`,
+          email: <span class="tok-var">email</span>
+        }
+      }
+    });
+
+    <span class="tok-keyword">if</span> (error) {
+      <span class="tok-fn">document</span>.<span class="tok-fn">getElementById</span>(<span class="tok-string">'card-errors'</span>).textContent = error.message;
+      <span class="tok-var">btn</span>.classList.<span class="tok-fn">remove</span>(<span class="tok-string">'loading'</span>);
+      <span class="tok-keyword">return</span>;
+    }
+
+    <span class="tok-comment">// 3. Payment succeeded!</span>
+    <span class="tok-fn">document</span>.<span class="tok-fn">getElementById</span>(<span class="tok-string">'successRef'</span>).textContent =
+      `Booking confirmed for ${fname}! Reference: ${paymentIntent.id}`;
+    <span class="tok-fn">document</span>.<span class="tok-fn">getElementById</span>(<span class="tok-string">'successOverlay'</span>).classList.<span class="tok-fn">add</span>(<span class="tok-string">'show'</span>);
+
+  } <span class="tok-keyword">catch</span> (err) {
+    <span class="tok-fn">alert</span>(<span class="tok-string">'Payment failed. Please try again or contact us directly.'</span>);
+    <span class="tok-fn">console</span>.<span class="tok-fn">error</span>(err);
+    <span class="tok-var">btn</span>.classList.<span class="tok-fn">remove</span>(<span class="tok-string">'loading'</span>);
+  }
+}</code></pre>
+      </div>
+    </div>
+
+    <p>Also, remove the mock card UI from <code class="code-inline">#card-element</code>. Find and delete this block in your HTML (Stripe will replace it with a real card form):</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">HTML — Delete this mock card block</span></div>
+      <div class="code-body">
+        <pre><code><span class="tok-comment">&lt;!-- DELETE this entire stripe-card-mock div --&gt;</span>
+&lt;div class=<span class="tok-string">"stripe-card-mock"</span>&gt;
+  &lt;span class=<span class="tok-string">"stripe-card-mock-num"</span>&gt;•••• •••• •••• ••••&lt;/span&gt;
+  ...
+&lt;/div&gt;</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 5 -->
+  <div class="doc-section" id="step5">
+    <div class="section-title">
+      <span class="section-num">5</span>
+      Set Up Your Backend (Server Side)
+    </div>
+
+    <p>Stripe requires a server to securely create a "PaymentIntent" — a Stripe object that represents your payment request. Here are <strong>three options</strong> depending on how you host your website:</p>
+
+    <div class="doc-card">
+      <div class="doc-card-title">🟢 Option A — Netlify or Vercel Serverless Function (Easiest, Free)</div>
+      <p style="margin:8px 0 0;font-size:0.87rem;color:var(--text-mid)">If you host (or move) your site to Netlify or Vercel, you can add a free serverless function. No ongoing server costs. Great for small studios.</p>
+    </div>
+
+    <p><strong>Netlify setup:</strong></p>
+
+    <ul class="steps-list">
+      <li class="step-item">
+        <div class="step-title">Create a <code class="code-inline">netlify/functions/create-payment-intent.js</code> file</div>
+        <div class="step-desc">In your website folder, create this folder path and add the file below.</div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">JavaScript — netlify/functions/create-payment-intent.js</span></div>
+          <div class="code-body">
+            <pre><code><span class="tok-comment">// Install first: npm install stripe</span>
+<span class="tok-keyword">const</span> <span class="tok-var">stripe</span> = <span class="tok-fn">require</span>(<span class="tok-string">'stripe'</span>)(process.env.<span class="tok-var">STRIPE_SECRET_KEY</span>);
+
+exports.<span class="tok-var">handler</span> = <span class="tok-keyword">async</span> (event) =&gt; {
+  <span class="tok-keyword">try</span> {
+    <span class="tok-keyword">const</span> { amount, currency, metadata } = <span class="tok-fn">JSON</span>.<span class="tok-fn">parse</span>(event.body);
+
+    <span class="tok-keyword">const</span> <span class="tok-var">paymentIntent</span> = <span class="tok-keyword">await</span> <span class="tok-var">stripe</span>.paymentIntents.<span class="tok-fn">create</span>({
+      amount,
+      currency: currency || <span class="tok-string">'usd'</span>,
+      metadata,
+      automatic_payment_methods: { enabled: <span class="tok-keyword">true</span> }
+    });
+
+    <span class="tok-keyword">return</span> {
+      statusCode: <span class="tok-num">200</span>,
+      headers: { <span class="tok-string">'Access-Control-Allow-Origin'</span>: <span class="tok-string">'*'</span> },
+      body: <span class="tok-fn">JSON</span>.<span class="tok-fn">stringify</span>({ clientSecret: <span class="tok-var">paymentIntent</span>.client_secret })
+    };
+  } <span class="tok-keyword">catch</span> (err) {
+    <span class="tok-keyword">return</span> {
+      statusCode: <span class="tok-num">500</span>,
+      body: <span class="tok-fn">JSON</span>.<span class="tok-fn">stringify</span>({ error: err.message })
+    };
+  }
+};</code></pre>
+          </div>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-title">Add your Secret Key as an environment variable in Netlify</div>
+        <div class="step-desc">
+          In your Netlify dashboard, go to: <strong>Site settings → Environment variables → Add variable</strong><br>
+          Key: <code class="code-inline">STRIPE_SECRET_KEY</code><br>
+          Value: <code class="code-inline">sk_test_...</code> (paste your secret key — the one that starts with <code class="code-inline">sk_</code>)
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-title">Update the fetch URL in your HTML</div>
+        <div class="step-desc">Change <code class="code-inline">'/create-payment-intent'</code> to <code class="code-inline">'/.netlify/functions/create-payment-intent'</code> in the JavaScript you added in Step 4.</div>
+      </li>
+    </ul>
+
+    <div class="doc-card" style="border-left-color: var(--gold); margin-top: 24px;">
+      <div class="doc-card-title">🟡 Option B — Simple PHP Script (If Your Host Supports PHP)</div>
+      <p style="margin:8px 0 0;font-size:0.87rem;color:var(--text-mid)">Many web hosting providers (GoDaddy, Bluehost, Hostinger, cPanel hosts) support PHP by default. Create a PHP file on your server:</p>
+      <div class="code-block" style="margin-top:12px">
+        <div class="code-header"><span class="code-lang">PHP — create-payment-intent.php (upload to your web server)</span></div>
+        <div class="code-body">
+          <pre><code><span class="tok-comment">&lt;?php
+// Install Stripe PHP library via Composer: composer require stripe/stripe-php
+// OR download from: https://github.com/stripe/stripe-php/releases</span>
+
+require_once <span class="tok-string">'vendor/autoload.php'</span>; <span class="tok-comment">// path to Stripe library</span>
+
+header(<span class="tok-string">'Content-Type: application/json'</span>);
+header(<span class="tok-string">'Access-Control-Allow-Origin: *'</span>);
+
+\Stripe\Stripe::<span class="tok-fn">setApiKey</span>(<span class="tok-string">'sk_test_YOUR_SECRET_KEY'</span>); <span class="tok-comment">// ← PUT YOUR SECRET KEY HERE</span>
+
+<span class="tok-var">$data</span> = json_decode(file_get_contents(<span class="tok-string">'php://input'</span>), true);
+
+<span class="tok-var">$paymentIntent</span> = \Stripe\PaymentIntent::<span class="tok-fn">create</span>([
+  <span class="tok-string">'amount'</span>   => <span class="tok-var">$data</span>[<span class="tok-string">'amount'</span>],
+  <span class="tok-string">'currency'</span> => <span class="tok-var">$data</span>[<span class="tok-string">'currency'</span>] ?? <span class="tok-string">'usd'</span>,
+  <span class="tok-string">'metadata'</span> => <span class="tok-var">$data</span>[<span class="tok-string">'metadata'</span>] ?? [],
+  <span class="tok-string">'automatic_payment_methods'</span> => [<span class="tok-string">'enabled'</span> => true]
+]);
+
+echo json_encode([<span class="tok-string">'clientSecret'</span> => <span class="tok-var">$paymentIntent</span>->client_secret]);
+?&gt;</code></pre>
+        </div>
+      </div>
+      <p style="margin-top:10px;font-size:0.83rem;color:var(--text-muted)">Then update your fetch URL to <code class="code-inline">'/create-payment-intent.php'</code> in the HTML JavaScript.</p>
+    </div>
+
+    <div class="doc-card" style="border-left-color: var(--terra); margin-top: 24px;">
+      <div class="doc-card-title">🔴 Option C — No-Code Alternative (Stripe Payment Links)</div>
+      <p style="margin:8px 0 0;font-size:0.87rem;color:var(--text-mid)">
+        If you don't want to deal with code at all, you can use <strong>Stripe Payment Links</strong>. You create a payment link in your Stripe dashboard, and you simply change the "Book Now" buttons on your website to point to that link. Customers pay through Stripe's hosted page — no code needed on your site.
+        <br><br>
+        <strong>How to create a Payment Link:</strong> Stripe Dashboard → Payment Links → Create. Set the price, description, and Stripe handles everything.
+      </p>
+    </div>
+  </div>
+
+  <!-- Step 6 -->
+  <div class="doc-section" id="step6">
+    <div class="section-title">
+      <span class="section-num">6</span>
+      Test Your Payments
+    </div>
+
+    <p>Stripe provides test card numbers that simulate real payments without charging real money. Use these to make sure everything works before going live.</p>
+
+    <table class="info-table">
+      <thead>
+        <tr>
+          <th>Card Number</th>
+          <th>Expiry</th>
+          <th>CVV</th>
+          <th>What It Simulates</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code class="code-inline">4242 4242 4242 4242</code></td>
+          <td>Any future date</td>
+          <td>Any 3 digits</td>
+          <td><span class="tag tag-live">✅ Successful payment</span></td>
+        </tr>
+        <tr>
+          <td><code class="code-inline">4000 0025 0000 3155</code></td>
+          <td>Any future date</td>
+          <td>Any 3 digits</td>
+          <td><span class="tag tag-test">3D Secure authentication</span></td>
+        </tr>
+        <tr>
+          <td><code class="code-inline">4000 0000 0000 9995</code></td>
+          <td>Any future date</td>
+          <td>Any 3 digits</td>
+          <td><span class="tag tag-req">❌ Declined — insufficient funds</span></td>
+        </tr>
+        <tr>
+          <td><code class="code-inline">4000 0000 0000 0069</code></td>
+          <td>Any future date</td>
+          <td>Any 3 digits</td>
+          <td><span class="tag tag-req">❌ Declined — expired card</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ul class="steps-list">
+      <li class="step-item">
+        <div class="step-title">Go to your booking page and make a test booking</div>
+        <div class="step-desc">Fill in all the form fields with test data. Use the card number <code class="code-inline">4242 4242 4242 4242</code>, any future expiry date (e.g. 12/29), any 3-digit CVV, and any postcode.</div>
+      </li>
+      <li class="step-item">
+        <div class="step-title">Check your Stripe Dashboard for the payment</div>
+        <div class="step-desc">Log in to <strong>dashboard.stripe.com</strong> → Payments. You should see the test payment appear within seconds. It will show a <span class="tag tag-test">Test</span> badge.</div>
+      </li>
+      <li class="step-item">
+        <div class="step-title">Test a declined card</div>
+        <div class="step-desc">Use <code class="code-inline">4000 0000 0000 9995</code> to confirm your error handling works — customers should see a clear error message.</div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Step 7 -->
+  <div class="doc-section" id="step7">
+    <div class="section-title">
+      <span class="section-num">7</span>
+      Go Live — Switch to Real Payments
+    </div>
+
+    <div class="alert alert-warning">
+      <div class="alert-icon">⚠️</div>
+      <div class="alert-body">
+        <div class="alert-title">Only do this when you're ready to accept real money</div>
+        <div class="alert-text">Make sure you've tested thoroughly with the test keys first. Going live means real credit cards will be charged.</div>
+      </div>
+    </div>
+
+    <ul class="steps-list">
+      <li class="step-item">
+        <div class="step-title">Complete Stripe account verification</div>
+        <div class="step-desc">Stripe may ask you to verify your identity and bank account details before activating live payments. This usually takes 1–2 business days.</div>
+      </li>
+      <li class="step-item">
+        <div class="step-title">Get your Live API Keys</div>
+        <div class="step-desc">In the Stripe Dashboard → Developers → API Keys, toggle from "Test" to "Live" and copy your live keys (<code class="code-inline">pk_live_...</code> and <code class="code-inline">sk_live_...</code>).</div>
+      </li>
+      <li class="step-item">
+        <div class="step-title">Update your Publishable Key in the HTML</div>
+        <div class="step-desc">In <code class="code-inline">instructors.html</code>, replace <code class="code-inline">pk_test_...</code> with <code class="code-inline">pk_live_...</code> in the JavaScript.</div>
+      </li>
+      <li class="step-item">
+        <div class="step-title">Update your Secret Key environment variable</div>
+        <div class="step-desc">In Netlify/your server, update the <code class="code-inline">STRIPE_SECRET_KEY</code> environment variable from <code class="code-inline">sk_test_...</code> to <code class="code-inline">sk_live_...</code>.</div>
+      </li>
+      <li class="step-item">
+        <div class="step-title">Make a real £1/$1 test payment with your own card</div>
+        <div class="step-desc">Book one slot with your real card and make sure the money appears in your Stripe balance. Then refund yourself from the Stripe Dashboard.</div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Checklist -->
+  <div class="doc-section" id="checklist">
+    <div class="section-title">
+      <span class="section-icon">✅</span>
+      Launch Checklist
+    </div>
+
+    <p>Use this checklist to make sure you haven't missed anything before accepting real bookings:</p>
+
+    <ul class="checklist">
+      <li><div class="check-box"></div> Stripe account created and email verified</li>
+      <li><div class="check-box"></div> Bank account connected in Stripe for payouts</li>
+      <li><div class="check-box"></div> Identity verification completed in Stripe</li>
+      <li><div class="check-box"></div> Stripe.js script added to instructors.html</li>
+      <li><div class="check-box"></div> Publishable key added to JavaScript (never the Secret Key!)</li>
+      <li><div class="check-box"></div> Backend function / PHP script deployed and working</li>
+      <li><div class="check-box"></div> Secret key stored as environment variable on server (NOT in HTML)</li>
+      <li><div class="check-box"></div> Test payment processed successfully with card 4242 4242 4242 4242</li>
+      <li><div class="check-box"></div> Declined card error message displays correctly</li>
+      <li><div class="check-box"></div> Success overlay appears after successful payment</li>
+      <li><div class="check-box"></div> Switched to Live API keys for production</li>
+      <li><div class="check-box"></div> Confirmation email set up (optional but recommended — use Stripe's webhook to trigger this)</li>
+      <li><div class="check-box"></div> Refund policy added to booking page</li>
+    </ul>
+  </div>
+
+  <!-- Support -->
+  <div class="doc-section" id="support">
+    <div class="section-title">
+      <span class="section-icon">🆘</span>
+      Help &amp; Support
+    </div>
+
+    <p>If you get stuck at any point, here are the best resources:</p>
+
+    <table class="info-table">
+      <thead>
+        <tr><th>Resource</th><th>URL</th><th>Best For</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Stripe Official Docs</strong></td>
+          <td><code class="code-inline">stripe.com/docs</code></td>
+          <td>Full technical documentation</td>
+        </tr>
+        <tr>
+          <td><strong>Stripe Support Chat</strong></td>
+          <td><code class="code-inline">support.stripe.com</code></td>
+          <td>Questions about your account, payouts, disputes</td>
+        </tr>
+        <tr>
+          <td><strong>Stripe Dashboard</strong></td>
+          <td><code class="code-inline">dashboard.stripe.com</code></td>
+          <td>View payments, refunds, customers, settings</td>
+        </tr>
+        <tr>
+          <td><strong>Stripe YouTube</strong></td>
+          <td>Search "Stripe payments tutorial" on YouTube</td>
+          <td>Video walkthroughs for beginners</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="alert alert-success">
+      <div class="alert-icon">💡</div>
+      <div class="alert-body">
+        <div class="alert-title">Pro Tips Once You're Live</div>
+        <div class="alert-text">
+          • Set up <strong>Stripe Radar</strong> (free) to automatically block fraudulent payments.<br>
+          • Enable <strong>email receipts</strong> in Stripe Dashboard → Settings → Email receipts — customers get an automatic receipt after paying.<br>
+          • Set up <strong>Stripe Webhooks</strong> if you want to send a custom confirmation email from your own address after payment.<br>
+          • Use <strong>Stripe Billing</strong> if you want to sell class bundles or subscriptions in the future.
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div class="doc-footer">
+  <p>🔒 This document is for the studio owner only. Do not share API keys with anyone. · Beyond the Canvas Art Studio</p>
+</div>
+
+</body>
+</html>

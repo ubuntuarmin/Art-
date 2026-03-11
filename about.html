@@ -80,16 +80,35 @@
     .canvas-block {
       border-radius: 12px;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      font-size: 3rem;
       flex: 1;
+      gap: 6px;
+      border: 2px dashed rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.04);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s;
     }
 
-    .cb-1 { background: linear-gradient(135deg, #D4B898, #B89070); min-height: 180px; }
-    .cb-2 { background: linear-gradient(135deg, #A8C0A0, #809880); min-height: 180px; flex: 0.7; }
-    .cb-3 { background: linear-gradient(135deg, #B8B0C8, #9890A8); min-height: 140px; }
-    .cb-4 { background: linear-gradient(135deg, #C8D8A8, #A8B880); min-height: 140px; flex: 0.6; }
+    .canvas-block:hover { background: rgba(196,98,45,0.1); border-color: rgba(196,98,45,0.4); }
+
+    .cb-1 { min-height: 180px; }
+    .cb-2 { min-height: 180px; flex: 0.7; }
+    .cb-3 { min-height: 140px; }
+    .cb-4 { min-height: 140px; flex: 0.6; }
+
+    .cb-icon { font-size: 2rem; opacity: 0.4; }
+    .cb-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-align: center;
+      padding: 0 12px;
+    }
 
     /* STORY */
     .story-section { max-width: 1200px; margin: 0 auto; padding: 80px 24px; }
@@ -145,10 +164,26 @@
 
     .space-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
-    .space-img { border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; }
-    .si-1 { background: linear-gradient(135deg, #D8C8B0, #C0A880); min-height: 160px; }
-    .si-2 { background: linear-gradient(135deg, #C8D0B8, #A8B898); min-height: 160px; }
-    .si-3 { background: linear-gradient(135deg, #D0C0C8, #B0A0A8); min-height: 160px; grid-column: span 2; }
+    .space-img {
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 2px dashed rgba(0,0,0,0.1);
+      background: var(--cream2);
+      transition: all 0.3s;
+    }
+
+    .space-img:hover { border-color: var(--terra); background: rgba(196,98,45,0.05); }
+
+    .space-img-icon { font-size: 2.5rem; opacity: 0.35; }
+    .space-img-label { font-size: 0.68rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; text-align: center; padding: 0 12px; }
+
+    .si-1 { min-height: 160px; }
+    .si-2 { min-height: 160px; }
+    .si-3 { min-height: 160px; grid-column: span 2; }
 
     /* Community */
     .community-section {
@@ -266,12 +301,24 @@
     </div>
     <div class="hero-visual">
       <div class="canvas-row">
-        <div class="canvas-block cb-1">🖌️</div>
-        <div class="canvas-block cb-2">🎨</div>
+        <div class="canvas-block cb-1">
+          <div class="cb-icon">📷</div>
+          <div class="cb-label">Add photo of Farnaz painting</div>
+        </div>
+        <div class="canvas-block cb-2">
+          <div class="cb-icon">🖼️</div>
+          <div class="cb-label">Artwork photo</div>
+        </div>
       </div>
       <div class="canvas-row">
-        <div class="canvas-block cb-3">✨</div>
-        <div class="canvas-block cb-4">🖼️</div>
+        <div class="canvas-block cb-3">
+          <div class="cb-icon">🎨</div>
+          <div class="cb-label">Studio photo</div>
+        </div>
+        <div class="canvas-block cb-4">
+          <div class="cb-icon">📷</div>
+          <div class="cb-label">Class photo</div>
+        </div>
       </div>
     </div>
   </div>
@@ -387,9 +434,18 @@
       </div>
     </div>
     <div class="space-visual">
-      <div class="space-img si-1">🏛️</div>
-      <div class="space-img si-2">🌿</div>
-      <div class="space-img si-3">🖼️</div>
+      <div class="space-img si-1">
+        <div class="space-img-icon">📷</div>
+        <div class="space-img-label">Add studio interior photo</div>
+      </div>
+      <div class="space-img si-2">
+        <div class="space-img-icon">📷</div>
+        <div class="space-img-label">Add class-in-progress photo</div>
+      </div>
+      <div class="space-img si-3">
+        <div class="space-img-icon">📷</div>
+        <div class="space-img-label">Add wide studio / gallery photo</div>
+      </div>
     </div>
   </div>
 
@@ -442,7 +498,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <p>Copyright &copy; 2025 Farnaz Art Studio. All rights reserved.</p>
+    <p>Copyright &copy; 2025 Beyond the Canvas Art Studio — Farnaz Amin. All rights reserved.</p>
     <div class="social-links">
       <a class="social-link" href="#" aria-label="Instagram">📸</a>
       <a class="social-link" href="#" aria-label="Facebook">📘</a>

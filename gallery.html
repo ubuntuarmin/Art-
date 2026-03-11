@@ -160,7 +160,24 @@
     .gallery-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 14px; }
     .gallery-grid-3 .gallery-tile { min-height: 240px; }
 
-    /* Colors for tiles */
+    /* Image placeholder overlay for tiles */
+    .img-ph {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: inherit;
+    }
+
+    .img-ph-icon { font-size: 2.2rem; opacity: 0.35; }
+    .img-ph-label { font-size: 0.68rem; font-weight: 700; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 1.5px; text-align: center; padding: 0 12px; }
+
+    /* Featured tile larger placeholder */
+    .gallery-featured .gallery-tile .img-ph-icon { font-size: 3rem; }
+    .gallery-featured .gallery-tile .img-ph-label { font-size: 0.72rem; }
     .t-oil-1  { background: linear-gradient(135deg, #D4B89A, #C4A080, #B08060); }
     .t-oil-2  { background: linear-gradient(135deg, #B8A0C8, #9880B0, #786090); }
     .t-oil-3  { background: linear-gradient(135deg, #C8D8A0, #A8C070, #88A050); }
@@ -341,12 +358,13 @@
 <!-- Filter -->
 <div class="filter-bar">
   <div class="filter-inner">
-    <button class="filter-btn active">All Works</button>
-    <button class="filter-btn">Oil Painting</button>
-    <button class="filter-btn">Ceramics</button>
-    <button class="filter-btn">Watercolour</button>
-    <button class="filter-btn">Drawing</button>
-    <button class="filter-btn">Mixed Media</button>
+    <button class="filter-btn active" onclick="filterGallery('all', this)">All Works</button>
+    <button class="filter-btn" onclick="filterGallery('oil', this)">Oil Painting</button>
+    <button class="filter-btn" onclick="filterGallery('ceramics', this)">Ceramics</button>
+    <button class="filter-btn" onclick="filterGallery('watercolour', this)">Watercolour</button>
+    <button class="filter-btn" onclick="filterGallery('drawing', this)">Drawing</button>
+    <button class="filter-btn" onclick="filterGallery('resin', this)">Resin Art ✨</button>
+    <button class="filter-btn" onclick="filterGallery('mixed', this)">Mixed Media</button>
   </div>
 </div>
 
@@ -355,24 +373,33 @@
 
   <!-- Featured row -->
   <div class="gallery-featured">
-    <div class="gallery-tile t-oil-1" onclick="openLightbox('🖼️','Autumn Coastline — Oil on Canvas','Beatrice Navarro · Oil Painting Class · October 2024')">
+    <div class="gallery-tile t-oil-1" data-category="oil" onclick="openLightbox('🖼️','Autumn Coastline — Oil on Canvas','Beatrice Navarro · Oil Painting Class · October 2024')">
       <div class="tile-badge">Featured</div>
-      <span class="tile-emoji">🖼️</span>
+      <div class="img-ph">
+        <div class="img-ph-icon">📷</div>
+        <div class="img-ph-label">Add featured artwork photo<br>(recommended: 800×600px)</div>
+      </div>
       <div class="tile-overlay">
         <div class="tile-title">Autumn Coastline — Oil on Canvas</div>
         <div class="tile-meta">Beatrice Navarro · Oil Painting Class</div>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;gap:14px;">
-      <div class="gallery-tile t-clay-1" style="min-height:180px;" onclick="openLightbox('🏺','Stoneware Bowl Series','James Yong · Pottery Class · November 2024')">
-        <span class="tile-emoji" style="font-size:3.5rem;">🏺</span>
+      <div class="gallery-tile t-clay-1" data-category="ceramics" style="min-height:180px;" onclick="openLightbox('🏺','Stoneware Bowl Series','James Yong · Pottery Class · November 2024')">
+        <div class="img-ph">
+          <div class="img-ph-icon">📷</div>
+          <div class="img-ph-label">Add ceramics photo</div>
+        </div>
         <div class="tile-overlay">
           <div class="tile-title">Stoneware Bowl Series</div>
           <div class="tile-meta">James Yong · Pottery Class</div>
         </div>
       </div>
-      <div class="gallery-tile t-wc-1" style="min-height:180px;" onclick="openLightbox('🎨','Morning Mist — Watercolour','Priya Sharma · Watercolour Landscapes')">
-        <span class="tile-emoji" style="font-size:3.5rem;">🎨</span>
+      <div class="gallery-tile t-wc-1" data-category="watercolour" style="min-height:180px;" onclick="openLightbox('🎨','Morning Mist — Watercolour','Priya Sharma · Watercolour Landscapes')">
+        <div class="img-ph">
+          <div class="img-ph-icon">📷</div>
+          <div class="img-ph-label">Add watercolour photo</div>
+        </div>
         <div class="tile-overlay">
           <div class="tile-title">Morning Mist — Watercolour</div>
           <div class="tile-meta">Priya Sharma · Watercolour Landscapes</div>
@@ -383,29 +410,41 @@
 
   <!-- Grid 1 — 4 columns -->
   <div class="gallery-grid">
-    <div class="gallery-tile t-draw-1" onclick="openLightbox('✏️','Figure Study in Charcoal','Leo Morrison · Figure Drawing')">
-      <span class="tile-emoji" style="font-size:3.5rem;">✏️</span>
+    <div class="gallery-tile t-draw-1" data-category="drawing" onclick="openLightbox('✏️','Figure Study in Charcoal','Leo Morrison · Figure Drawing')">
+      <div class="img-ph">
+        <div class="img-ph-icon">📷</div>
+        <div class="img-ph-label">Add drawing photo</div>
+      </div>
       <div class="tile-overlay">
         <div class="tile-title">Figure Study in Charcoal</div>
         <div class="tile-meta">Leo Morrison · Figure Drawing</div>
       </div>
     </div>
-    <div class="gallery-tile t-mix-1" onclick="openLightbox('🖼️','Memory Collage','Carmen Diaz · Mixed Media & Collage')">
-      <span class="tile-emoji" style="font-size:3.5rem;">🖼️</span>
+    <div class="gallery-tile t-mix-1" data-category="mixed" onclick="openLightbox('🖼️','Memory Collage','Carmen Diaz · Mixed Media & Collage')">
+      <div class="img-ph">
+        <div class="img-ph-icon">📷</div>
+        <div class="img-ph-label">Add mixed media photo</div>
+      </div>
       <div class="tile-overlay">
         <div class="tile-title">Memory Collage</div>
         <div class="tile-meta">Carmen Diaz · Mixed Media</div>
       </div>
     </div>
-    <div class="gallery-tile t-clay-2" onclick="openLightbox('🧱','Textured Wall Panel','Sofia Andrews · Hand-Building Class')">
-      <span class="tile-emoji" style="font-size:3.5rem;">🧱</span>
+    <div class="gallery-tile t-clay-2" data-category="ceramics" onclick="openLightbox('🧱','Textured Wall Panel','Sofia Andrews · Hand-Building Class')">
+      <div class="img-ph">
+        <div class="img-ph-icon">📷</div>
+        <div class="img-ph-label">Add ceramics photo</div>
+      </div>
       <div class="tile-overlay">
         <div class="tile-title">Textured Wall Panel</div>
         <div class="tile-meta">Sofia Andrews · Hand-Building</div>
       </div>
     </div>
-    <div class="gallery-tile t-oil-2" onclick="openLightbox('🖌️','Still Life with Peonies','Marco Bell · Oil Painting')">
-      <span class="tile-emoji" style="font-size:3.5rem;">🖌️</span>
+    <div class="gallery-tile t-oil-2" data-category="oil" onclick="openLightbox('🖌️','Still Life with Peonies','Marco Bell · Oil Painting')">
+      <div class="img-ph">
+        <div class="img-ph-icon">📷</div>
+        <div class="img-ph-label">Add oil painting photo</div>
+      </div>
       <div class="tile-overlay">
         <div class="tile-title">Still Life with Peonies</div>
         <div class="tile-meta">Marco Bell · Oil Painting</div>
@@ -415,22 +454,31 @@
 
   <!-- Grid 2 — 3 columns -->
   <div class="gallery-grid-3">
-    <div class="gallery-tile t-wc-2" onclick="openLightbox('🌸','Botanical Series — Rose','Nina Patel · Botanical Illustration')">
-      <span class="tile-emoji">🌸</span>
+    <div class="gallery-tile t-wc-2" data-category="watercolour" onclick="openLightbox('🌸','Botanical Series — Rose','Nina Patel · Botanical Illustration')">
+      <div class="img-ph">
+        <div class="img-ph-icon">📷</div>
+        <div class="img-ph-label">Add watercolour photo</div>
+      </div>
       <div class="tile-overlay">
         <div class="tile-title">Botanical Series — Rose</div>
         <div class="tile-meta">Nina Patel · Botanical Illustration</div>
       </div>
     </div>
-    <div class="gallery-tile t-oil-3" onclick="openLightbox('🌿','Garden in Summer','Alicia Chen · Oil Painting')">
-      <span class="tile-emoji">🌿</span>
+    <div class="gallery-tile t-oil-3" data-category="oil" onclick="openLightbox('🌿','Garden in Summer','Alicia Chen · Oil Painting')">
+      <div class="img-ph">
+        <div class="img-ph-icon">📷</div>
+        <div class="img-ph-label">Add oil painting photo</div>
+      </div>
       <div class="tile-overlay">
         <div class="tile-title">Garden in Summer</div>
         <div class="tile-meta">Alicia Chen · Oil Painting</div>
       </div>
     </div>
-    <div class="gallery-tile t-clay-3" onclick="openLightbox('🫙','Celadon Vase','Thomas Kim · Wheel Throwing')">
-      <span class="tile-emoji">🫙</span>
+    <div class="gallery-tile t-clay-3" data-category="ceramics" onclick="openLightbox('🫙','Celadon Vase','Thomas Kim · Wheel Throwing')">
+      <div class="img-ph">
+        <div class="img-ph-icon">📷</div>
+        <div class="img-ph-label">Add ceramics photo</div>
+      </div>
       <div class="tile-overlay">
         <div class="tile-title">Celadon Glaze Vase</div>
         <div class="tile-meta">Thomas Kim · Pottery Class</div>
@@ -440,32 +488,78 @@
 
   <!-- Grid 3 — 4 columns -->
   <div class="gallery-grid">
-    <div class="gallery-tile t-mix-2" onclick="openLightbox('🎭','Portrait in Ink','David Owens · Ink & Illustration')">
-      <span class="tile-emoji" style="font-size:3.5rem;">🎭</span>
+    <div class="gallery-tile t-mix-2" data-category="drawing" onclick="openLightbox('🎭','Portrait in Ink','David Owens · Ink & Illustration')">
+      <div class="img-ph">
+        <div class="img-ph-icon">📷</div>
+        <div class="img-ph-label">Add illustration photo</div>
+      </div>
       <div class="tile-overlay">
         <div class="tile-title">Portrait in Ink</div>
         <div class="tile-meta">David Owens · Illustration</div>
       </div>
     </div>
-    <div class="gallery-tile t-wc-3" onclick="openLightbox('🌊','Seascape Study','Rachel T. · Watercolour Landscapes')">
-      <span class="tile-emoji" style="font-size:3.5rem;">🌊</span>
+    <div class="gallery-tile t-wc-3" data-category="watercolour" onclick="openLightbox('🌊','Seascape Study','Rachel T. · Watercolour Landscapes')">
+      <div class="img-ph">
+        <div class="img-ph-icon">📷</div>
+        <div class="img-ph-label">Add watercolour photo</div>
+      </div>
       <div class="tile-overlay">
         <div class="tile-title">Seascape Study</div>
         <div class="tile-meta">Rachel T. · Watercolour Landscapes</div>
       </div>
     </div>
-    <div class="gallery-tile t-oil-4" onclick="openLightbox('🏙️','Urban Light — Portrait','Lena Morse · Portrait in Oils')">
-      <span class="tile-emoji" style="font-size:3.5rem;">🏙️</span>
+    <div class="gallery-tile t-oil-4" data-category="oil" onclick="openLightbox('🏙️','Urban Light — Portrait','Lena Morse · Portrait in Oils')">
+      <div class="img-ph">
+        <div class="img-ph-icon">📷</div>
+        <div class="img-ph-label">Add oil painting photo</div>
+      </div>
       <div class="tile-overlay">
         <div class="tile-title">Urban Light — Portrait</div>
         <div class="tile-meta">Lena Morse · Portrait in Oils</div>
       </div>
     </div>
-    <div class="gallery-tile t-draw-2" onclick="openLightbox('🌳','Tree Study in Graphite','Chris Park · Figure Drawing')">
-      <span class="tile-emoji" style="font-size:3.5rem;">🌳</span>
+    <div class="gallery-tile t-draw-2" data-category="drawing" onclick="openLightbox('🌳','Tree Study in Graphite','Chris Park · Figure Drawing')">
+      <div class="img-ph">
+        <div class="img-ph-icon">📷</div>
+        <div class="img-ph-label">Add drawing photo</div>
+      </div>
       <div class="tile-overlay">
         <div class="tile-title">Tree Study in Graphite</div>
         <div class="tile-meta">Chris Park · Drawing</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Grid 4 — Resin Art section -->
+  <div class="gallery-grid-3" style="margin-top: 14px;">
+    <div class="gallery-tile" data-category="resin" style="background: linear-gradient(135deg, #E8D0E8, #C8A0C8);" onclick="openLightbox('✨','Resin Ocean Wave','Studio Workshop · Resin Art')">
+      <div class="img-ph">
+        <div class="img-ph-icon">📷</div>
+        <div class="img-ph-label">Add resin art photo</div>
+      </div>
+      <div class="tile-overlay">
+        <div class="tile-title">Resin Ocean Wave</div>
+        <div class="tile-meta">Studio Workshop · Resin Art</div>
+      </div>
+    </div>
+    <div class="gallery-tile" data-category="resin" style="background: linear-gradient(135deg, #D0D8F0, #A0B0E0);" onclick="openLightbox('✨','Geode Crystal Panel','Studio Workshop · Resin Art')">
+      <div class="img-ph">
+        <div class="img-ph-icon">📷</div>
+        <div class="img-ph-label">Add resin geode photo</div>
+      </div>
+      <div class="tile-overlay">
+        <div class="tile-title">Geode Crystal Panel</div>
+        <div class="tile-meta">Studio Workshop · Resin Art</div>
+      </div>
+    </div>
+    <div class="gallery-tile" data-category="mixed" style="background: linear-gradient(135deg, #F0D8C0, #E0B890);" onclick="openLightbox('🌸','Floral Mixed Media','Student Work · Mixed Media')">
+      <div class="img-ph">
+        <div class="img-ph-icon">📷</div>
+        <div class="img-ph-label">Add mixed media photo</div>
+      </div>
+      <div class="tile-overlay">
+        <div class="tile-title">Floral Mixed Media</div>
+        <div class="tile-meta">Student Work · Mixed Media</div>
       </div>
     </div>
   </div>
@@ -526,7 +620,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <p>Copyright &copy; 2025 Farnaz Art Studio. All rights reserved.</p>
+    <p>Copyright &copy; 2025 Beyond the Canvas Art Studio — Farnaz Amin. All rights reserved.</p>
     <div class="social-links">
       <a class="social-link" href="#" aria-label="Instagram">📸</a>
       <a class="social-link" href="#" aria-label="Facebook">📘</a>
@@ -541,6 +635,19 @@
     document.getElementById('mobileOverlay').classList.toggle('open');
   }
 
+  function filterGallery(category, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const tiles = document.querySelectorAll('.gallery-tile');
+    if (category === 'all') {
+      tiles.forEach(t => t.style.display = '');
+    } else {
+      tiles.forEach(t => {
+        t.style.display = t.dataset.category === category ? '' : 'none';
+      });
+    }
+  }
+
   const tileClasses = ['t-oil-1','t-oil-2','t-oil-3','t-oil-4','t-clay-1','t-clay-2','t-clay-3','t-wc-1','t-wc-2','t-wc-3','t-draw-1','t-draw-2','t-mix-1','t-mix-2'];
 
   function openLightbox(emoji, title, meta) {
@@ -548,7 +655,7 @@
     const art   = document.getElementById('lightboxArt');
     const t     = document.getElementById('lightboxTitle');
     const m     = document.getElementById('lightboxMeta');
-    art.textContent = emoji;
+    art.innerHTML = `<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;height:100%;opacity:0.55;"><div style="font-size:5rem;">${emoji}</div><div style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.5)">[ Photo goes here ]</div></div>`;
     art.className   = 'lightbox-art ' + tileClasses[Math.floor(Math.random() * tileClasses.length)];
     t.textContent   = title;
     m.textContent   = meta;

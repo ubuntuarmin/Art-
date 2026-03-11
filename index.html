@@ -909,6 +909,101 @@
     .author-name { font-size: 0.9rem; font-weight: 700; color: var(--text-dark); }
     .author-class { font-size: 0.75rem; color: var(--text-muted); }
 
+    /* ── NEWSLETTER ── */
+    .newsletter-section {
+      padding: 80px 24px;
+      background: linear-gradient(135deg, var(--charcoal) 0%, #1E1210 60%, var(--charcoal) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .newsletter-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(196,98,45,0.1) 0%, transparent 70%);
+    }
+
+    .newsletter-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .newsletter-title {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 800;
+      color: var(--white);
+      font-family: Georgia, serif;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .newsletter-desc {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.75;
+    }
+
+    .newsletter-input-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .newsletter-input {
+      flex: 1;
+      padding: 13px 16px;
+      border: 2px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      font-size: 0.92rem;
+      font-family: 'Inter', sans-serif;
+      color: var(--white);
+      background: rgba(255,255,255,0.08);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .newsletter-input:focus { border-color: var(--terra); }
+    .newsletter-input::placeholder { color: rgba(255,255,255,0.35); }
+
+    .newsletter-btn {
+      padding: 13px 22px;
+      background: var(--terra);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      white-space: nowrap;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .newsletter-btn:hover { background: var(--terra-dark); transform: translateY(-2px); }
+
+    .newsletter-fine {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.3);
+      margin-top: 10px;
+    }
+
+    .newsletter-success {
+      background: rgba(34,197,94,0.15);
+      border: 1px solid rgba(34,197,94,0.3);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 0.85rem;
+      color: #86efac;
+      margin-top: 12px;
+      font-weight: 600;
+    }
+
     /* ── CTA SECTION ── */
     .cta-section {
       padding: 110px 24px;
@@ -1064,6 +1159,7 @@
       .farnaz-inner { grid-template-columns: 1fr; gap: 56px; }
       .farnaz-content .section-head { text-align: center; }
       .about-studio-inner { grid-template-columns: 1fr; gap: 56px; }
+      .newsletter-inner { grid-template-columns: 1fr; gap: 32px; }
       .footer-inner { grid-template-columns: 1fr 1fr; gap: 36px; }
     }
 
@@ -1076,6 +1172,7 @@
       .gallery-mosaic { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
       .gallery-tile:nth-child(1) { grid-column: span 2; grid-row: span 1; }
       .modal-box { padding: 36px 24px; }
+      .newsletter-input-row { flex-direction: column; }
     }
 
     @media (max-width: 600px) {
@@ -1172,14 +1269,21 @@
         <div class="canvas-brushstroke"></div>
         <div class="canvas-brushstroke"></div>
         <div class="canvas-brushstroke"></div>
-        <div class="canvas-label">Farnaz Art Studio</div>
+        <!-- 📷 REPLACE THIS CANVAS WITH YOUR HERO IMAGE:
+             Use an <img> tag with src="your-photo.jpg" style="width:100%;height:100%;object-fit:cover;"
+             Recommended size: 840×1050px (4:5 ratio) -->
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;opacity:0.25;pointer-events:none;">
+          <div style="font-size:3rem;">📷</div>
+          <div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#555;margin-top:6px;">Add your<br>hero photo here</div>
+        </div>
+        <div class="canvas-label">Beyond the Canvas Art Studio</div>
       </div>
 
       <div class="float-badge">
         <div class="float-icon">🖌️</div>
         <div>
           <div class="float-num">Oil · Resin</div>
-          <div class="float-lbl">& Fine Art</div>
+          <div class="float-lbl">&amp; Fine Art</div>
         </div>
       </div>
 
@@ -1220,7 +1324,11 @@
 <section class="about-studio-section">
   <div class="about-studio-inner">
     <div class="about-studio-visual reveal">
-      <div class="about-canvas-frame"><span>🎨</span></div>
+      <div class="about-canvas-frame" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;border:2px dashed rgba(196,98,45,0.35);background:rgba(196,98,45,0.04);">
+        <span style="font-size:3rem;opacity:0.35;">📷</span>
+        <span style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:rgba(196,98,45,0.6);">Add studio / Farnaz photo here</span>
+        <span style="font-size:0.65rem;color:rgba(0,0,0,0.3);">Recommended: 600×500px</span>
+      </div>
       <div class="about-accent-badge">
         <span class="badge-num">25+</span>
         <span class="badge-lbl">Years of Teaching</span>
@@ -1271,6 +1379,15 @@
           <div class="service-name">Training Painting &amp; Drawing</div>
           <p class="service-desc">Discover the timeless beauty of traditional Art. We offer professional Oil painting and drawing classes designed for all levels.</p>
           <button class="learn-more-btn" onclick="openModal('modal-training')">Learn More</button>
+        </div>
+      </div>
+
+      <div class="service-card reveal reveal-delay-4">
+        <div class="service-visual">✨</div>
+        <div class="service-info">
+          <div class="service-name">Resin Art &amp; Craft Workshops</div>
+          <p class="service-desc">Explore the fluid, mesmerizing world of resin art. Create ocean waves, geodes, jewellery, and decorative pieces in our hands-on resin workshops. All levels welcome.</p>
+          <button class="learn-more-btn" onclick="openModal('modal-resin')">Learn More</button>
         </div>
       </div>
     </div>
@@ -1333,6 +1450,26 @@
   </div>
 </div>
 
+<!-- Modal: Resin Art -->
+<div class="modal-overlay" id="modal-resin" onclick="closeModalOutside(event, 'modal-resin')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('modal-resin')" aria-label="Close">✕</button>
+    <div class="modal-label">Resin Art &amp; Craft Workshops</div>
+    <h3 class="modal-title">Create Stunning Resin Art</h3>
+    <div class="modal-body">
+      <p>Dive into the fluid, mesmerizing world of resin art at Beyond the Canvas Art Studio. Using epoxy resin, alcohol inks, pigments, mica powders, and gold leaf, you'll create pieces that are truly one of a kind.</p>
+      <p>Our resin workshops are suitable for all skill levels. No prior experience is needed — Farnaz will guide you through every step, from safety and mixing to achieving beautiful cells, ocean waves, and geode effects.</p>
+      <p><strong>Classes include:</strong></p>
+      <ul>
+        <li>Resin Art Workshop — fluid art, pour techniques (All Levels)</li>
+        <li>Ocean Resin &amp; Geode Art — advanced layering (Intermediate)</li>
+        <li>Resin Jewellery &amp; Small Objects — moulds and casting (Beginner)</li>
+      </ul>
+      <p>All safety equipment, resin, pigments, and materials are included. Take your masterpiece home the same day!</p>
+    </div>
+  </div>
+</div>
+
 <!-- Meet Farnaz Amin -->
 <section class="farnaz-section">
   <div class="section-inner">
@@ -1387,31 +1524,46 @@
 
     <div class="gallery-mosaic reveal">
       <div class="gallery-tile">
-        🖼️
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;opacity:0.45;">
+          <span style="font-size:2.8rem;">📷</span>
+          <span style="font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;">Add featured artwork photo</span>
+        </div>
         <div class="gallery-tile-overlay">
           <span class="gallery-tile-label">Oil on Canvas — Farnaz Amin</span>
         </div>
       </div>
       <div class="gallery-tile">
-        ✨
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;opacity:0.45;">
+          <span style="font-size:2rem;">📷</span>
+          <span style="font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;">Add resin art photo</span>
+        </div>
         <div class="gallery-tile-overlay">
           <span class="gallery-tile-label">Resin Art Piece</span>
         </div>
       </div>
       <div class="gallery-tile">
-        🎨
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;opacity:0.45;">
+          <span style="font-size:2rem;">📷</span>
+          <span style="font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;">Add watercolour photo</span>
+        </div>
         <div class="gallery-tile-overlay">
-          <span class="gallery-tile-label">Watercolor Series</span>
+          <span class="gallery-tile-label">Watercolour Series</span>
         </div>
       </div>
       <div class="gallery-tile">
-        ✏️
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;opacity:0.45;">
+          <span style="font-size:2rem;">📷</span>
+          <span style="font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;">Add drawing photo</span>
+        </div>
         <div class="gallery-tile-overlay">
           <span class="gallery-tile-label">Fine Art Drawing</span>
         </div>
       </div>
       <div class="gallery-tile">
-        🖌️
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;opacity:0.45;">
+          <span style="font-size:2rem;">📷</span>
+          <span style="font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;">Add painting photo</span>
+        </div>
         <div class="gallery-tile-overlay">
           <span class="gallery-tile-label">Acrylic Painting</span>
         </div>
@@ -1473,6 +1625,29 @@
   </div>
 </section>
 
+<!-- Newsletter Signup -->
+<section class="newsletter-section">
+  <div class="section-inner">
+    <div class="newsletter-inner reveal">
+      <div class="newsletter-content">
+        <div class="section-label" style="color:var(--gold);">Stay Inspired</div>
+        <h2 class="newsletter-title">Join Our Creative Community</h2>
+        <p class="newsletter-desc">Sign up for studio news, new class announcements, upcoming art camps, and exclusive early-bird discounts. No spam — only inspiration.</p>
+      </div>
+      <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+        <div class="newsletter-input-row">
+          <input type="email" id="newsletterEmail" class="newsletter-input" placeholder="Your email address" required autocomplete="email">
+          <button type="submit" class="newsletter-btn">Subscribe 🎨</button>
+        </div>
+        <p class="newsletter-fine">We respect your privacy. Unsubscribe at any time.</p>
+        <div id="newsletterSuccess" class="newsletter-success" style="display:none;">
+          ✅ You're in! Welcome to the Beyond the Canvas community.
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
 <!-- CTA -->
 <section class="cta-section">
   <div class="cta-inner">
@@ -1520,7 +1695,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <p>Copyright &copy; 2025 Farnaz Art Studio. All rights reserved.</p>
+    <p>Copyright &copy; 2025 Beyond the Canvas Art Studio — Farnaz Amin. All rights reserved.</p>
     <div class="social-links">
       <a class="social-link" href="#" aria-label="Instagram">📸</a>
       <a class="social-link" href="#" aria-label="Facebook">📘</a>
@@ -1530,6 +1705,14 @@
 </footer>
 
 <script>
+  function handleNewsletter(e) {
+    e.preventDefault();
+    document.getElementById('newsletterSuccess').style.display = 'block';
+    document.getElementById('newsletterEmail').value = '';
+    document.getElementById('newsletterEmail').style.display = 'none';
+    document.querySelector('.newsletter-btn').style.display = 'none';
+  }
+
   function toggleMenu() {
     document.getElementById('mobileMenu').classList.toggle('open');
     document.getElementById('mobileOverlay').classList.toggle('open');

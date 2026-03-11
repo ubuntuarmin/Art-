@@ -152,6 +152,34 @@
     .stripe-badge { display: flex; align-items: center; gap: 6px; margin-top: 10px; font-size: 0.72rem; color: var(--text-muted); }
     .stripe-badge strong { color: #6772e5; }
 
+    /* ── PROMO CODE ── */
+    .promo-row { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+    .promo-label { font-size: 0.78rem; font-weight: 600; color: var(--text-muted); margin-bottom: 8px; }
+    .promo-input-row { display: flex; gap: 8px; }
+    .promo-input { flex: 1; padding: 9px 12px; border: 2px solid var(--border); border-radius: 8px; font-size: 0.85rem; font-family: 'Inter', sans-serif; color: var(--text-dark); background: #fff; outline: none; transition: border-color 0.2s; text-transform: uppercase; letter-spacing: 1px; }
+    .promo-input:focus { border-color: var(--terra); }
+    .promo-btn { padding: 9px 16px; background: var(--charcoal); color: #fff; border: none; border-radius: 8px; font-size: 0.82rem; font-weight: 700; cursor: pointer; transition: all 0.2s; white-space: nowrap; font-family: 'Inter', sans-serif; }
+    .promo-btn:hover { background: var(--terra); }
+    .promo-msg { font-size: 0.78rem; margin-top: 6px; min-height: 18px; }
+    .promo-msg.success { color: var(--success); font-weight: 600; }
+    .promo-msg.error   { color: #e53e3e; }
+
+    /* ── GIFT CARD SECTION ── */
+    .gift-card-note {
+      background: linear-gradient(135deg, rgba(212,168,67,0.08), rgba(196,98,45,0.06));
+      border: 1px solid rgba(212,168,67,0.25);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.82rem;
+      color: var(--text-mid);
+    }
+
+    .gift-card-icon { font-size: 1.3rem; flex-shrink: 0; }
+
     /* ── SUBMIT ── */
     .submit-btn { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; padding: 17px 24px; border-radius: 50px; background: linear-gradient(135deg, var(--terra), var(--terra-dark)); color: #fff; font-size: 1.05rem; font-weight: 700; border: none; cursor: pointer; transition: all 0.3s; letter-spacing: 0.3px; box-shadow: 0 8px 30px rgba(196,98,45,0.35); font-family: 'Inter', sans-serif; }
     .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(196,98,45,0.5); }
@@ -317,7 +345,7 @@
           <input type="radio" name="classSelect" value="resin" data-price="75" data-name="Resin Art Workshop" onchange="updateOrder(this)">
           <div class="class-option-info">
             <div class="class-option-name">✨ Resin Art Workshop</div>
-            <div class="class-option-meta">2.5 hrs · All Levels · Kit included</div>
+            <div class="class-option-meta">2.5 hrs · All Levels · Full kit included</div>
           </div>
           <div class="class-option-price">$75</div>
         </label>
@@ -366,12 +394,27 @@
         <div class="order-total-amount" id="orderTotal">$65.00</div>
       </div>
 
+      <!-- Promo Code -->
+      <div class="promo-row">
+        <div class="promo-label">Have a promo or gift code?</div>
+        <div class="promo-input-row">
+          <input type="text" id="promoCode" class="promo-input" placeholder="Enter code" autocomplete="off">
+          <button class="promo-btn" type="button" onclick="applyPromo()">Apply</button>
+        </div>
+        <div id="promoMsg" class="promo-msg"></div>
+      </div>
+
       <div class="security-badges">
         <div class="security-badge">🔒 SSL Secured</div>
         &nbsp;·&nbsp;
         <div class="security-badge">✅ Instant Confirmation</div>
         &nbsp;·&nbsp;
-        <div class="security-badge">↩️ Free Cancellation</div>
+        <div class="security-badge">↩️ Free Cancellation (48h)</div>
+      </div>
+
+      <div class="gift-card-note">
+        <span class="gift-card-icon">🎁</span>
+        <span>Booking as a gift? Add a note in <strong>Special Requests</strong> and we'll email you a printable gift card to present to the recipient.</span>
       </div>
     </div>
   </div>
@@ -518,9 +561,13 @@
   <div class="success-box">
     <div class="success-check">✅</div>
     <h2 class="success-title">Booking Confirmed!</h2>
-    <p class="success-desc">Thank you! Your class has been booked. We can't wait to see you in the studio.</p>
-    <div class="success-ref" id="successRef">A confirmation has been sent to your email address.</div>
-    <a href="index.html" class="success-back">🏠 Back to Home</a>
+    <p class="success-desc">Thank you! Your class has been booked. We can't wait to see you in the studio. A confirmation email will be sent to you shortly.</p>
+    <div class="success-ref" id="successRef">Confirmation will be sent to your email address.</div>
+    <div id="successBookingRef" style="background:var(--cream2);border-radius:8px;padding:10px 16px;font-size:0.82rem;color:var(--text-muted);margin-bottom:20px;font-family:monospace;letter-spacing:1px;"></div>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <a href="index.html" class="success-back">🏠 Back to Home</a>
+      <a href="classes.html" class="success-back" style="background:var(--charcoal);">📋 Browse Classes</a>
+    </div>
   </div>
 </div>
 
@@ -581,7 +628,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <p>Copyright &copy; 2025 Farnaz Art Studio. All rights reserved.</p>
+    <p>Copyright &copy; 2025 Beyond the Canvas Art Studio — Farnaz Amin. All rights reserved.</p>
     <div class="social-links">
       <a class="social-link" href="#" aria-label="Instagram">📸</a>
       <a class="social-link" href="#" aria-label="Facebook">📘</a>
@@ -598,12 +645,24 @@
 
   let currentPrice = 65;
   let currentName  = 'Oil Painting Fundamentals';
+  let promoDiscount = 0;
+
+  const PROMO_CODES = {
+    'WELCOME10': { discount: 10, label: '10% off — Welcome discount!' },
+    'ART20':     { discount: 20, label: '20% off — Art enthusiast code!' },
+    'STUDENT15': { discount: 15, label: '15% off — Student discount!' },
+    'FIRSTTIME': { discount: 10, label: '10% off — First-time student!' }
+  };
 
   function updateOrder(radio) {
     currentPrice = parseFloat(radio.dataset.price);
     currentName  = radio.dataset.name;
     document.querySelectorAll('.class-option').forEach(opt => opt.classList.remove('selected'));
     radio.closest('.class-option').classList.add('selected');
+    promoDiscount = 0;
+    document.getElementById('promoCode').value = '';
+    document.getElementById('promoMsg').textContent = '';
+    document.getElementById('promoMsg').className = 'promo-msg';
     recalcTotal();
   }
 
@@ -615,13 +674,30 @@
 
   function recalcTotal() {
     const qty   = parseInt(document.getElementById('qtyInput').value) || 1;
-    const total = currentPrice * qty;
-    const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const base  = currentPrice * qty;
+    const total = base * (1 - promoDiscount / 100);
     const formatPrice = n => '$' + n.toFixed(2).replace(/\.00$/, '');
-    document.getElementById('orderLineName').textContent  = `${currentName} \u00d7 ${qty}`;
-    document.getElementById('orderLinePrice').textContent = formatPrice(total);
+    document.getElementById('orderLineName').textContent  = `${currentName} × ${qty}`;
+    document.getElementById('orderLinePrice').textContent = formatPrice(base);
     document.getElementById('orderTotal').textContent     = formatPrice(total);
     document.getElementById('btnTotal').textContent       = formatPrice(total);
+  }
+
+  function applyPromo() {
+    const code  = document.getElementById('promoCode').value.trim().toUpperCase();
+    const msgEl = document.getElementById('promoMsg');
+    if (!code) { msgEl.textContent = 'Please enter a code.'; msgEl.className = 'promo-msg error'; return; }
+    if (PROMO_CODES[code]) {
+      promoDiscount = PROMO_CODES[code].discount;
+      msgEl.textContent = '✅ ' + PROMO_CODES[code].label;
+      msgEl.className = 'promo-msg success';
+      recalcTotal();
+    } else {
+      promoDiscount = 0;
+      msgEl.textContent = '❌ Code not recognised. Please check and try again.';
+      msgEl.className = 'promo-msg error';
+      recalcTotal();
+    }
   }
 
   const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -647,18 +723,24 @@
     btn.classList.add('loading');
 
     /*
-    STRIPE — Replace timeout with real payment:
+    ══════════════════════════════════════════════
+    STRIPE — See stripe-instructions.html for full setup guide.
+    Replace this timeout with real Stripe payment:
+
     const { paymentMethod, error } = await stripe.createPaymentMethod({
       type: 'card', card: cardElement,
       billing_details: { name: fname + ' ' + lname, email }
     });
     if (error) { document.getElementById('card-errors').textContent = error.message; btn.classList.remove('loading'); return; }
-    // POST { paymentMethodId: paymentMethod.id, amount: currentPrice * qty, class: currentName } to backend
+    // POST { paymentMethodId: paymentMethod.id, amount: currentPrice * qty } to backend
+    ══════════════════════════════════════════════
     */
 
     setTimeout(() => {
       btn.classList.remove('loading');
-      document.getElementById('successRef').textContent = 'Confirmation sent to ' + email;
+      const refNum = 'BTC-' + Date.now().toString(36).toUpperCase().slice(-6);
+      document.getElementById('successRef').textContent = 'Confirmation sent to: ' + email;
+      document.getElementById('successBookingRef').textContent = 'Booking Ref: ' + refNum + ' · ' + currentName;
       document.getElementById('successOverlay').classList.add('show');
     }, 2000);
   }
