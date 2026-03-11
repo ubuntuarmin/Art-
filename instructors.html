@@ -82,7 +82,7 @@
     .step-connector { flex: 1; height: 2px; background: var(--border); margin: 0 12px; border-radius: 2px; min-width: 40px; }
 
     /* ── CHECKOUT MAIN ── */
-    .checkout-main { max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px; display: grid; grid-template-columns: 1fr 400px; gap: 36px; align-items: start; }
+    .checkout-main { max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px; display: grid; grid-template-columns: minmax(300px, 360px) 1fr; gap: 36px; align-items: start; }
 
     /* ── ORDER PANEL (left) ── */
     .order-panel { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; position: sticky; top: 90px; }
@@ -227,10 +227,54 @@
     .social-link { width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; font-size: 0.95rem; text-decoration: none; transition: all 0.3s; }
     .social-link:hover { background: var(--terra); border-color: var(--terra); transform: translateY(-3px); }
 
+    /* ── STEP TRANSITION ANIMATIONS ── */
+    .step-panel { display: none; }
+    .step-panel.active { display: flex; flex-direction: column; gap: 22px; animation: stepIn 0.42s cubic-bezier(0.22,1,0.36,1) both; }
+    .step-panel.active.from-prev { animation-name: stepInFromLeft; }
+    @keyframes stepIn         { from { opacity:0; transform:translateX(42px);  } to { opacity:1; transform:translateX(0); } }
+    @keyframes stepInFromLeft { from { opacity:0; transform:translateX(-42px); } to { opacity:1; transform:translateX(0); } }
+
+    /* Active step circle pulse */
+    .step.active .step-circle { animation: activePulse 2s ease-in-out infinite; }
+    @keyframes activePulse { 0%,100% { box-shadow:0 0 0 0 rgba(196,98,45,0.45); } 50% { box-shadow:0 0 0 9px rgba(196,98,45,0); } }
+    .step.done .step-circle { animation: none; }
+
+    /* Connector fill */
+    .step-connector { transition: background 0.5s ease; }
+    .step-connector.done { background: var(--success); }
+
+    /* ── STEP NAV BUTTONS ── */
+    .step-nav { display: flex; align-items: center; gap: 12px; }
+    .btn-back { flex-shrink:0; display:flex; align-items:center; gap:6px; padding:13px 20px; background:var(--cream2); color:var(--text-mid); border:2px solid var(--border); border-radius:50px; font-size:0.88rem; font-weight:600; cursor:pointer; transition:all 0.2s; font-family:'Inter',sans-serif; white-space:nowrap; }
+    .btn-back:hover { border-color:var(--terra); color:var(--terra); background:rgba(196,98,45,0.06); }
+    .btn-next { flex:1; display:flex; align-items:center; justify-content:center; gap:10px; padding:15px 24px; background:linear-gradient(135deg,var(--terra),var(--terra-dark)); color:#fff; border:none; border-radius:50px; font-size:0.95rem; font-weight:700; cursor:pointer; transition:all 0.3s; box-shadow:0 6px 24px rgba(196,98,45,0.3); font-family:'Inter',sans-serif; letter-spacing:0.2px; }
+    .btn-next:hover { transform:translateY(-2px); box-shadow:0 10px 34px rgba(196,98,45,0.45); }
+    .btn-next .arrow { display:inline-block; transition:transform 0.2s; }
+    .btn-next:hover .arrow { transform:translateX(5px); }
+    .step-nav .submit-btn { flex:1; }
+
+    /* Field-level error */
+    .field-error { color:#e53e3e; font-size:0.77rem; margin-top:4px; min-height:16px; }
+
+    /* ── SUCCESS STEP (Step 4) ── */
+    .success-step-panel { background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow); padding:48px 36px; text-align:center; }
+    .success-anim-check { width:90px; height:90px; border-radius:50%; background:linear-gradient(135deg,#d1fae5,#a7f3d0); display:flex; align-items:center; justify-content:center; margin:0 auto 28px; font-size:3rem; animation:checkPop 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.1s both; }
+    @keyframes checkPop { from { opacity:0; transform:scale(0.3) rotate(-20deg); } to { opacity:1; transform:scale(1) rotate(0); } }
+    .success-step-title { font-family:'Playfair Display',Georgia,serif; font-size:2rem; font-weight:700; color:var(--text-dark); margin-bottom:10px; animation:fadeUp 0.5s ease 0.3s both; }
+    .success-step-sub { font-size:0.95rem; color:var(--text-mid); line-height:1.7; margin-bottom:24px; animation:fadeUp 0.5s ease 0.4s both; }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+    .success-booking-details { background:var(--cream); border-radius:12px; padding:18px 20px; margin-bottom:20px; text-align:left; animation:fadeUp 0.5s ease 0.5s both; }
+    .success-detail-row { display:flex; justify-content:space-between; align-items:center; padding:7px 0; font-size:0.87rem; border-bottom:1px dashed var(--border); }
+    .success-detail-row:last-child { border:none; }
+    .success-detail-label { color:var(--text-muted); }
+    .success-detail-value { font-weight:600; color:var(--text-dark); }
+    .success-ref-code { display:block; background:var(--cream2); border-radius:8px; padding:10px 16px; font-family:monospace; font-size:0.88rem; color:var(--text-muted); letter-spacing:1.5px; margin-bottom:28px; animation:fadeUp 0.5s ease 0.55s both; }
+    .success-step-actions { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; animation:fadeUp 0.5s ease 0.6s both; }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) { .checkout-main { grid-template-columns: 1fr; } .order-panel { position: static; } .faq-grid { grid-template-columns: 1fr; } }
     @media (max-width: 768px) { .nav-links { display: none; } .hamburger { display: flex; } .mobile-menu { display: flex; } .form-row { grid-template-columns: 1fr; } .datetime-grid { grid-template-columns: 1fr; } .footer-inner { grid-template-columns: 1fr 1fr; gap: 32px; } }
-    @media (max-width: 500px) { .footer-inner { grid-template-columns: 1fr; gap: 22px; } .step-label { display: none; } .success-box { padding: 36px 24px; } }
+    @media (max-width: 500px) { .footer-inner { grid-template-columns: 1fr; gap: 22px; } .step-label { display: none; } .success-step-panel { padding: 36px 20px; } }
   </style>
 </head>
 <body>
@@ -282,23 +326,23 @@
 <!-- Progress Steps -->
 <div class="checkout-steps">
   <div class="steps-inner">
-    <div class="step active">
+    <div class="step active" id="step-1">
       <div class="step-circle">1</div>
-      <div class="step-label">Select Class</div>
-    </div>
-    <div class="step-connector"></div>
-    <div class="step active">
-      <div class="step-circle">2</div>
       <div class="step-label">Your Details</div>
     </div>
-    <div class="step-connector"></div>
-    <div class="step pending">
+    <div class="step-connector" id="connector-1"></div>
+    <div class="step pending" id="step-2">
+      <div class="step-circle">2</div>
+      <div class="step-label">Schedule</div>
+    </div>
+    <div class="step-connector" id="connector-2"></div>
+    <div class="step pending" id="step-3">
       <div class="step-circle">3</div>
       <div class="step-label">Payment</div>
     </div>
-    <div class="step-connector"></div>
-    <div class="step pending">
-      <div class="step-circle">✓</div>
+    <div class="step-connector" id="connector-3"></div>
+    <div class="step pending" id="step-4">
+      <div class="step-circle">4</div>
       <div class="step-label">Confirmed</div>
     </div>
   </div>
@@ -419,155 +463,185 @@
     </div>
   </div>
 
-  <!-- Right: Checkout Form -->
+  <!-- Right: Checkout Form (Multi-Step Wizard) -->
   <div class="checkout-form-panel">
 
-    <!-- Step 1: Your Details -->
-    <div class="form-card">
-      <div class="form-card-header">
-        <div class="form-card-num">1</div>
-        <h3>Your Details</h3>
-      </div>
-      <div class="form-card-body">
-        <div class="form-row">
-          <div class="form-group">
-            <label for="firstName">First Name <span class="req">*</span></label>
-            <input type="text" id="firstName" name="firstName" class="form-input" placeholder="Jane" required autocomplete="given-name">
-          </div>
-          <div class="form-group">
-            <label for="lastName">Last Name <span class="req">*</span></label>
-            <input type="text" id="lastName" name="lastName" class="form-input" placeholder="Smith" required autocomplete="family-name">
-          </div>
+    <!-- ── STEP 1: Your Details ── -->
+    <div class="step-panel active" id="step-panel-1">
+      <div class="form-card">
+        <div class="form-card-header">
+          <div class="form-card-num">1</div>
+          <h3>Your Details</h3>
         </div>
-        <div class="form-group">
-          <label for="email">Email Address <span class="req">*</span></label>
-          <input type="email" id="email" name="email" class="form-input" placeholder="jane@example.com" required autocomplete="email">
-        </div>
-        <div class="form-group">
-          <label for="phone">Phone Number</label>
-          <input type="tel" id="phone" name="phone" class="form-input" placeholder="(555) 000-0000" autocomplete="tel">
-        </div>
-      </div>
-    </div>
-
-    <!-- Step 2: Schedule -->
-    <div class="form-card">
-      <div class="form-card-header">
-        <div class="form-card-num">2</div>
-        <h3>Choose Your Date &amp; Time</h3>
-      </div>
-      <div class="form-card-body">
-        <div class="datetime-grid">
-          <div class="form-group">
-            <label for="sessionDate">Preferred Date <span class="req">*</span></label>
-            <input type="date" id="sessionDate" name="sessionDate" class="form-input" required>
-          </div>
-          <div class="form-group">
-            <label for="sessionTime">Session Time <span class="req">*</span></label>
-            <select id="sessionTime" name="sessionTime" class="form-input form-select" required>
-              <option value="" disabled selected>— Select time —</option>
-              <option>10:00 am – 12:00 pm</option>
-              <option>12:30 pm – 2:30 pm</option>
-              <option>3:00 pm – 5:00 pm</option>
-              <option>5:30 pm – 7:30 pm</option>
-              <option>6:00 pm – 8:00 pm</option>
-              <option>6:00 pm – 9:00 pm</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="experience">Experience Level</label>
-          <select id="experience" name="experience" class="form-input form-select">
-            <option value="" disabled selected>— How would you describe yourself? —</option>
-            <option>Complete beginner</option>
-            <option>Some experience</option>
-            <option>Intermediate</option>
-            <option>Advanced / returning student</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="notes">Special Requests or Notes</label>
-          <textarea id="notes" name="notes" class="form-input form-textarea" placeholder="Allergies, accessibility needs, gift booking, etc."></textarea>
-        </div>
-      </div>
-    </div>
-
-    <!-- Step 3: Payment -->
-    <div class="form-card">
-      <div class="form-card-header">
-        <div class="form-card-num">3</div>
-        <h3>Payment</h3>
-      </div>
-      <div class="form-card-body">
-        <div class="payment-info-bar">🔒 Your payment is secured with 256-bit SSL encryption</div>
-        <div class="form-group">
-          <label>Card Details <span class="req">*</span></label>
-          <!--
-          ══════════════════════════════════════════════
-          STRIPE INTEGRATION — Ready to connect
-          ══════════════════════════════════════════════
-          1. Add before </body>:
-             <script src="https://js.stripe.com/v3/"></script>
-
-          2. Initialize (add your key via environment variable, never hardcode live keys):
-             const stripe = Stripe(window.STRIPE_PK /* set from server-rendered config */);
-             const elements = stripe.elements();
-             const cardElement = elements.create('card', {
-               style: { base: { fontFamily: 'Inter, sans-serif', fontSize: '15px', color: '#1A1A1A' } }
-             });
-             cardElement.mount('#card-element');
-             cardElement.on('change', ({error}) => {
-               document.getElementById('card-errors').textContent = error ? error.message : '';
-             });
-
-          3. On submit:
-             const { paymentMethod, error } = await stripe.createPaymentMethod({
-               type: 'card', card: cardElement,
-               billing_details: { name: firstName + ' ' + lastName, email }
-             });
-             // POST paymentMethod.id + amount to your backend
-          ══════════════════════════════════════════════
-          -->
-          <div id="card-element">
-            <!-- Stripe Elements mounts here. Remove mock below when connected. -->
-            <div class="stripe-card-mock">
-              <span class="stripe-card-mock-num">•••• •••• •••• ••••</span>
-              <div class="stripe-card-mock-icons">
-                <div class="card-icon">VISA</div>
-                <div class="card-icon">MC</div>
-                <div class="card-icon">AMEX</div>
-              </div>
+        <div class="form-card-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">First Name <span class="req">*</span></label>
+              <input type="text" id="firstName" name="firstName" class="form-input" placeholder="Jane" required autocomplete="given-name">
+              <div class="field-error" id="err-firstName"></div>
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name <span class="req">*</span></label>
+              <input type="text" id="lastName" name="lastName" class="form-input" placeholder="Smith" required autocomplete="family-name">
+              <div class="field-error" id="err-lastName"></div>
             </div>
           </div>
-          <div id="card-errors" role="alert"></div>
-          <div class="stripe-badge">🔒 Powered by <strong>Stripe</strong> — Card details never stored on our servers</div>
+          <div class="form-group">
+            <label for="email">Email Address <span class="req">*</span></label>
+            <input type="email" id="email" name="email" class="form-input" placeholder="jane@example.com" required autocomplete="email">
+            <div class="field-error" id="err-email"></div>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" class="form-input" placeholder="(555) 000-0000" autocomplete="tel">
+          </div>
+        </div>
+      </div>
+      <div class="step-nav">
+        <button type="button" class="btn-next" onclick="goToStep(2)">
+          Continue — Choose Date &amp; Time <span class="arrow">→</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ── STEP 2: Schedule ── -->
+    <div class="step-panel" id="step-panel-2">
+      <div class="form-card">
+        <div class="form-card-header">
+          <div class="form-card-num">2</div>
+          <h3>Choose Your Date &amp; Time</h3>
+        </div>
+        <div class="form-card-body">
+          <div class="datetime-grid">
+            <div class="form-group">
+              <label for="sessionDate">Preferred Date <span class="req">*</span></label>
+              <input type="date" id="sessionDate" name="sessionDate" class="form-input" required>
+              <div class="field-error" id="err-sessionDate"></div>
+            </div>
+            <div class="form-group">
+              <label for="sessionTime">Session Time <span class="req">*</span></label>
+              <select id="sessionTime" name="sessionTime" class="form-input form-select" required>
+                <option value="" disabled selected>— Select time —</option>
+                <option>10:00 am – 12:00 pm</option>
+                <option>12:30 pm – 2:30 pm</option>
+                <option>3:00 pm – 5:00 pm</option>
+                <option>5:30 pm – 7:30 pm</option>
+                <option>6:00 pm – 8:00 pm</option>
+                <option>6:00 pm – 9:00 pm</option>
+              </select>
+              <div class="field-error" id="err-sessionTime"></div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="experience">Experience Level</label>
+            <select id="experience" name="experience" class="form-input form-select">
+              <option value="" disabled selected>— How would you describe yourself? —</option>
+              <option>Complete beginner</option>
+              <option>Some experience</option>
+              <option>Intermediate</option>
+              <option>Advanced / returning student</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="notes">Special Requests or Notes</label>
+            <textarea id="notes" name="notes" class="form-input form-textarea" placeholder="Allergies, accessibility needs, gift booking, etc."></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="step-nav">
+        <button type="button" class="btn-back" onclick="goToStep(1)">← Back</button>
+        <button type="button" class="btn-next" onclick="goToStep(3)">
+          Continue — Payment <span class="arrow">→</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ── STEP 3: Payment ── -->
+    <div class="step-panel" id="step-panel-3">
+      <div class="form-card">
+        <div class="form-card-header">
+          <div class="form-card-num">3</div>
+          <h3>Payment</h3>
+        </div>
+        <div class="form-card-body">
+          <div class="payment-info-bar">🔒 Your payment is secured with 256-bit SSL encryption</div>
+          <div class="form-group">
+            <label>Card Details <span class="req">*</span></label>
+            <!--
+            ══════════════════════════════════════════════
+            STRIPE INTEGRATION — Ready to connect
+            ══════════════════════════════════════════════
+            To activate real Stripe payments:
+            1. Set window.STRIPE_PK to your publishable key (e.g. from a server-rendered
+               <script>window.STRIPE_PK = "pk_live_...";</script> tag — never hardcode live keys).
+            2. The Stripe.js script is already loaded below. mountStripeCard() will run
+               automatically when the user reaches Step 3.
+            3. Wire up your backend: uncomment the fetch() call in handleCheckout().
+            ══════════════════════════════════════════════
+            -->
+            <div id="card-element">
+              <!-- Stripe Elements mounts here. The mock UI below is removed automatically when Stripe connects. -->
+              <div class="stripe-card-mock">
+                <span class="stripe-card-mock-num">•••• •••• •••• ••••</span>
+                <div class="stripe-card-mock-icons">
+                  <div class="card-icon">VISA</div>
+                  <div class="card-icon">MC</div>
+                  <div class="card-icon">AMEX</div>
+                </div>
+              </div>
+            </div>
+            <div id="card-errors" role="alert"></div>
+            <div class="stripe-badge">🔒 Powered by <strong>Stripe</strong> — Card details never stored on our servers</div>
+          </div>
+        </div>
+      </div>
+      <div class="step-nav">
+        <button type="button" class="btn-back" onclick="goToStep(2)">← Back</button>
+        <button class="submit-btn" id="submitBtn" onclick="handleCheckout(event)" type="button" style="flex:1;">
+          <span class="btn-icon">🎨</span>
+          <span>Complete Booking — <span id="btnTotal">$65.00</span></span>
+          <div class="btn-spinner"></div>
+        </button>
+      </div>
+      <p class="submit-note">🔒 Secure checkout · Confirmation email sent instantly</p>
+    </div>
+
+    <!-- ── STEP 4: Confirmed ── -->
+    <div class="step-panel" id="step-panel-4">
+      <div class="success-step-panel">
+        <div class="success-anim-check">✅</div>
+        <h2 class="success-step-title">Booking Confirmed!</h2>
+        <p class="success-step-sub">Thank you! Your class has been booked. We can't wait to see you in the studio. A confirmation email will be sent to you shortly.</p>
+        <div class="success-booking-details">
+          <div class="success-detail-row">
+            <span class="success-detail-label">Name</span>
+            <span class="success-detail-value" id="successDetailName">—</span>
+          </div>
+          <div class="success-detail-row">
+            <span class="success-detail-label">Class</span>
+            <span class="success-detail-value" id="successDetailClass">—</span>
+          </div>
+          <div class="success-detail-row">
+            <span class="success-detail-label">Date</span>
+            <span class="success-detail-value" id="successDetailDate">—</span>
+          </div>
+          <div class="success-detail-row">
+            <span class="success-detail-label">Time</span>
+            <span class="success-detail-value" id="successDetailTime">—</span>
+          </div>
+          <div class="success-detail-row">
+            <span class="success-detail-label">Email</span>
+            <span class="success-detail-value" id="successDetailEmail">—</span>
+          </div>
+        </div>
+        <span class="success-ref-code" id="successBookingRef">Booking Ref: —</span>
+        <div class="success-step-actions">
+          <a href="index.html" class="success-back">🏠 Back to Home</a>
+          <a href="classes.html" class="success-back" style="background:var(--charcoal);">📋 Browse Classes</a>
         </div>
       </div>
     </div>
 
-    <!-- Submit -->
-    <button class="submit-btn" id="submitBtn" onclick="handleCheckout(event)" type="button">
-      <span class="btn-icon">🎨</span>
-      <span>Complete Booking — <span id="btnTotal">$65.00</span></span>
-      <div class="btn-spinner"></div>
-    </button>
-    <p class="submit-note">🔒 Secure checkout · Confirmation email sent instantly</p>
-
-  </div>
-</div>
-
-<!-- Success Overlay -->
-<div class="success-overlay" id="successOverlay">
-  <div class="success-box">
-    <div class="success-check">✅</div>
-    <h2 class="success-title">Booking Confirmed!</h2>
-    <p class="success-desc">Thank you! Your class has been booked. We can't wait to see you in the studio. A confirmation email will be sent to you shortly.</p>
-    <div class="success-ref" id="successRef">Confirmation will be sent to your email address.</div>
-    <div id="successBookingRef" style="background:var(--cream2);border-radius:8px;padding:10px 16px;font-size:0.82rem;color:var(--text-muted);margin-bottom:20px;font-family:monospace;letter-spacing:1px;"></div>
-    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-      <a href="index.html" class="success-back">🏠 Back to Home</a>
-      <a href="classes.html" class="success-back" style="background:var(--charcoal);">📋 Browse Classes</a>
-    </div>
   </div>
 </div>
 
@@ -643,8 +717,9 @@
     document.getElementById('mobileOverlay').classList.toggle('open');
   }
 
-  let currentPrice = 65;
-  let currentName  = 'Oil Painting Fundamentals';
+  /* ── ORDER STATE ── */
+  let currentPrice  = 65;
+  let currentName   = 'Oil Painting Fundamentals';
   let promoDiscount = 0;
 
   const PROMO_CODES = {
@@ -680,11 +755,11 @@
     const qty   = parseInt(document.getElementById('qtyInput').value) || 1;
     const base  = currentPrice * qty;
     const total = base * (1 - promoDiscount / 100);
-    const formatPrice = n => '$' + n.toFixed(2).replace(/\.00$/, '');
-    document.getElementById('orderLineName').textContent  = `${currentName} × ${qty}`;
-    document.getElementById('orderLinePrice').textContent = formatPrice(base);
-    document.getElementById('orderTotal').textContent     = formatPrice(total);
-    document.getElementById('btnTotal').textContent       = formatPrice(total);
+    const fmt   = n => '$' + n.toFixed(2).replace(/\.00$/, '');
+    document.getElementById('orderLineName').textContent  = currentName + ' × ' + qty;
+    document.getElementById('orderLinePrice').textContent = fmt(base);
+    document.getElementById('orderTotal').textContent     = fmt(total);
+    document.getElementById('btnTotal').textContent       = fmt(total);
   }
 
   function applyPromo() {
@@ -704,68 +779,250 @@
     }
   }
 
+  /* ── MULTI-STEP CHECKOUT ── */
+  let currentStep    = 1;
+  const TOTAL_STEPS  = 4;
+  let isTransitioning = false;
+
+  function updateStepIndicator(step) {
+    for (let i = 1; i <= TOTAL_STEPS; i++) {
+      const el = document.getElementById('step-' + i);
+      if (!el) continue;
+      const circle = el.querySelector('.step-circle');
+      if (i < step) {
+        el.className = 'step done';
+        circle.textContent = '✓';
+      } else if (i === step) {
+        el.className = 'step active';
+        circle.textContent = (i === TOTAL_STEPS) ? '✓' : String(i);
+      } else {
+        el.className = 'step pending';
+        circle.textContent = String(i);
+      }
+    }
+    for (let i = 1; i < TOTAL_STEPS; i++) {
+      const c = document.getElementById('connector-' + i);
+      if (!c) continue;
+      c.className = 'step-connector' + (i < step ? ' done' : '');
+    }
+  }
+
   const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  function handleCheckout(e) {
+  function validateStep(step) {
+    let firstInvalid = null;
+    function setErr(id, msg) {
+      const errEl = document.getElementById('err-' + id);
+      const inp   = document.getElementById(id);
+      if (errEl) errEl.textContent = msg;
+      if (inp) {
+        if (msg) {
+          inp.style.borderColor = '#e53e3e';
+          inp.style.boxShadow   = '0 0 0 3px rgba(229,62,62,0.15)';
+          if (!firstInvalid) firstInvalid = inp;
+          inp.addEventListener('input', function clear() {
+            inp.style.borderColor = '';
+            inp.style.boxShadow   = '';
+            if (errEl) errEl.textContent = '';
+            inp.removeEventListener('input', clear);
+          });
+        } else {
+          inp.style.borderColor = '';
+          inp.style.boxShadow   = '';
+        }
+      }
+    }
+    if (step === 1) {
+      const fname = document.getElementById('firstName').value.trim();
+      const lname = document.getElementById('lastName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      setErr('firstName', fname ? '' : 'Please enter your first name.');
+      setErr('lastName',  lname ? '' : 'Please enter your last name.');
+      setErr('email', !email ? 'Please enter your email address.'
+                    : !EMAIL_REGEX.test(email) ? 'Please enter a valid email address.' : '');
+    }
+    if (step === 2) {
+      const date = document.getElementById('sessionDate').value;
+      const time = document.getElementById('sessionTime').value;
+      setErr('sessionDate', date ? '' : 'Please select a date.');
+      setErr('sessionTime', time ? '' : 'Please select a session time.');
+    }
+    if (firstInvalid) { firstInvalid.focus(); return false; }
+    return true;
+  }
+
+  function goToStep(target, skipValidation) {
+    if (target === currentStep || isTransitioning) return;
+    if (!skipValidation && target > currentStep && !validateStep(currentStep)) return;
+
+    isTransitioning = true;
+    const fromPanel    = document.getElementById('step-panel-' + currentStep);
+    const toPanel      = document.getElementById('step-panel-' + target);
+    const goingForward = target > currentStep;
+
+    /* Animate the current panel out */
+    fromPanel.style.opacity   = '0';
+    fromPanel.style.transform = goingForward ? 'translateX(-32px)' : 'translateX(32px)';
+    fromPanel.style.transition = 'opacity 0.24s ease, transform 0.24s ease';
+
+    setTimeout(() => {
+      fromPanel.classList.remove('active', 'from-prev');
+      fromPanel.style.cssText = '';
+
+      /* Animate the new panel in */
+      if (!goingForward) toPanel.classList.add('from-prev');
+      else               toPanel.classList.remove('from-prev');
+      toPanel.classList.add('active');
+
+      currentStep = target;
+      updateStepIndicator(currentStep);
+
+      if (currentStep === 3) mountStripeCard();
+
+      toPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      setTimeout(() => { isTransitioning = false; }, 450);
+    }, 240);
+  }
+
+  /* ── STRIPE INTEGRATION ── */
+  let stripe      = null;
+  let cardElement = null;
+  let cardMounted = false;
+
+  function mountStripeCard() {
+    if (cardMounted) return;
+    cardMounted = true;
+
+    if (typeof Stripe !== 'undefined' && window.STRIPE_PK) {
+      stripe = Stripe(window.STRIPE_PK);
+      const elements = stripe.elements({
+        fonts: [{ cssSrc: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap' }]
+      });
+      cardElement = elements.create('card', {
+        style: {
+          base: {
+            fontFamily: 'Inter, sans-serif',
+            fontSize: '15px',
+            color: '#1A1A1A',
+            '::placeholder': { color: '#888' }
+          },
+          invalid: { color: '#e53e3e' }
+        }
+      });
+      cardElement.mount('#card-element');
+      cardElement.on('change', ({ error }) => {
+        document.getElementById('card-errors').textContent = error ? error.message : '';
+      });
+      /* Remove the placeholder mock UI once Stripe mounts */
+      const mock = document.querySelector('.stripe-card-mock');
+      if (mock) mock.remove();
+    }
+    /* If window.STRIPE_PK is not set, the mock UI stays and payment is simulated */
+  }
+
+  async function handleCheckout(e) {
     e.preventDefault();
+
     const fname = document.getElementById('firstName').value.trim();
     const lname = document.getElementById('lastName').value.trim();
     const email = document.getElementById('email').value.trim();
+    const qty   = parseInt(document.getElementById('qtyInput').value) || 1;
     const date  = document.getElementById('sessionDate').value;
     const time  = document.getElementById('sessionTime').value;
 
-    if (!fname || !lname || !email || !date || !time) {
-      alert('Please fill in all required fields (marked with *).');
-      return;
-    }
-    if (!EMAIL_REGEX.test(email)) {
-      alert('Please enter a valid email address.');
-      return;
-    }
-
-    const btn = document.getElementById('submitBtn');
+    const btn   = document.getElementById('submitBtn');
+    const errEl = document.getElementById('card-errors');
     btn.classList.add('loading');
+    errEl.textContent = '';
 
-    /*
-    ══════════════════════════════════════════════
-    STRIPE — See stripe-instructions.html for full setup guide.
-    Replace this timeout with real Stripe payment:
+    if (stripe && cardElement) {
+      /* ── Real Stripe payment ── */
+      const { paymentMethod, error } = await stripe.createPaymentMethod({
+        type: 'card',
+        card: cardElement,
+        billing_details: { name: fname + ' ' + lname, email }
+      });
 
-    const { paymentMethod, error } = await stripe.createPaymentMethod({
-      type: 'card', card: cardElement,
-      billing_details: { name: fname + ' ' + lname, email }
-    });
-    if (error) { document.getElementById('card-errors').textContent = error.message; btn.classList.remove('loading'); return; }
-    // POST { paymentMethodId: paymentMethod.id, amount: currentPrice * qty } to backend
-    ══════════════════════════════════════════════
-    */
+      if (error) {
+        errEl.textContent = error.message;
+        btn.classList.remove('loading');
+        return;
+      }
 
-    setTimeout(() => {
+      /*
+       * POST paymentMethod.id + amount to your backend, e.g.:
+       *
+       * const res = await fetch('/api/create-payment-intent', {
+       *   method: 'POST',
+       *   headers: { 'Content-Type': 'application/json' },
+       *   body: JSON.stringify({
+       *     paymentMethodId: paymentMethod.id,
+       *     amount: Math.round(currentPrice * qty * (1 - promoDiscount / 100) * 100) // cents
+       *   })
+       * });
+       * const data = await res.json();
+       * if (data.error) { errEl.textContent = data.error; btn.classList.remove('loading'); return; }
+       *
+       * Handle 3D Secure / additional actions:
+       * if (data.requiresAction) {
+       *   const { error: confirmErr } = await stripe.confirmCardPayment(data.clientSecret);
+       *   if (confirmErr) { errEl.textContent = confirmErr.message; btn.classList.remove('loading'); return; }
+       * }
+       */
+
       btn.classList.remove('loading');
-      const refNum = 'BTC-' + (typeof crypto !== 'undefined' && crypto.randomUUID
-        ? crypto.randomUUID().replace(/-/g, '').slice(0, 8).toUpperCase()
-        : (Date.now().toString(36) + Math.random().toString(36).slice(2, 6)).toUpperCase().slice(-8));
-      document.getElementById('successRef').textContent = 'Confirmation sent to: ' + email;
-      document.getElementById('successBookingRef').textContent = 'Booking Ref: ' + refNum + ' · ' + currentName;
-      document.getElementById('successOverlay').classList.add('show');
-    }, 2000);
+      showConfirmation(fname, lname, email, date, time);
+    } else {
+      /* ── Mock payment (no Stripe key configured yet) ── */
+      setTimeout(() => {
+        btn.classList.remove('loading');
+        showConfirmation(fname, lname, email, date, time);
+      }, 1500);
+    }
   }
 
-  document.getElementById('successOverlay').addEventListener('click', function(e) {
-    if (e.target === this) this.classList.remove('show');
-  });
+  function showConfirmation(fname, lname, email, date, time) {
+    const refNum = 'BTC-' + (
+      typeof crypto !== 'undefined' && crypto.randomUUID
+        ? crypto.randomUUID().replace(/-/g, '').slice(0, 8).toUpperCase()
+        : (Date.now().toString(36) + Math.random().toString(36).slice(2, 6)).toUpperCase().slice(-8)
+    );
+    const qty       = parseInt(document.getElementById('qtyInput').value) || 1;
+    const dateLabel = date
+      ? new Date(date + 'T12:00:00').toLocaleDateString('en-US', { weekday:'short', year:'numeric', month:'long', day:'numeric' })
+      : '—'; // T12:00:00 keeps the local date stable across all UTC offsets (avoids off-by-one from midnight)
 
-  // Set min date to today
+    document.getElementById('successDetailName').textContent  = fname + ' ' + lname;
+    document.getElementById('successDetailClass').textContent = currentName + (qty > 1 ? ' × ' + qty : '');
+    document.getElementById('successDetailDate').textContent  = dateLabel;
+    document.getElementById('successDetailTime').textContent  = time || '—';
+    document.getElementById('successDetailEmail').textContent = email;
+    document.getElementById('successBookingRef').textContent  = 'Booking Ref: ' + refNum;
+
+    goToStep(4, true);
+  }
+
+  /* ── INIT ── */
+  updateStepIndicator(1);
+
   const dateInput = document.getElementById('sessionDate');
-  dateInput.min = new Date().toISOString().split('T')[0];
+  dateInput.min   = new Date().toISOString().split('T')[0];
   dateInput.value = dateInput.min;
 
-  // Pre-select class from URL ?class=oil etc.
+  /* Pre-select class from URL ?class=oil etc. */
   const preselect = new URLSearchParams(window.location.search).get('class');
   if (preselect) {
     const radio = document.querySelector('input[value="' + preselect + '"]');
     if (radio) { radio.checked = true; updateOrder(radio); }
   }
 </script>
+
+<!-- Stripe.js — loaded here so it is always available when Step 3 mounts -->
+<script src="https://js.stripe.com/v3/"></script>
+<!--
+  To enable real payments, add your publishable key before the closing </body>:
+  <script>window.STRIPE_PK = "pk_live_YOUR_KEY_HERE";</script>
+  Never hardcode your secret key in client-side code.
+-->
 </body>
 </html>
