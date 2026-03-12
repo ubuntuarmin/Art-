@@ -6,6 +6,7 @@ import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import ScrollReveal from '@/components/ScrollReveal'
+import SplineScrollytelling from '@/components/SplineScrollytelling'
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
@@ -147,16 +148,20 @@ export default function HomePage() {
   const farnazRef   = useRef<HTMLDivElement>(null)
 
   useGSAP(() => {
-    // Hero stagger — scoped to heroRef so it finds hero-stagger elements correctly
+    // Hero stagger with a subtle 3-D lift: elements start rotated on X then settle flat
     if (heroRef.current) {
+      gsap.set(heroRef.current, { perspective: 1200 })
       gsap.from(heroRef.current.querySelectorAll('.hero-stagger'), {
-        y: 60, opacity: 0, duration: 1, stagger: 0.15, ease: 'power3.out',
+        y: 60, opacity: 0, rotateX: 12, duration: 1.1, stagger: 0.15,
+        ease: 'power3.out', transformOrigin: 'center bottom',
       })
     }
-    // Scroll-triggered animations use document-level selectors (no scope)
+
+    // About section — image slides in with a 3-D tilt that resolves on arrival
     if (aboutRef.current) {
       gsap.from(aboutRef.current.querySelectorAll('.about-img'), {
-        x: -80, opacity: 0, duration: 1, ease: 'power3.out',
+        x: -80, opacity: 0, rotateY: -15, duration: 1.1, ease: 'power3.out',
+        transformOrigin: 'left center',
         scrollTrigger: { trigger: aboutRef.current, start: 'top 75%' },
       })
       gsap.from(aboutRef.current.querySelectorAll('.about-text > *'), {
@@ -164,13 +169,21 @@ export default function HomePage() {
         scrollTrigger: { trigger: aboutRef.current, start: 'top 70%' },
       })
     }
-    if (servicesRef.current || galleryRef.current) {
-      // Service cards and gallery tiles use ScrollReveal (Framer Motion) — no GSAP needed here
-    }
+
+    // Farnaz portrait — two independent animations on different CSS properties:
+    //   • ScrollTrigger scrubs `y` (vertical parallax)
+    //   • Repeating tween animates `rotateY`/`rotateX` (3-D sway)
+    //   They target distinct transform components so they do not conflict.
     if (farnazRef.current) {
       gsap.to(farnazRef.current.querySelectorAll('.farnaz-portrait'), {
         y: -40, ease: 'none',
-        scrollTrigger: { trigger: farnazRef.current, start: 'top bottom', end: 'bottom top', scrub: 1.5 },
+        scrollTrigger: {
+          trigger: farnazRef.current, start: 'top bottom', end: 'bottom top', scrub: 1.5,
+        },
+      })
+      gsap.to(farnazRef.current.querySelectorAll('.farnaz-portrait'), {
+        rotateY: 5, rotateX: -3, duration: 4, ease: 'sine.inOut',
+        repeat: -1, yoyo: true, transformOrigin: 'center center',
       })
     }
   })
@@ -247,6 +260,9 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+
+      {/* 3-D Scrollytelling — Spline scene + GSAP scroll steps */}
+      <SplineScrollytelling />
 
       {/* About the Studio */}
       <section ref={aboutRef} className="about-section section-pad bg-[#FAF7F2]">
