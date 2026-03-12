@@ -20,6 +20,12 @@ interface GalleryItem {
   size: 'normal' | 'wide' | 'tall'
 }
 
+const ASPECT_RATIOS: Record<GalleryItem['size'], string> = {
+  wide:   '16/9',
+  tall:   '3/4',
+  normal: '1',
+}
+
 const GALLERY_ITEMS: GalleryItem[] = [
   { id:  1, title: 'Morning Light',         medium: 'Oil Painting', bg: 'radial-gradient(ellipse 65% 55% at 40% 40%,#C4622D99 0%,transparent 60%),radial-gradient(ellipse 50% 65% at 65% 55%,#D4A84388 0%,transparent 55%),linear-gradient(135deg,#2a1810,#3d2518,#1a1005)', size: 'wide' },
   { id:  2, title: 'Autumn Reflection',     medium: 'Oil Painting', bg: 'radial-gradient(ellipse 60% 70% at 45% 35%,#C4622D77 0%,transparent 60%),radial-gradient(ellipse 70% 50% at 60% 65%,#7A9E7E55 0%,transparent 55%),linear-gradient(160deg,#1a0e08,#2d1a10,#0f0805)', size: 'normal' },
@@ -150,7 +156,7 @@ export default function GalleryPage() {
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.4 }}
                   className="gallery-item break-inside-avoid cursor-pointer group relative overflow-hidden rounded-xl"
-                  style={{ aspectRatio: item.size === 'wide' ? '16/9' : item.size === 'tall' ? '3/4' : '1' }}
+                  style={{ aspectRatio: ASPECT_RATIOS[item.size] }}
                   onClick={() => setLightboxItem(item)}
                 >
                   <div className="w-full h-full min-h-[200px]" style={{ background: item.bg }} />

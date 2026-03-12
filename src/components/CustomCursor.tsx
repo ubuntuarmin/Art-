@@ -18,23 +18,30 @@ export default function CustomCursor() {
 
     window.addEventListener('mousemove', move)
 
-    const targets = document.querySelectorAll('a, button, [role="button"]')
-    targets.forEach(el => {
+    const attached = new Set<Element>()
+
+    const attachToEl = (el: Element) => {
+      if (attached.has(el)) return
       el.addEventListener('mouseenter', enter)
       el.addEventListener('mouseleave', leave)
-    })
+      attached.add(el)
+    }
+
+    document.querySelectorAll('a, button, [role="button"]').forEach(attachToEl)
 
     const observer = new MutationObserver(() => {
-      document.querySelectorAll('a, button, [role="button"]').forEach(el => {
-        el.addEventListener('mouseenter', enter)
-        el.addEventListener('mouseleave', leave)
-      })
+      document.querySelectorAll('a, button, [role="button"]').forEach(attachToEl)
     })
     observer.observe(document.body, { childList: true, subtree: true })
 
     return () => {
       window.removeEventListener('mousemove', move)
       observer.disconnect()
+      attached.forEach(el => {
+        el.removeEventListener('mouseenter', enter)
+        el.removeEventListener('mouseleave', leave)
+      })
+      attached.clear()
     }
   }, [])
 

@@ -39,7 +39,8 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setStatus('sending')
-    /* Simulate sending — replace with actual API call */
+    /* TODO: Replace this simulation with a real API call (e.g. /api/contact) that
+       validates input server-side and sends the email before going to production. */
     await new Promise(r => setTimeout(r, 1500))
     setStatus('sent')
     setForm({ name: '', email: '', phone: '', subject: '', message: '' })

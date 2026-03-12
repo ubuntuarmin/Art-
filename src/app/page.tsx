@@ -94,7 +94,7 @@ function TestimonialCarousel() {
     return () => clearInterval(id)
   }, [])
 
-  const handleDragEnd = (_: unknown, info: { offset: { x: number } }) => {
+  const handleDragEnd = (_event: unknown, info: { offset: { x: number } }) => {
     if (info.offset.x < -50) setActive(a => (a + 1) % TESTIMONIALS.length)
     if (info.offset.x > 50)  setActive(a => (a - 1 + TESTIMONIALS.length) % TESTIMONIALS.length)
   }
@@ -164,11 +164,8 @@ export default function HomePage() {
         scrollTrigger: { trigger: aboutRef.current, start: 'top 70%' },
       })
     }
-    if (servicesRef.current) {
-      // Service cards now use ScrollReveal (Framer Motion) for stagger reveal
-    }
-    if (galleryRef.current) {
-      // Gallery tiles now use ScrollReveal (Framer Motion) for stagger reveal
+    if (servicesRef.current || galleryRef.current) {
+      // Service cards and gallery tiles use ScrollReveal (Framer Motion) — no GSAP needed here
     }
     if (farnazRef.current) {
       gsap.to(farnazRef.current.querySelectorAll('.farnaz-portrait'), {
