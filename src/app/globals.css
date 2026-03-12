@@ -1,0 +1,215 @@
+@import "tailwindcss";
+
+/* ─── Design Tokens ─────────────────────────────────────────────────────────── */
+:root {
+  /* Brand palette */
+  --charcoal: #1C1C1C;
+  --terra:    #C4622D;
+  --gold:     #D4A843;
+  --cream:    #FAF7F2;
+  --sage:     #7A9E7E;
+  --white:    #FFFFFF;
+
+  /* Semantic aliases */
+  --bg-primary:   var(--charcoal);
+  --bg-light:     var(--cream);
+  --accent-main:  var(--terra);
+  --accent-lux:   var(--gold);
+  --text-primary: var(--charcoal);
+  --text-light:   var(--cream);
+
+  /* Transitions */
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Tailwind theme extension ───────────────────────────────────────────────── */
+@theme inline {
+  --color-charcoal: var(--charcoal);
+  --color-terra:    var(--terra);
+  --color-gold:     var(--gold);
+  --color-cream:    var(--cream);
+  --color-sage:     var(--sage);
+  --font-serif:     'Playfair Display', Georgia, serif;
+  --font-sans:      'Inter', system-ui, sans-serif;
+}
+
+/* ─── Base ───────────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background: var(--cream);
+  color: var(--charcoal);
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ─── Typography ─────────────────────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', Georgia, serif;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+/* ─── Luxury Scrollbar ───────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--charcoal);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--terra);
+}
+
+/* ─── Custom Cursor ──────────────────────────────────────────────────────────── */
+@media (pointer: fine) {
+  body { cursor: none; }
+
+  .custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease,
+                background 0.2s ease, border-color 0.2s ease;
+    mix-blend-mode: difference;
+  }
+
+  .custom-cursor.hovering {
+    width: 40px;
+    height: 40px;
+    background: rgba(212, 168, 67, 0.15);
+    border-color: var(--terra);
+  }
+}
+
+/* ─── Marquee ─────────────────────────────────────────────────────────────────── */
+@keyframes marquee-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  display: flex;
+  white-space: nowrap;
+  animation: marquee-scroll 28s linear infinite;
+}
+
+/* ─── Paint splash keyframes ──────────────────────────────────────────────────── */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+  33%       { transform: translateY(-18px) rotate(3deg) scale(1.04); }
+  66%       { transform: translateY(10px) rotate(-2deg) scale(0.97); }
+}
+
+@keyframes float-medium {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%       { transform: translateY(-24px) rotate(5deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.6; }
+  50%       { opacity: 1; }
+}
+
+.float-slow   { animation: float-slow   7s ease-in-out infinite; }
+.float-medium { animation: float-medium 5s ease-in-out infinite; }
+.pulse-glow   { animation: pulse-glow   3s ease-in-out infinite; }
+
+/* ─── Art canvas placeholders ────────────────────────────────────────────────── */
+.art-canvas-hero {
+  background:
+    radial-gradient(ellipse 60% 50% at 35% 40%, rgba(196, 98, 45, 0.55) 0%, transparent 60%),
+    radial-gradient(ellipse 45% 55% at 70% 30%, rgba(212, 168, 67, 0.45) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 55% 75%, rgba(250, 247, 242, 0.2) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 60% at 20% 70%, rgba(122, 158, 126, 0.3) 0%, transparent 55%),
+    linear-gradient(135deg, #2a1810 0%, #3d2518 35%, #1a1a1a 100%);
+}
+
+.art-canvas-portrait {
+  background:
+    radial-gradient(ellipse 55% 70% at 45% 35%, rgba(196, 98, 45, 0.4) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 45% at 65% 60%, rgba(212, 168, 67, 0.35) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 50% at 30% 70%, rgba(122, 158, 126, 0.25) 0%, transparent 60%),
+    linear-gradient(160deg, #2e1a0e 0%, #1C1C1C 100%);
+}
+
+/* ─── Link & button base ─────────────────────────────────────────────────────── */
+a { transition: color var(--transition-base); }
+
+.btn-terra {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  background: var(--terra);
+  color: var(--white);
+  border-radius: 4px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: background var(--transition-base), transform var(--transition-base),
+              box-shadow var(--transition-base);
+}
+.btn-terra:hover {
+  background: #b35525;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(196, 98, 45, 0.35);
+}
+
+.btn-outline-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  border: 2px solid var(--gold);
+  color: var(--gold);
+  border-radius: 4px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: background var(--transition-base), color var(--transition-base),
+              transform var(--transition-base);
+}
+.btn-outline-gold:hover {
+  background: var(--gold);
+  color: var(--charcoal);
+  transform: translateY(-2px);
+}
+
+/* ─── Section spacing utility ────────────────────────────────────────────────── */
+.section-pad {
+  padding: 5rem 1.5rem;
+}
+@media (min-width: 768px) {
+  .section-pad { padding: 7rem 2rem; }
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .marquee-track { animation: none; }
+}
