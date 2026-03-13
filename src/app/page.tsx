@@ -7,6 +7,8 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import ScrollReveal from '@/components/ScrollReveal'
 import SplineScrollytelling from '@/components/SplineScrollytelling'
+import SplitTextReveal from '@/components/SplitTextReveal'
+import TiltCard from '@/components/TiltCard'
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
@@ -153,26 +155,44 @@ export default function HomePage() {
 
   useGSAP(() => {
     // Hero stagger with a subtle 3-D lift: elements start rotated on X then settle flat
+    // Uses Power4.out for fast-start, heavy-deceleration feel
     if (heroRef.current) {
       gsap.set(heroRef.current, { perspective: 1200 })
       gsap.from(heroRef.current.querySelectorAll('.hero-stagger'), {
-        y: 60, opacity: 0, rotateX: 12, duration: 1.1, stagger: 0.15,
-        ease: 'power3.out', transformOrigin: 'center bottom',
+        y: 60, opacity: 0, rotateX: 12, duration: 1.2, stagger: 0.15,
+        ease: 'power4.out', transformOrigin: 'center bottom',
       })
     }
 
     // About section — image slides in with a 3-D tilt that resolves on arrival
     if (aboutRef.current) {
       gsap.from(aboutRef.current.querySelectorAll('.about-img'), {
-        x: -80, opacity: 0, rotateY: -15, duration: 1.1, ease: 'power3.out',
+        x: -80, opacity: 0, rotateY: -15, duration: 1.1, ease: 'power4.out',
         transformOrigin: 'left center',
         scrollTrigger: { trigger: aboutRef.current, start: 'top 75%' },
       })
       gsap.from(aboutRef.current.querySelectorAll('.about-text > *'), {
-        x: 60, opacity: 0, duration: 0.9, stagger: 0.12, ease: 'power3.out',
+        x: 60, opacity: 0, duration: 0.9, stagger: 0.12, ease: 'power4.out',
         scrollTrigger: { trigger: aboutRef.current, start: 'top 70%' },
       })
     }
+
+    // Scroll-driven image scaling: images subtly scale 1.0 → 1.05 as user scrolls past
+    document.querySelectorAll<HTMLElement>('.scroll-scale-img').forEach(img => {
+      gsap.fromTo(img,
+        { scale: 1 },
+        {
+          scale: 1.05,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: img,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1.5,
+          },
+        },
+      )
+    })
 
     // Farnaz portrait — two independent animations on different CSS properties:
     //   • ScrollTrigger scrubs `y` (vertical parallax)
@@ -209,9 +229,16 @@ export default function HomePage() {
         <div className="relative mx-auto max-w-7xl px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-20">
           <div>
             <p className="hero-stagger text-[#D4A843] uppercase tracking-[0.3em] text-xs font-semibold mb-4">Los Angeles Art Studio</p>
-            <h1 className="hero-stagger font-serif text-5xl md:text-6xl xl:text-7xl font-bold text-[#FAF7F2] leading-[1.08] mb-6">
-              Beyond the <span className="text-[#C4622D] italic block">Canvas</span>
-            </h1>
+            <SplitTextReveal
+              as="h1"
+              className="hero-stagger font-serif text-5xl md:text-6xl xl:text-7xl font-bold text-[#FAF7F2] leading-[1.08] mb-6"
+              scrollTrigger={false}
+              stagger={0.07}
+              duration={1.2}
+              delay={0.2}
+            >
+              Beyond the Canvas
+            </SplitTextReveal>
             <p className="hero-stagger text-[#FAF7F2]/65 text-lg md:text-xl leading-relaxed max-w-lg mb-10">
               A luxury creative space where passion meets technique. Join award-winning artist Farnaz Amin for transformative art experiences for all ages.
             </p>
@@ -235,8 +262,8 @@ export default function HomePage() {
           <div className="hero-stagger relative">
             {/* 📷 PHOTO PLACEHOLDER — Replace with <Image> of hero artwork. Aspect ratio 4:5, min 1200px wide. */}
             <div data-art-type="hero-canvas"
-                 className="parallax-container art-canvas-hero relative w-full aspect-[4/5] rounded-2xl shadow-2xl shadow-black/60">
-              <div className="parallax-inner-auto absolute inset-0">
+                 className="parallax-container art-canvas-hero relative w-full aspect-[4/5] rounded-2xl shadow-2xl shadow-black/60 overflow-hidden">
+              <div className="parallax-inner-auto scroll-scale-img absolute inset-0">
                 <div className="absolute inset-3 border border-[#C5B358]/20 rounded-xl pointer-events-none" />
                 <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 opacity-30">
                   <span className="text-5xl">🎨</span>
@@ -276,8 +303,8 @@ export default function HomePage() {
           <div className="about-img relative">
             {/* 📷 PHOTO PLACEHOLDER — Replace with studio/artwork image (3:4 ratio). */}
             <div data-art-type="about-studio"
-                 className="parallax-container art-canvas-hero relative w-full aspect-[3/4] rounded-2xl shadow-xl">
-              <div className="parallax-inner-auto absolute inset-0 flex flex-col items-center justify-center gap-2 opacity-25">
+                 className="parallax-container art-canvas-hero relative w-full aspect-[3/4] rounded-2xl shadow-xl overflow-hidden">
+              <div className="parallax-inner-auto scroll-scale-img absolute inset-0 flex flex-col items-center justify-center gap-2 opacity-25">
                 <span className="text-4xl">🖼️</span>
                 <p className="text-[#FAF9F6] text-xs tracking-widest uppercase">Add Studio Photo</p>
               </div>
@@ -289,10 +316,14 @@ export default function HomePage() {
           </div>
           <div className="about-text">
             <p className="text-[#C4622D] uppercase tracking-[0.25em] text-xs font-semibold mb-3">About the Studio</p>
-            <h2 className="font-serif text-4xl md:text-5xl font-bold text-[#1C1C1C] leading-tight mb-6">
-              A Creative Space for All Ages to{' '}
-              <span className="text-[#C4622D] italic">Explore &amp; Grow</span> Through Art
-            </h2>
+            <SplitTextReveal
+              as="h2"
+              className="font-serif text-4xl md:text-5xl font-bold text-[#1C1C1C] leading-tight mb-6"
+              stagger={0.05}
+              duration={1.0}
+            >
+              A Creative Space for All Ages to Explore and Grow Through Art
+            </SplitTextReveal>
             <p className="text-[#1C1C1C]/65 text-lg leading-relaxed mb-5">
               Beyond the Canvas is more than an art studio — it&apos;s a sanctuary for creativity.
               Founded by Iranian-American artist Farnaz Amin, our studio offers a warm, inclusive
@@ -314,19 +345,28 @@ export default function HomePage() {
       {/* Services Grid */}
       <section ref={servicesRef} className="section-pad bg-[#1C1C1C]">
         <div className="mx-auto max-w-7xl">
-          <ScrollReveal className="text-center mb-14">
+          <ScrollReveal className="text-center mb-14" depth>
             <p className="text-[#D4A843] uppercase tracking-[0.25em] text-xs font-semibold mb-3">What We Offer</p>
-            <h2 className="font-serif text-4xl md:text-5xl font-bold text-[#FAF7F2]">Our Services</h2>
+            <SplitTextReveal
+              as="h2"
+              className="font-serif text-4xl md:text-5xl font-bold text-[#FAF7F2]"
+              stagger={0.06}
+              duration={1.0}
+            >
+              Our Services
+            </SplitTextReveal>
           </ScrollReveal>
           <div className="services-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {SERVICES.map(({ icon, title, desc, detail, href }, i) => (
-              <ScrollReveal key={title} delay={i * 0.12} direction="up">
-                <Link href={href} className="service-card group h-full bg-white/5 border border-white/10 rounded-2xl p-7 hover:border-[#D4A843]/50 hover:-translate-y-2 transition-all duration-300 block">
-                  <span className="text-4xl mb-5 block">{icon}</span>
-                  <h3 className="font-serif text-xl font-bold text-[#FAF7F2] mb-3">{title}</h3>
-                  <p className="text-[#FAF7F2]/55 text-sm leading-relaxed mb-5">{desc}</p>
-                  <p className="text-[#D4A843] text-sm font-medium group-hover:underline">{detail} →</p>
-                </Link>
+              <ScrollReveal key={title} delay={i * 0.12} direction="up" depth>
+                <TiltCard maxTilt={5} hoverScale={1.02}>
+                  <Link href={href} className="service-card group h-full bg-white/5 border border-white/10 rounded-2xl p-7 hover:border-[#D4A843]/50 transition-all duration-300 block">
+                    <span className="text-4xl mb-5 block">{icon}</span>
+                    <h3 className="font-serif text-xl font-bold text-[#FAF7F2] mb-3">{title}</h3>
+                    <p className="text-[#FAF7F2]/55 text-sm leading-relaxed mb-5">{desc}</p>
+                    <p className="text-[#D4A843] text-sm font-medium group-hover:underline">{detail} →</p>
+                  </Link>
+                </TiltCard>
               </ScrollReveal>
             ))}
           </div>
@@ -336,9 +376,16 @@ export default function HomePage() {
       {/* Gallery Preview */}
       <section ref={galleryRef} className="section-pad bg-[#FAF7F2]">
         <div className="mx-auto max-w-7xl">
-          <ScrollReveal className="text-center mb-12">
+          <ScrollReveal className="text-center mb-12" depth>
             <p className="text-[#C4622D] uppercase tracking-[0.25em] text-xs font-semibold mb-3">Portfolio</p>
-            <h2 className="font-serif text-4xl md:text-5xl font-bold text-[#1C1C1C]">Gallery Preview</h2>
+            <SplitTextReveal
+              as="h2"
+              className="font-serif text-4xl md:text-5xl font-bold text-[#1C1C1C]"
+              stagger={0.06}
+              duration={1.0}
+            >
+              Gallery Preview
+            </SplitTextReveal>
           </ScrollReveal>
           <div className="gallery-grid grid grid-cols-2 lg:grid-cols-4 gap-3 auto-rows-[220px] lg:auto-rows-[200px]">
             {GALLERY_SLOTS.map(({ id, title, medium, span, bg }, i) => (
@@ -419,9 +466,16 @@ export default function HomePage() {
       {/* Testimonials Carousel */}
       <section className="section-pad bg-[#FAF7F2]">
         <div className="mx-auto max-w-7xl">
-          <ScrollReveal className="text-center mb-12">
+          <ScrollReveal className="text-center mb-12" depth>
             <p className="text-[#C4622D] uppercase tracking-[0.25em] text-xs font-semibold mb-3">What Students Say</p>
-            <h2 className="font-serif text-4xl md:text-5xl font-bold text-[#1C1C1C]">Testimonials</h2>
+            <SplitTextReveal
+              as="h2"
+              className="font-serif text-4xl md:text-5xl font-bold text-[#1C1C1C]"
+              stagger={0.07}
+              duration={1.0}
+            >
+              Testimonials
+            </SplitTextReveal>
           </ScrollReveal>
           <div className="bg-[#1C1C1C] rounded-3xl py-14 px-6 md:px-12">
             <TestimonialCarousel />
@@ -434,11 +488,16 @@ export default function HomePage() {
         <div aria-hidden="true" className="absolute inset-0 pointer-events-none"
              style={{ background: 'radial-gradient(ellipse 70% 60% at 30% 50%,rgba(196,98,45,0.18) 0%,transparent 60%),radial-gradient(ellipse 50% 70% at 75% 45%,rgba(212,168,67,0.12) 0%,transparent 60%)' }} />
         <div className="relative mx-auto max-w-3xl text-center">
-          <ScrollReveal>
+          <ScrollReveal depth>
             <p className="text-[#D4A843] uppercase tracking-[0.25em] text-xs font-semibold mb-4">Begin Your Journey</p>
-            <h2 className="font-serif text-4xl md:text-6xl font-bold text-[#FAF7F2] mb-6 leading-tight">
-              Ready to Create Something <span className="text-[#C4622D] italic">Beautiful?</span>
-            </h2>
+            <SplitTextReveal
+              as="h2"
+              className="font-serif text-4xl md:text-6xl font-bold text-[#FAF7F2] mb-6 leading-tight"
+              stagger={0.06}
+              duration={1.1}
+            >
+              Ready to Create Something Beautiful?
+            </SplitTextReveal>
             <p className="text-[#FAF7F2]/60 text-lg mb-10 max-w-lg mx-auto">
               Join our studio family and discover the artist within you. All skill levels, all ages, all welcome.
             </p>
