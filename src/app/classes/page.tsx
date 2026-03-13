@@ -12,6 +12,7 @@ const CLASSES = [
   {
     icon: '🖌️',
     title: 'Oil Painting Fundamentals',
+    subject: 'Book a Class',
     desc: 'Master the foundations of oil painting — color mixing, layering techniques, composition, and glazing. Perfect for beginners ready to dive deep.',
     ages: 'Ages 14+',
     duration: '10 weeks',
@@ -23,6 +24,7 @@ const CLASSES = [
   {
     icon: '🎨',
     title: 'Advanced Oil Painting',
+    subject: 'Book a Class',
     desc: 'Push your technique further with palette knives, impasto, alla prima painting, and personal style development guided by Farnaz.',
     ages: 'Ages 16+',
     duration: '8 weeks',
@@ -34,6 +36,7 @@ const CLASSES = [
   {
     icon: '💧',
     title: 'Watercolor Workshop',
+    subject: 'Book a Class',
     desc: 'Explore the luminous world of watercolor: wet-on-wet, dry brush, resist techniques, and transparent layering for stunning results.',
     ages: 'Ages 10+',
     duration: '6 weeks',
@@ -45,6 +48,7 @@ const CLASSES = [
   {
     icon: '✨',
     title: 'Resin Art & Craft',
+    subject: 'Book a Class',
     desc: 'Create mesmerizing resin artworks — geode designs, ocean pours, petri art, and custom home décor pieces using professional-grade resins.',
     ages: 'Ages 14+',
     duration: '4 weeks',
@@ -56,6 +60,7 @@ const CLASSES = [
   {
     icon: '✏️',
     title: 'Drawing & Sketching',
+    subject: 'Book a Class',
     desc: 'Build the backbone of visual art through line, form, perspective, shading, and observational drawing. Works of all complexity welcome.',
     ages: 'Ages 8+',
     duration: '8 weeks',
@@ -67,6 +72,7 @@ const CLASSES = [
   {
     icon: '🌟',
     title: 'Kids Art Camp',
+    subject: 'Book a Class',
     desc: 'A joyful, imagination-first program where children explore painting, sculpture, collage, and crafts in a supportive, fun environment.',
     ages: 'Ages 5–12',
     duration: '1 week (Summer)',
@@ -78,6 +84,7 @@ const CLASSES = [
   {
     icon: '👑',
     title: 'Private One-on-One Lessons',
+    subject: 'Private Lesson',
     desc: 'Fully personalized instruction tailored to your goals, pace, and chosen medium. Flexible scheduling available for all ages and levels.',
     ages: 'All Ages',
     duration: 'Ongoing',
@@ -89,6 +96,7 @@ const CLASSES = [
   {
     icon: '🎉',
     title: 'Birthday Party Packages',
+    subject: 'Birthday Party',
     desc: 'Make your child\'s birthday unforgettable with a guided art party at the studio. Includes materials, instruction, and take-home artwork.',
     ages: 'Ages 5–16',
     duration: '2 hours',
@@ -140,7 +148,7 @@ export default function ClassesPage() {
           </ScrollReveal>
 
           <div className="classes-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {CLASSES.map(({ icon, title, desc, ages, duration, price, level, sessions, accent }) => (
+            {CLASSES.map(({ icon, title, subject, desc, ages, duration, price, level, sessions, accent }) => (
               <div key={title}
                    className="class-card group bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-[#D4A843]/40 hover:-translate-y-1 transition-all duration-300">
                 {/* Card header */}
@@ -168,7 +176,7 @@ export default function ClassesPage() {
                 <div className="p-6 pt-0 flex items-center justify-between border-t border-white/10">
                   <span className="text-[#D4A843] font-bold font-serif text-lg">{price}</span>
                   <Link
-                    href="/contact"
+                    href={`/contact?class=${encodeURIComponent(title)}&subject=${encodeURIComponent(subject)}`}
                     className="text-sm font-medium px-4 py-2 rounded-lg transition-all duration-200"
                     style={{ background: accent + '22', color: accent }}
                   >
