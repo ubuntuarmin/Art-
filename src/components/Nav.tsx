@@ -36,9 +36,7 @@ export default function Nav() {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? 'bg-[#1C1C1C]/95 backdrop-blur-md shadow-lg shadow-black/30'
-            : 'bg-[#1C1C1C]/60 backdrop-blur-sm'
+          scrolled ? 'nav-glass nav-glass-scrolled' : 'nav-glass'
         }`}
       >
         <div className="mx-auto max-w-7xl flex items-center justify-between px-5 sm:px-6 py-3 sm:py-4">
@@ -107,8 +105,8 @@ export default function Nav() {
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
-              transition={{ type: 'tween', duration: 0.28 }}
-              className="fixed top-0 right-0 bottom-0 z-50 w-[min(280px,85vw)] bg-[#1C1C1C] flex flex-col px-6 py-8 md:hidden shadow-2xl"
+              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+              className="fixed top-0 right-0 bottom-0 z-50 w-[min(280px,85vw)] bg-[#1A1A1A] flex flex-col px-6 py-8 md:hidden shadow-2xl"
             >
               {/* Drawer header */}
               <div className="flex items-center justify-between mb-8">
