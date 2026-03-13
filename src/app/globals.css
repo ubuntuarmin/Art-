@@ -293,12 +293,19 @@ a { transition: color var(--transition-base); }
 .service-card {
   transform-style: preserve-3d;
   transition: box-shadow 0.5s var(--ease-spring),
-              border-color 0.4s var(--ease-spring);
+              border-color 0.4s var(--ease-spring),
+              transform 0.4s var(--ease-spring);
 }
-/* 3-D tilt is handled by TiltCard component on desktop; CSS fallback for non-JS */
+/* 3-D tilt is handled by TiltCard component on desktop; CSS fallback for non-JS or touch */
 @media (hover: hover) {
   .service-card:hover {
     box-shadow: 0 28px 56px -14px rgba(0,0,0,0.5), 0 0 0 1px rgba(197,179,88,0.25);
+  }
+}
+/* Touch device / reduced-motion fallback: simple vertical lift */
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .service-card:hover {
+    transform: translateY(-4px);
   }
 }
 

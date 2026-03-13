@@ -83,8 +83,8 @@ export default function SplitTextReveal({
     }
   }, [children, stagger, duration, delay, scrollTrigger, triggerStart])
 
-  // Split text into words, preserving spaces
-  const words = children.split(/(\s+)/)
+  // Split text into words, preserving spaces. Filter out empty results.
+  const words = children.split(/(\s+)/).filter(Boolean)
 
   return (
     <Tag
