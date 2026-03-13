@@ -44,6 +44,8 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  /* Prevent horizontal overflow on iOS Safari */
+  overflow-x: hidden;
 }
 
 body {
@@ -84,6 +86,15 @@ h4 { font-size: clamp(1.125rem, 1.5vw + 0.125rem, 1.5rem); }
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--terra);
+}
+
+/* ─── Scrollbar hide utility ─────────────────────────────────────────────────── */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE / Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;             /* Chrome / Safari / Opera */
 }
 
 /* ─── Custom Cursor ──────────────────────────────────────────────────────────── */
@@ -266,6 +277,25 @@ a { transition: color var(--transition-base); }
 .gallery-tile > a:hover {
   transform: scale(1.04) rotateX(3deg) translateZ(10px);
   box-shadow: 0 32px 56px -16px rgba(0,0,0,0.6);
+}
+
+/* Gallery caption — always visible on touch, hidden by hover overlay on desktop */
+.gallery-tile-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.625rem 0.75rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
+  transition: transform 0.3s var(--ease-spring);
+}
+
+@media (hover: hover) {
+  /* Only hide/slide caption on devices that support hover (desktop) */
+  .gallery-tile > a:hover .gallery-tile-caption,
+  .gallery-item:hover .gallery-tile-caption {
+    transform: translateY(100%);
+  }
 }
 
 /* ─── Reduced motion ─────────────────────────────────────────────────────────── */
