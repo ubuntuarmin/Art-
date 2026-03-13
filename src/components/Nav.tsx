@@ -80,9 +80,9 @@ export default function Nav() {
             aria-expanded={open}
             aria-controls="mobile-nav"
           >
-            <span className={`block w-6 h-0.5 bg-current transition-all duration-300 origin-center ${open ? 'rotate-45 translate-y-2' : ''}`} />
-            <span className={`block w-6 h-0.5 bg-current transition-all duration-300 ${open ? 'opacity-0' : ''}`} />
-            <span className={`block w-6 h-0.5 bg-current transition-all duration-300 origin-center ${open ? '-rotate-45 -translate-y-2' : ''}`} />
+            <span className={`block w-6 h-0.5 bg-current transition-all duration-500 ease-in-out origin-center ${open ? 'rotate-45 translate-y-2' : ''}`} />
+            <span className={`block w-6 h-0.5 bg-current transition-all duration-500 ease-in-out ${open ? 'opacity-0 scale-x-0' : ''}`} />
+            <span className={`block w-6 h-0.5 bg-current transition-all duration-500 ease-in-out origin-center ${open ? '-rotate-45 -translate-y-2' : ''}`} />
           </button>
         </div>
       </header>
@@ -96,6 +96,7 @@ export default function Nav() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              transition={{ duration: 0.5, ease: 'easeInOut' }}
               className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm md:hidden"
               onClick={() => setOpen(false)}
             />
@@ -105,7 +106,7 @@ export default function Nav() {
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
-              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+              transition={{ type: 'tween', duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="fixed top-0 right-0 bottom-0 z-50 w-[min(280px,85vw)] bg-[#1A1A1A] flex flex-col px-6 py-8 md:hidden shadow-2xl"
             >
               {/* Drawer header */}
@@ -130,7 +131,7 @@ export default function Nav() {
                     key={href}
                     initial={{ opacity: 0, x: 24 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.04 * i }}
+                    transition={{ delay: 0.15 + 0.08 * i, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                   >
                     <Link
                       href={href}
@@ -152,7 +153,7 @@ export default function Nav() {
               <motion.div
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.22 }}
+                transition={{ delay: 0.55, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 className="mt-6 pt-6 border-t border-white/10"
               >
                 <Link href="/classes" className="btn-terra w-full justify-center text-center text-sm">
