@@ -198,13 +198,30 @@ a { transition: color var(--transition-base); }
   border-radius: 4px;
   font-weight: 600;
   letter-spacing: 0.04em;
-  transition: background var(--transition-base), transform var(--transition-base),
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+  transition: transform var(--transition-base),
               box-shadow var(--transition-base);
 }
+/* Fill-sweep hover — a pseudo-element slides in from left for a premium feel */
+.btn-terra::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, #b35525 0%, #9a3d14 100%);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+.btn-terra:hover::before {
+  transform: scaleX(1);
+}
 .btn-terra:hover {
-  background: #b35525;
-  transform: translateY(-3px);
-  box-shadow: 0 12px 32px rgba(196, 98, 45, 0.4);
+  transform: translateY(-2px) translate3d(0, 0, 0);
+  box-shadow: 0 8px 28px rgba(196, 98, 45, 0.35), 0 2px 8px rgba(196, 98, 45, 0.2);
 }
 
 .btn-outline-gold {
@@ -217,14 +234,32 @@ a { transition: color var(--transition-base); }
   border-radius: 4px;
   font-weight: 600;
   letter-spacing: 0.04em;
-  transition: background var(--transition-base), color var(--transition-base),
-              transform var(--transition-base), box-shadow var(--transition-base);
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+  transition: color var(--transition-base),
+              transform var(--transition-base),
+              box-shadow var(--transition-base);
+}
+/* Fill-sweep hover for outline button */
+.btn-outline-gold::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+.btn-outline-gold:hover::before {
+  transform: scaleX(1);
 }
 .btn-outline-gold:hover {
-  background: var(--gold);
   color: var(--charcoal);
-  transform: translateY(-3px);
-  box-shadow: 0 12px 32px rgba(197, 179, 88, 0.3);
+  transform: translateY(-2px) translate3d(0, 0, 0);
+  box-shadow: 0 8px 28px rgba(197, 179, 88, 0.25), 0 2px 8px rgba(197, 179, 88, 0.15);
 }
 
 /* ─── Section spacing utility — generous negative space ────────────────────── */
@@ -257,13 +292,21 @@ a { transition: color var(--transition-base); }
 /* Service card subtle 3-D lift on hover */
 .service-card {
   transform-style: preserve-3d;
-  transition: transform 0.5s var(--ease-spring),
-              box-shadow 0.5s var(--ease-spring),
-              border-color 0.4s var(--ease-spring);
+  transition: box-shadow 0.5s var(--ease-spring),
+              border-color 0.4s var(--ease-spring),
+              transform 0.4s var(--ease-spring);
 }
-.service-card:hover {
-  transform: translateY(-10px) rotateX(4deg) rotateY(-2deg) scale(1.02);
-  box-shadow: 0 28px 56px -14px rgba(0,0,0,0.5), 0 0 0 1px rgba(197,179,88,0.25);
+/* 3-D tilt is handled by TiltCard component on desktop; CSS fallback for non-JS or touch */
+@media (hover: hover) {
+  .service-card:hover {
+    box-shadow: 0 28px 56px -14px rgba(0,0,0,0.5), 0 0 0 1px rgba(197,179,88,0.25);
+  }
+}
+/* Touch device / reduced-motion fallback: simple vertical lift */
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .service-card:hover {
+    transform: translateY(-4px);
+  }
 }
 
 /* Gallery tiles: depth pop on hover */
@@ -310,7 +353,21 @@ a { transition: color var(--transition-base); }
   .gallery-tile > a:hover {
     transform: translateY(-4px);
   }
-  .scroll-reveal-item { opacity: 1 !important; transform: none !important; }
+  .scroll-reveal-item { opacity: 1 !important; transform: none !important; filter: none !important; }
+  /* Disable split-text animation: show all words immediately */
+  .split-word { opacity: 1 !important; transform: none !important; }
+  /* Disable button pseudo-element sweeps */
+  .btn-terra::before,
+  .btn-outline-gold::before {
+    transform: scaleX(1) !important;
+    transition: none !important;
+  }
+  .btn-terra:hover,
+  .btn-outline-gold:hover {
+    transform: none !important;
+  }
+  /* Disable scroll-driven image scale */
+  .scroll-scale-img { transform: none !important; }
 }
 
 /* ─── Glassmorphism Navigation ───────────────────────────────────────────────── */
