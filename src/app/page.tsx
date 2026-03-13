@@ -219,15 +219,15 @@ export default function HomePage() {
               <Link href="/classes" className="btn-terra">Book a Class</Link>
               <Link href="/gallery" className="btn-outline-gold">View Portfolio</Link>
             </div>
-            <div className="hero-stagger grid grid-cols-3 gap-4 mt-12">
+            <div className="hero-stagger grid grid-cols-3 gap-2 sm:gap-4 mt-12">
               {[
                 { num: '25+', label: 'Years Teaching' },
                 { num: '∞',   label: 'All Ages Welcome' },
                 { num: '🏆',  label: 'Award Winning' },
               ].map(({ num, label }) => (
-                <div key={label} className="bg-white/5 border border-white/10 rounded-xl p-4 text-center backdrop-blur-sm">
+                <div key={label} className="bg-white/5 border border-white/10 rounded-xl p-3 sm:p-4 text-center backdrop-blur-sm">
                   <p className="text-[#D4A843] text-2xl font-bold font-serif">{num}</p>
-                  <p className="text-[#FAF7F2]/60 text-xs mt-1 leading-tight">{label}</p>
+                  <p className="text-[#FAF7F2]/60 text-[10px] sm:text-xs mt-1 leading-tight">{label}</p>
                 </div>
               ))}
             </div>

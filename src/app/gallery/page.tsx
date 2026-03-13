@@ -79,7 +79,7 @@ function Lightbox({ item, onClose }: LightboxProps) {
         </div>
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 w-10 h-10 bg-black/50 rounded-full text-white flex items-center justify-center hover:bg-black/80 transition-colors"
+          className="absolute top-4 right-4 w-12 h-12 bg-black/50 rounded-full text-white flex items-center justify-center hover:bg-black/80 transition-colors"
           aria-label="Close"
         >
           ✕
@@ -121,8 +121,8 @@ export default function GalleryPage() {
       </section>
 
       {/* Filter tabs */}
-      <section className="sticky top-[72px] z-30 bg-[#1C1C1C]/95 backdrop-blur-md border-b border-white/10 px-6 py-4">
-        <div className="mx-auto max-w-7xl flex gap-2 overflow-x-auto scrollbar-hidden">
+      <section className="sticky top-[56px] sm:top-[64px] z-30 bg-[#1C1C1C]/95 backdrop-blur-md border-b border-white/10 px-6 py-4">
+        <div className="mx-auto max-w-7xl flex gap-2 overflow-x-auto scrollbar-hide">
           {CATEGORIES.map(cat => (
             <button
               key={cat}
@@ -155,15 +155,20 @@ export default function GalleryPage() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.4 }}
-                  className="gallery-item break-inside-avoid cursor-pointer group relative overflow-hidden rounded-xl"
+                  className="gallery-item break-inside-avoid cursor-pointer group relative overflow-hidden rounded-xl touch-manipulation"
                   style={{ aspectRatio: ASPECT_RATIOS[item.size] }}
                   onClick={() => setLightboxItem(item)}
                 >
-                  <div className="w-full h-full min-h-[200px]" style={{ background: item.bg }} />
+                  <div role="img" aria-label={`${item.title} — ${item.medium}`} className="w-full h-full min-h-[120px]" style={{ background: item.bg }} />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-all duration-300 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 p-4">
                     <p className="text-white font-serif font-bold text-lg text-center">{item.title}</p>
                     <p className="text-[#D4A843] text-sm mt-1">{item.medium}</p>
                     <span className="mt-3 text-white/70 text-xs border border-white/30 rounded-full px-3 py-1">View</span>
+                  </div>
+                  {/* Persistent caption — always visible for touch users (slides away on hover for desktop) */}
+                  <div className="gallery-tile-caption">
+                    <p className="text-white text-xs font-semibold font-serif leading-tight truncate">{item.title}</p>
+                    <p className="text-[#D4A843] text-[10px] mt-0.5 leading-none">{item.medium}</p>
                   </div>
                 </motion.div>
               ))}

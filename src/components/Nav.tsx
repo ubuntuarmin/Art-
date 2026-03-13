@@ -74,7 +74,7 @@ export default function Nav() {
 
           {/* Hamburger */}
           <button
-            className="md:hidden flex flex-col gap-1.5 p-2 text-[#FAF7F2] rounded-lg hover:bg-white/10 transition-colors"
+            className="md:hidden flex flex-col items-center justify-center gap-1.5 p-2.5 min-h-[44px] min-w-[44px] text-[#FAF7F2] rounded-lg hover:bg-white/10 transition-colors"
             onClick={() => setOpen(v => !v)}
             aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
@@ -114,7 +114,7 @@ export default function Nav() {
                 <button
                   onClick={() => setOpen(false)}
                   aria-label="Close menu"
-                  className="w-9 h-9 rounded-lg border border-white/10 flex items-center justify-center text-[#FAF7F2]/70 hover:text-[#FAF7F2] hover:border-white/30 transition-colors"
+                  className="w-11 h-11 rounded-lg border border-white/10 flex items-center justify-center text-[#FAF7F2]/70 hover:text-[#FAF7F2] hover:border-white/30 transition-colors"
                 >
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                     <line x1="2" y1="2" x2="14" y2="14" />

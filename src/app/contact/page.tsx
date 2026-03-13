@@ -241,7 +241,7 @@ export default function ContactPage() {
                 <p className="text-[#FAF7F2]/55 text-sm mb-5">
                   Stay inspired — follow us on social media for behind-the-scenes content, student work, and studio updates.
                 </p>
-                <div className="flex gap-3">
+                <div className="flex flex-wrap gap-3">
                   <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
                      className="flex items-center gap-2 px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-sm hover:border-[#D4A843]/50 transition-colors">
                     📸 Instagram
