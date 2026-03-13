@@ -235,16 +235,18 @@ export default function HomePage() {
           <div className="hero-stagger relative">
             {/* 📷 PHOTO PLACEHOLDER — Replace with <Image> of hero artwork. Aspect ratio 4:5, min 1200px wide. */}
             <div data-art-type="hero-canvas"
-                 className="art-canvas-hero relative w-full aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl shadow-black/60">
-              <div className="absolute inset-3 border border-[#D4A843]/20 rounded-xl pointer-events-none" />
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 opacity-30">
-                <span className="text-5xl">🎨</span>
-                <p className="text-[#FAF7F2] text-sm font-medium tracking-widest uppercase">Add Hero Photo Here</p>
+                 className="parallax-container art-canvas-hero relative w-full aspect-[4/5] rounded-2xl shadow-2xl shadow-black/60">
+              <div className="parallax-inner-auto absolute inset-0">
+                <div className="absolute inset-3 border border-[#C5B358]/20 rounded-xl pointer-events-none" />
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 opacity-30">
+                  <span className="text-5xl">🎨</span>
+                  <p className="text-[#FAF9F6] text-sm font-medium tracking-widest uppercase">Add Hero Photo Here</p>
+                </div>
+                <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-[#C5B358]/60 rounded-tl" />
+                <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 border-[#C5B358]/60 rounded-tr" />
+                <div className="absolute bottom-4 left-4 w-8 h-8 border-l-2 border-b-2 border-[#C5B358]/60 rounded-bl" />
+                <div className="absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 border-[#C5B358]/60 rounded-br" />
               </div>
-              <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-[#D4A843]/60 rounded-tl" />
-              <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 border-[#D4A843]/60 rounded-tr" />
-              <div className="absolute bottom-4 left-4 w-8 h-8 border-l-2 border-b-2 border-[#D4A843]/60 rounded-bl" />
-              <div className="absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 border-[#D4A843]/60 rounded-br" />
             </div>
             <div className="absolute -bottom-4 -left-4 bg-[#C4622D] text-white rounded-xl px-5 py-3 shadow-xl">
               <p className="text-xs font-medium opacity-80">Since 1999</p>
@@ -255,10 +257,10 @@ export default function HomePage() {
       </section>
 
       {/* Marquee ticker */}
-      <section className="bg-[#D4A843] py-4 overflow-hidden" aria-label="Services ticker">
+      <section className="bg-[#C5B358] py-4 overflow-hidden" aria-label="Services ticker">
         <div className="marquee-track">
           {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, i) => (
-            <span key={i} className="text-[#1C1C1C] font-semibold text-sm uppercase tracking-widest mx-6 shrink-0">
+            <span key={i} className="text-[#1A1A1A] font-semibold text-sm uppercase tracking-widest mx-6 shrink-0">
               {item}<span className="mx-6 opacity-40">•</span>
             </span>
           ))}
@@ -274,10 +276,10 @@ export default function HomePage() {
           <div className="about-img relative">
             {/* 📷 PHOTO PLACEHOLDER — Replace with studio/artwork image (3:4 ratio). */}
             <div data-art-type="about-studio"
-                 className="art-canvas-hero relative w-full aspect-[3/4] rounded-2xl overflow-hidden shadow-xl">
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 opacity-25">
+                 className="parallax-container art-canvas-hero relative w-full aspect-[3/4] rounded-2xl shadow-xl">
+              <div className="parallax-inner-auto absolute inset-0 flex flex-col items-center justify-center gap-2 opacity-25">
                 <span className="text-4xl">🖼️</span>
-                <p className="text-[#FAF7F2] text-xs tracking-widest uppercase">Add Studio Photo</p>
+                <p className="text-[#FAF9F6] text-xs tracking-widest uppercase">Add Studio Photo</p>
               </div>
             </div>
             <div className="absolute -top-5 -right-5 w-24 h-24 bg-[#C4622D] rounded-full flex flex-col items-center justify-center text-white shadow-lg">
@@ -369,12 +371,12 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="farnaz-portrait relative mx-auto lg:mx-0 max-w-md w-full">
             {/* 📷 PHOTO PLACEHOLDER — Replace with Farnaz professional portrait (3:4 ratio). */}
-            <div className="absolute inset-0 border-2 border-[#D4A843]/40 rounded-2xl transform translate-x-4 translate-y-4" />
+            <div className="absolute inset-0 border-2 border-[#C5B358]/40 rounded-2xl transform translate-x-4 translate-y-4" />
             <div data-art-type="artist-portrait"
-                 className="art-canvas-portrait relative w-full aspect-[3/4] rounded-2xl overflow-hidden border-2 border-[#C4622D]/30">
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 opacity-25">
+                 className="parallax-container art-canvas-portrait relative w-full aspect-[3/4] rounded-2xl border-2 border-[#C4622D]/30">
+              <div className="parallax-inner-auto absolute inset-0 flex flex-col items-center justify-center gap-2 opacity-25">
                 <span className="text-5xl">👩‍🎨</span>
-                <p className="text-[#FAF7F2] text-xs tracking-widest uppercase">Artist Portrait</p>
+                <p className="text-[#FAF9F6] text-xs tracking-widest uppercase">Artist Portrait</p>
               </div>
             </div>
           </div>

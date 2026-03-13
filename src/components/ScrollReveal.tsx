@@ -18,13 +18,13 @@ export default function ScrollReveal({
   once = true,
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, { once, margin: '-10% 0px' })
+  const inView = useInView(ref, { once, margin: '-8% 0px' })
 
   const offsets: Record<NonNullable<ScrollRevealProps['direction']>, { x: number; y: number }> = {
-    up:    { x: 0,   y: 40  },
-    down:  { x: 0,   y: -40 },
-    left:  { x: -60, y: 0   },
-    right: { x: 60,  y: 0   },
+    up:    { x: 0,   y: 48  },
+    down:  { x: 0,   y: -48 },
+    left:  { x: -64, y: 0   },
+    right: { x: 64,  y: 0   },
     none:  { x: 0,   y: 0   },
   }
 
@@ -33,10 +33,14 @@ export default function ScrollReveal({
   return (
     <motion.div
       ref={ref}
-      className={className}
-      initial={{ opacity: 0, x, y }}
-      animate={inView ? { opacity: 1, x: 0, y: 0 } : { opacity: 0, x, y }}
-      transition={{ duration: 0.7, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
+      className={`scroll-reveal-item ${className}`}
+      initial={{ opacity: 0, x, y, scale: 0.97 }}
+      animate={inView ? { opacity: 1, x: 0, y: 0, scale: 1 } : { opacity: 0, x, y, scale: 0.97 }}
+      transition={{
+        duration: 0.8,
+        delay,
+        ease: [0.16, 1, 0.3, 1], /* spring cubic-bezier */
+      }}
     >
       {children}
     </motion.div>
