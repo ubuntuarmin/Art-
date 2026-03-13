@@ -21,24 +21,28 @@ const SERVICES = [
     title: 'Private Events & Classes',
     desc: 'Tailored one-on-one sessions and intimate group classes for all skill levels, from complete beginners to advanced artists.',
     detail: 'Book a personalized session',
+    href: '/contact?subject=General+Inquiry',
   },
   {
     icon: '🎂',
     title: 'Special Party & Meeting',
     desc: 'Transform your celebration into an artistic experience. Birthday parties, corporate team-building, and milestone events.',
     detail: 'Plan your event',
+    href: '/contact?subject=Birthday+Party',
   },
   {
     icon: '🖌️',
     title: 'Training Painting & Drawing',
     desc: 'Structured curriculum for oil, acrylic, watercolor, and drawing — from fundamental techniques to advanced composition.',
     detail: 'View class schedule',
+    href: '/classes',
   },
   {
     icon: '✨',
     title: 'Resin Art & Craft Workshops',
     desc: 'Explore the stunning world of resin art: ocean pours, geode designs, custom jewelry, and decorative pieces.',
     detail: 'Join a workshop',
+    href: `/contact?class=${encodeURIComponent('Resin Art & Craft')}&subject=${encodeURIComponent('Book a Class')}`,
   },
 ]
 
@@ -313,14 +317,14 @@ export default function HomePage() {
             <h2 className="font-serif text-4xl md:text-5xl font-bold text-[#FAF7F2]">Our Services</h2>
           </ScrollReveal>
           <div className="services-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {SERVICES.map(({ icon, title, desc, detail }, i) => (
+            {SERVICES.map(({ icon, title, desc, detail, href }, i) => (
               <ScrollReveal key={title} delay={i * 0.12} direction="up">
-                <div className="service-card group h-full bg-white/5 border border-white/10 rounded-2xl p-7 hover:border-[#D4A843]/50 hover:-translate-y-2 transition-all duration-300 cursor-pointer">
+                <Link href={href} className="service-card group h-full bg-white/5 border border-white/10 rounded-2xl p-7 hover:border-[#D4A843]/50 hover:-translate-y-2 transition-all duration-300 block">
                   <span className="text-4xl mb-5 block">{icon}</span>
                   <h3 className="font-serif text-xl font-bold text-[#FAF7F2] mb-3">{title}</h3>
                   <p className="text-[#FAF7F2]/55 text-sm leading-relaxed mb-5">{desc}</p>
                   <p className="text-[#D4A843] text-sm font-medium group-hover:underline">{detail} →</p>
-                </div>
+                </Link>
               </ScrollReveal>
             ))}
           </div>

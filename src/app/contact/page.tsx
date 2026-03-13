@@ -1,5 +1,6 @@
 'use client'
-import { useState, useRef } from 'react'
+import { useState, useRef, Suspense } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { motion } from 'framer-motion'
 import ScrollReveal from '@/components/ScrollReveal'
 
@@ -27,8 +28,21 @@ const SUBJECTS = [
   'Other',
 ]
 
-export default function ContactPage() {
-  const [form, setForm] = useState<FormData>({ name: '', email: '', phone: '', subject: '', message: '' })
+function ContactForm() {
+  const searchParams = useSearchParams()
+  const className = searchParams.get('class') ?? ''
+  const subjectParam = searchParams.get('subject') ?? ''
+
+  const initialSubject = SUBJECTS.includes(subjectParam) ? subjectParam : ''
+  const initialMessage = className
+    ? `Hi, I'd like to book a spot in "${className}". Please let me know about availability and next steps.`
+    : ''
+
+  const [form, setForm] = useState<FormData>({
+    name: '', email: '', phone: '',
+    subject: initialSubject,
+    message: initialMessage,
+  })
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
   const formRef = useRef<HTMLFormElement>(null)
 
@@ -47,6 +61,108 @@ export default function ContactPage() {
   }
 
   return (
+    <div className="bg-white rounded-2xl shadow-xl shadow-black/5 p-8 md:p-10">
+      <h2 className="font-serif text-2xl font-bold text-[#1C1C1C] mb-2">Send a Message</h2>
+      {className && (
+        <p className="text-sm text-[#C4622D] font-medium mb-6">
+          📋 Booking inquiry for: <span className="font-semibold">{className}</span>
+        </p>
+      )}
+      {!className && <div className="mb-7" />}
+
+      {status === 'sent' ? (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="text-center py-10"
+        >
+          <span className="text-5xl block mb-4">🎨</span>
+          <h3 className="font-serif text-2xl font-bold text-[#1C1C1C] mb-2">Message Sent!</h3>
+          <p className="text-[#1C1C1C]/60">
+            Thank you for reaching out. Farnaz or a team member will reply within 24 hours.
+          </p>
+        </motion.div>
+      ) : (
+        <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div>
+              <label htmlFor="name" className="block text-xs font-semibold text-[#1C1C1C]/60 uppercase tracking-wide mb-1.5">
+                Full Name *
+              </label>
+              <input
+                id="name" name="name" type="text" required
+                value={form.name} onChange={handleChange}
+                placeholder="Your name"
+                className="w-full px-4 py-3 rounded-lg border border-[#1C1C1C]/15 bg-[#FAF7F2] text-[#1C1C1C] placeholder-[#1C1C1C]/30 focus:outline-none focus:border-[#C4622D] transition-colors text-sm"
+              />
+            </div>
+            <div>
+              <label htmlFor="email" className="block text-xs font-semibold text-[#1C1C1C]/60 uppercase tracking-wide mb-1.5">
+                Email Address *
+              </label>
+              <input
+                id="email" name="email" type="email" required
+                value={form.email} onChange={handleChange}
+                placeholder="your@email.com"
+                className="w-full px-4 py-3 rounded-lg border border-[#1C1C1C]/15 bg-[#FAF7F2] text-[#1C1C1C] placeholder-[#1C1C1C]/30 focus:outline-none focus:border-[#C4622D] transition-colors text-sm"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div>
+              <label htmlFor="phone" className="block text-xs font-semibold text-[#1C1C1C]/60 uppercase tracking-wide mb-1.5">
+                Phone (optional)
+              </label>
+              <input
+                id="phone" name="phone" type="tel"
+                value={form.phone} onChange={handleChange}
+                placeholder="(310) 000-0000"
+                className="w-full px-4 py-3 rounded-lg border border-[#1C1C1C]/15 bg-[#FAF7F2] text-[#1C1C1C] placeholder-[#1C1C1C]/30 focus:outline-none focus:border-[#C4622D] transition-colors text-sm"
+              />
+            </div>
+            <div>
+              <label htmlFor="subject" className="block text-xs font-semibold text-[#1C1C1C]/60 uppercase tracking-wide mb-1.5">
+                Subject *
+              </label>
+              <select
+                id="subject" name="subject" required
+                value={form.subject} onChange={handleChange}
+                className="w-full px-4 py-3 rounded-lg border border-[#1C1C1C]/15 bg-[#FAF7F2] text-[#1C1C1C] focus:outline-none focus:border-[#C4622D] transition-colors text-sm appearance-none"
+              >
+                <option value="" disabled>Select a topic</option>
+                {SUBJECTS.map(s => <option key={s} value={s}>{s}</option>)}
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label htmlFor="message" className="block text-xs font-semibold text-[#1C1C1C]/60 uppercase tracking-wide mb-1.5">
+              Message *
+            </label>
+            <textarea
+              id="message" name="message" required rows={5}
+              value={form.message} onChange={handleChange}
+              placeholder="Tell us about yourself or what you're interested in..."
+              className="w-full px-4 py-3 rounded-lg border border-[#1C1C1C]/15 bg-[#FAF7F2] text-[#1C1C1C] placeholder-[#1C1C1C]/30 focus:outline-none focus:border-[#C4622D] transition-colors text-sm resize-none"
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={status === 'sending'}
+            className="btn-terra w-full justify-center disabled:opacity-60 disabled:cursor-not-allowed"
+          >
+            {status === 'sending' ? 'Sending…' : 'Send Message'}
+          </button>
+        </form>
+      )}
+    </div>
+  )
+}
+
+export default function ContactPage() {
+  return (
     <div className="min-h-screen bg-[#FAF7F2]">
       {/* Hero */}
       <section className="relative bg-[#1C1C1C] pt-32 pb-20 px-6 text-center overflow-hidden">
@@ -64,97 +180,13 @@ export default function ContactPage() {
         <div className="mx-auto max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-14">
           {/* Contact form */}
           <ScrollReveal direction="left">
-            <div className="bg-white rounded-2xl shadow-xl shadow-black/5 p-8 md:p-10">
-              <h2 className="font-serif text-2xl font-bold text-[#1C1C1C] mb-7">Send a Message</h2>
-
-              {status === 'sent' ? (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="text-center py-10"
-                >
-                  <span className="text-5xl block mb-4">🎨</span>
-                  <h3 className="font-serif text-2xl font-bold text-[#1C1C1C] mb-2">Message Sent!</h3>
-                  <p className="text-[#1C1C1C]/60">
-                    Thank you for reaching out. Farnaz or a team member will reply within 24 hours.
-                  </p>
-                </motion.div>
-              ) : (
-                <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <div>
-                      <label htmlFor="name" className="block text-xs font-semibold text-[#1C1C1C]/60 uppercase tracking-wide mb-1.5">
-                        Full Name *
-                      </label>
-                      <input
-                        id="name" name="name" type="text" required
-                        value={form.name} onChange={handleChange}
-                        placeholder="Your name"
-                        className="w-full px-4 py-3 rounded-lg border border-[#1C1C1C]/15 bg-[#FAF7F2] text-[#1C1C1C] placeholder-[#1C1C1C]/30 focus:outline-none focus:border-[#C4622D] transition-colors text-sm"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="email" className="block text-xs font-semibold text-[#1C1C1C]/60 uppercase tracking-wide mb-1.5">
-                        Email Address *
-                      </label>
-                      <input
-                        id="email" name="email" type="email" required
-                        value={form.email} onChange={handleChange}
-                        placeholder="your@email.com"
-                        className="w-full px-4 py-3 rounded-lg border border-[#1C1C1C]/15 bg-[#FAF7F2] text-[#1C1C1C] placeholder-[#1C1C1C]/30 focus:outline-none focus:border-[#C4622D] transition-colors text-sm"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <div>
-                      <label htmlFor="phone" className="block text-xs font-semibold text-[#1C1C1C]/60 uppercase tracking-wide mb-1.5">
-                        Phone (optional)
-                      </label>
-                      <input
-                        id="phone" name="phone" type="tel"
-                        value={form.phone} onChange={handleChange}
-                        placeholder="(310) 000-0000"
-                        className="w-full px-4 py-3 rounded-lg border border-[#1C1C1C]/15 bg-[#FAF7F2] text-[#1C1C1C] placeholder-[#1C1C1C]/30 focus:outline-none focus:border-[#C4622D] transition-colors text-sm"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="subject" className="block text-xs font-semibold text-[#1C1C1C]/60 uppercase tracking-wide mb-1.5">
-                        Subject *
-                      </label>
-                      <select
-                        id="subject" name="subject" required
-                        value={form.subject} onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-lg border border-[#1C1C1C]/15 bg-[#FAF7F2] text-[#1C1C1C] focus:outline-none focus:border-[#C4622D] transition-colors text-sm appearance-none"
-                      >
-                        <option value="" disabled>Select a topic</option>
-                        {SUBJECTS.map(s => <option key={s} value={s}>{s}</option>)}
-                      </select>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label htmlFor="message" className="block text-xs font-semibold text-[#1C1C1C]/60 uppercase tracking-wide mb-1.5">
-                      Message *
-                    </label>
-                    <textarea
-                      id="message" name="message" required rows={5}
-                      value={form.message} onChange={handleChange}
-                      placeholder="Tell us about yourself or what you're interested in..."
-                      className="w-full px-4 py-3 rounded-lg border border-[#1C1C1C]/15 bg-[#FAF7F2] text-[#1C1C1C] placeholder-[#1C1C1C]/30 focus:outline-none focus:border-[#C4622D] transition-colors text-sm resize-none"
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={status === 'sending'}
-                    className="btn-terra w-full justify-center disabled:opacity-60 disabled:cursor-not-allowed"
-                  >
-                    {status === 'sending' ? 'Sending…' : 'Send Message'}
-                  </button>
-                </form>
-              )}
-            </div>
+            <Suspense fallback={
+              <div className="bg-white rounded-2xl shadow-xl shadow-black/5 p-8 md:p-10 min-h-[400px] flex items-center justify-center">
+                <p className="text-[#1C1C1C]/40 text-sm">Loading form…</p>
+              </div>
+            }>
+              <ContactForm />
+            </Suspense>
           </ScrollReveal>
 
           {/* Info column */}
