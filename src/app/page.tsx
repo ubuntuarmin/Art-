@@ -264,11 +264,8 @@ export default function HomePage() {
             <div data-art-type="hero-canvas"
                  className="parallax-container art-canvas-hero relative w-full aspect-[4/5] rounded-2xl shadow-2xl shadow-black/60 overflow-hidden">
               <div className="parallax-inner-auto scroll-scale-img absolute inset-0">
+                <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&q=80&w=1200" alt="Art Studio Canvas" className="object-cover w-full h-full" />
                 <div className="absolute inset-3 border border-[#C5B358]/20 rounded-xl pointer-events-none" />
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 opacity-30">
-                  <span className="text-5xl">🎨</span>
-                  <p className="text-[#FAF9F6] text-sm font-medium tracking-widest uppercase">Add Hero Photo Here</p>
-                </div>
                 <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-[#C5B358]/60 rounded-tl" />
                 <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 border-[#C5B358]/60 rounded-tr" />
                 <div className="absolute bottom-4 left-4 w-8 h-8 border-l-2 border-b-2 border-[#C5B358]/60 rounded-bl" />
@@ -304,9 +301,8 @@ export default function HomePage() {
             {/* 📷 PHOTO PLACEHOLDER — Replace with studio/artwork image (3:4 ratio). */}
             <div data-art-type="about-studio"
                  className="parallax-container art-canvas-hero relative w-full aspect-[3/4] rounded-2xl shadow-xl overflow-hidden">
-              <div className="parallax-inner-auto scroll-scale-img absolute inset-0 flex flex-col items-center justify-center gap-2 opacity-25">
-                <span className="text-4xl">🖼️</span>
-                <p className="text-[#FAF9F6] text-xs tracking-widest uppercase">Add Studio Photo</p>
+              <div className="parallax-inner-auto scroll-scale-img absolute inset-0">
+                <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&q=80&w=800" alt="Studio Setup" className="object-cover w-full h-full" />
               </div>
             </div>
             <div className="absolute -top-5 -right-5 w-24 h-24 bg-[#C4622D] rounded-full flex flex-col items-center justify-center text-white shadow-lg">
@@ -420,10 +416,9 @@ export default function HomePage() {
             {/* 📷 PHOTO PLACEHOLDER — Replace with Farnaz professional portrait (3:4 ratio). */}
             <div className="absolute inset-0 border-2 border-[#C5B358]/40 rounded-2xl transform translate-x-4 translate-y-4" />
             <div data-art-type="artist-portrait"
-                 className="parallax-container art-canvas-portrait relative w-full aspect-[3/4] rounded-2xl border-2 border-[#C4622D]/30">
-              <div className="parallax-inner-auto absolute inset-0 flex flex-col items-center justify-center gap-2 opacity-25">
-                <span className="text-5xl">👩‍🎨</span>
-                <p className="text-[#FAF9F6] text-xs tracking-widest uppercase">Artist Portrait</p>
+                 className="parallax-container art-canvas-portrait relative w-full aspect-[3/4] rounded-2xl border-2 border-[#C4622D]/30 overflow-hidden">
+              <div className="parallax-inner-auto absolute inset-0">
+                <img src="https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&q=80&w=800" alt="Farnaz Amin - Artist" className="object-cover w-full h-full" />
               </div>
             </div>
           </div>
