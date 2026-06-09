@@ -75,9 +75,8 @@ export default function AboutPage() {
             <div className="absolute inset-0 border-2 border-[#D4A843]/30 rounded-2xl transform translate-x-5 translate-y-5" />
             <div data-art-type="about-portrait"
                  className="art-canvas-portrait relative w-full aspect-[3/4] rounded-2xl overflow-hidden border-2 border-[#C4622D]/40">
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 opacity-25">
-                <span className="text-5xl">👩‍🎨</span>
-                <p className="text-[#FAF7F2] text-xs tracking-widest uppercase">Farnaz Amin</p>
+              <div className="absolute inset-0">
+                <img src="https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&q=80&w=800" alt="Farnaz Amin" className="object-cover w-full h-full" />
               </div>
             </div>
           </div>

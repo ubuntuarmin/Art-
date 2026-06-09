@@ -5,12 +5,12 @@ import Footer from '@/components/Footer'
 import CustomCursor from '@/components/CustomCursor'
 
 export const metadata: Metadata = {
-  title: 'Beyond the Canvas Art Studio | Farnaz Amin',
+  title: 'Beyond the Canvas Art Studio',
   description:
-    'A luxury art studio in Los Angeles led by Iranian-American artist Farnaz Amin. Oil painting, watercolor, resin art, private classes, and events for all ages.',
+    'A luxury art studio led by Farnaz Amin. Oil painting, watercolor, resin art, private classes, and events for all ages.',
   keywords: [
     'art studio', 'oil painting', 'watercolor', 'resin art', 'Farnaz Amin',
-    'art classes Los Angeles', 'painting classes', 'art workshops',
+    'art classes', 'painting classes', 'art workshops',
   ],
   openGraph: {
     title: 'Beyond the Canvas Art Studio',
