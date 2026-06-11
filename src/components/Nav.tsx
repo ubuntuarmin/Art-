@@ -41,9 +41,9 @@ export default function Nav() {
       >
         <div className="mx-auto max-w-7xl flex items-center justify-between px-5 sm:px-6 py-3 sm:py-4">
           {/* Logo */}
-          <Link href="/" className="font-serif text-lg sm:text-xl font-bold tracking-wide text-[#FAF7F2] select-none">
+          <Link href="/" className="font-serif text-lg sm:text-xl font-bold tracking-wide text-cream select-none">
             Beyond the{' '}
-            <span className="text-[#C4622D] italic">Canvas</span>
+            <span className="text-terra italic">Canvas</span>
           </Link>
 
           {/* Desktop links */}
@@ -54,13 +54,13 @@ export default function Nav() {
                 href={href}
                 className={`relative text-sm font-medium tracking-wide transition-colors duration-200 py-1 ${
                   pathname === href
-                    ? 'text-[#D4A843]'
-                    : 'text-[#FAF7F2]/80 hover:text-[#FAF7F2]'
+                    ? 'text-gold'
+                    : 'text-cream/80 hover:text-cream'
                 }`}
               >
                 {label}
                 {pathname === href && (
-                  <span className="absolute -bottom-0.5 left-0 right-0 h-px bg-[#D4A843] rounded-full" />
+                  <span className="absolute -bottom-0.5 left-0 right-0 h-px bg-gold rounded-full" />
                 )}
               </Link>
             ))}
@@ -74,7 +74,7 @@ export default function Nav() {
 
           {/* Hamburger */}
           <button
-            className="md:hidden flex flex-col items-center justify-center gap-1.5 p-2.5 min-h-[44px] min-w-[44px] text-[#FAF7F2] rounded-lg hover:bg-white/10 transition-colors"
+            className="md:hidden flex flex-col items-center justify-center gap-1.5 p-2.5 min-h-[44px] min-w-[44px] text-cream rounded-lg hover:bg-white/10 transition-colors"
             onClick={() => setOpen(v => !v)}
             aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
@@ -111,17 +111,17 @@ export default function Nav() {
             >
               {/* Drawer header */}
               <div className="flex items-center justify-between mb-8">
-                <p className="font-serif text-[#D4A843] text-lg font-semibold">Menu</p>
-                <button
-                  onClick={() => setOpen(false)}
-                  aria-label="Close menu"
-                  className="w-11 h-11 rounded-lg border border-white/10 flex items-center justify-center text-[#FAF7F2]/70 hover:text-[#FAF7F2] hover:border-white/30 transition-colors"
-                >
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                    <line x1="2" y1="2" x2="14" y2="14" />
-                    <line x1="14" y1="2" x2="2" y2="14" />
-                  </svg>
-                </button>
+                <p className="font-serif text-gold text-lg font-semibold">Menu</p>
+                  <button
+                    onClick={() => setOpen(false)}
+                    aria-label="Close menu"
+                    className="w-11 h-11 rounded-lg border border-cream/10 flex items-center justify-center text-cream/70 hover:text-cream hover:border-cream/30 transition-colors"
+                  >
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                      <line x1="2" y1="2" x2="14" y2="14" />
+                      <line x1="14" y1="2" x2="2" y2="14" />
+                    </svg>
+                  </button>
               </div>
 
               {/* Nav links */}
@@ -135,31 +135,31 @@ export default function Nav() {
                   >
                     <Link
                       href={href}
-                      className={`flex items-center justify-between py-3.5 px-2 text-base font-medium border-b border-white/8 rounded-lg transition-colors ${
+                      className={`flex items-center justify-between py-3.5 px-2 text-base font-medium border-b border-cream/8 rounded-lg transition-colors ${
                         pathname === href
-                          ? 'text-[#D4A843]'
-                          : 'text-[#FAF7F2]/80 hover:text-[#FAF7F2] hover:bg-white/5'
+                          ? 'text-gold'
+                          : 'text-cream/80 hover:text-cream hover:bg-cream/5'
                       }`}
                     >
                       {label}
                       {pathname === href && (
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#D4A843] shrink-0" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-gold shrink-0" />
                       )}
                     </Link>
                   </motion.div>
                 ))}
               </div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.55, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="mt-6 pt-6 border-t border-white/10"
-              >
-                <Link href="/classes" className="btn-terra w-full justify-center text-center text-sm">
-                  Book a Class
-                </Link>
-              </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.55, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  className="mt-6 pt-6 border-t border-cream/10"
+                >
+                  <Link href="/classes" className="btn-terra w-full justify-center text-center text-sm">
+                    Book a Class
+                  </Link>
+                </motion.div>
             </motion.nav>
           </>
         )}
