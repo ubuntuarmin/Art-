@@ -52,6 +52,12 @@
       justify-content: space-between;
     }
 
+    .logo-img {
+      width: 50px;
+      height: auto;
+      margin-right: 16px;
+    }
+
     .nav-logo {
       display: flex;
       align-items: center;
@@ -1260,6 +1266,17 @@
   </style>
 </head>
 <body>
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="Home">
+        <img src="/images/byond--768x486.webp" alt="Beyond Logo" class="logo-img">
+        <div class="logo-text">
+          <span class="logo-name">Beyond</span>
+          <span class="logo-tagline">The Canvas</span>
+        </div>
+      </a>
+    </div>
+  </nav>
 
 <!-- Mobile overlay -->
 <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMenu()"></div>
