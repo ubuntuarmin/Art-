@@ -1884,7 +1884,15 @@
 
 <script>
   let slideIndex = 1;
-  showSlides(slideIndex);
+  let slideInterval; // Variable to hold the timer ID for auto-sliding
+
+  // Call showSlides initially with a delay for the first slide
+  document.addEventListener("DOMContentLoaded", function() {
+    // Initial slide display after 1.5 seconds
+    slideInterval = setTimeout(function() {
+      showSlides(slideIndex);
+    }, 1500);
+  });
 
   // Next/previous controls
   function plusSlides(n) {
@@ -1900,16 +1908,29 @@
     let i;
     let slides = document.getElementsByClassName("mySlides");
     let dots = document.getElementsByClassName("dot");
+
+    // Clear any existing timeout to prevent multiple timers running
+    clearTimeout(slideInterval);
+
     if (n > slides.length) {slideIndex = 1}
     if (n < 1) {slideIndex = slides.length}
+
+    // Hide all slides and remove active class from dots
     for (i = 0; i < slides.length; i++) {
       slides[i].style.display = "none";
     }
     for (i = 0; i < dots.length; i++) {
       dots[i].className = dots[i].className.replace(" active-dot", "");
     }
+
+    // Display the current slide and add active class to the corresponding dot
     slides[slideIndex-1].style.display = "block";
     dots[slideIndex-1].className += " active-dot";
+
+    // Set timeout for the next slide to appear after 3 seconds
+    slideInterval = setTimeout(function() {
+      plusSlides(1); // Advance to the next slide
+    }, 3000);
   }
 
   function handleNewsletter(e) {
