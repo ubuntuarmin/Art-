@@ -352,27 +352,13 @@
   </style>
 </head>
 <body>
-<img src="../images/byond--768x486.webp" alt="Logo">
-
-<div class="mobile-overlay" id="mobileOverlay" onclick="toggleMenu()"></div>
-<div class="mobile-menu" id="mobileMenu">
-  <button class="close-btn" onclick="toggleMenu()" aria-label="Close menu">✕</button>
-  <a href="index.html">Home</a>
-  <a href="classes.html">Classes</a>
-  <a href="gallery.html" class="active">Gallery</a>
-  <a href="instructors.html">Book Now</a>
-  <a href="about.html">Biography</a>
-  <a href="contact.html">Contact</a>
-</div>
-
 <nav>
   <div class="nav-inner">
-<a href="index.html" class="nav-logo">
-      <img src="/images/byond--768x486.webp" alt="Beyond Logo" class="logo-img" style="width: 50px; height: 50px;">
-      </svg>
-      <div>
-        <div class="logo-name">Beyond the<span> Canvas</span></div>
-        <div class="logo-tagline">Art Studio · Farnaz Amin</div>
+    <a href="index.html" class="nav-logo" aria-label="Home">
+      <img src="images/byond--768x486.webp" alt="Beyond Logo" class="logo-img">
+      <div class="logo-text">
+        <span class="logo-name">Beyond</span>
+        <span class="logo-tagline">The Canvas</span>
       </div>
     </a>
     <ul class="nav-links">
@@ -388,6 +374,18 @@
     </button>
   </div>
 </nav>
+
+<!-- Mobile overlay -->
+<div class="mobile-overlay" id="mobileOverlay" onclick="toggleMenu()"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <button class="close-btn" onclick="toggleMenu()" aria-label="Close menu">✕</button>
+  <a href="index.html">Home</a>
+  <a href="classes.html">Classes</a>
+  <a href="gallery.html" class="active">Gallery</a>
+  <a href="instructors.html">Book Now</a>
+  <a href="about.html">Biography</a>
+  <a href="contact.html">Contact</a>
+</div>
 
 <!-- Page Hero -->
 <div class="page-hero">
@@ -709,26 +707,5 @@
   }
 </script>
 
-<!-- Add styles for gallery-image and signature-image -->
-<style>
-  .gallery-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .signature-image {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    width: 100px;
-    height: auto;
-    opacity: 0.8;
-  }
-  .signature-img {
-    width: 100%;
-    height: auto;
-  }
-</style>
 </body>
 </html>
