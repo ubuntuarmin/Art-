@@ -418,6 +418,274 @@
     .social-link { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; text-decoration: none; transition: all 0.3s; }
     .social-link:hover { background: var(--terra); border-color: var(--terra); transform: translateY(-2px); }
 
+    /* Enhanced Modal styles for the new functionality */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+
+    .modal-content {
+      background: var(--white);
+      border-radius: 20px;
+      max-width: 95%;
+      max-height: 95vh;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+
+    .modal-header {
+      padding: 25px 30px;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-header h3 {
+      margin: 0;
+      color: var(--text-dark);
+      font-size: 1.75rem;
+      font-family: Georgia, serif;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: var(--text-muted);
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.25s;
+    }
+
+    .modal-close:hover {
+      background: rgba(0,0,0,0.05);
+      color: var(--terra);
+    }
+
+    .modal-body {
+      padding: 0;
+      position: relative;
+    }
+
+    .iframe-container {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+      min-height: 500px;
+    }
+
+    .done-button {
+      background: var(--terra);
+      color: var(--white);
+      border: none;
+      padding: 16px 32px;
+      border-radius: 12px;
+      font-size: 1.125rem;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 25px;
+      transition: all 0.3s;
+      letter-spacing: 0.5px;
+      font-family: Georgia, serif;
+    }
+
+    .done-button:hover {
+      background: var(--terra-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(196,98,45,0.3);
+    }
+
+    .supplies-options {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin: 30px 0;
+    }
+
+    .supplies-option {
+      display: flex;
+      align-items: center;
+      padding: 20px;
+      border: 2px solid var(--cream2);
+      border-radius: 16px;
+      cursor: pointer;
+      transition: all 0.3s;
+      backdrop-filter: blur(5px);
+    }
+
+    .supplies-option:hover {
+      border-color: var(--terra);
+      background: var(--cream);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+    }
+
+    .supplies-option.selected {
+      border-color: var(--terra);
+      background: linear-gradient(135deg, var(--terra), var(--terra-dark));
+      color: var(--white);
+      transform: scale(1.03);
+      box-shadow: 0 15px 30px rgba(196,98,45,0.2);
+    }
+
+    .supplies-option-icon {
+      font-size: 2.5rem;
+      margin-right: 20px;
+      flex-shrink: 0;
+    }
+
+    .supplies-option-details {
+      flex: 1;
+    }
+
+    .supplies-option-title {
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--text-dark);
+      font-family: Georgia, serif;
+    }
+
+    .supplies-option-description {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .continue-button {
+      background: var(--terra);
+      color: var(--white);
+      border: none;
+      padding: 18px 36px;
+      border-radius: 12px;
+      font-size: 1.125rem;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 25px;
+      transition: all 0.3s;
+      letter-spacing: 0.5px;
+      font-family: Georgia, serif;
+    }
+
+    .continue-button:hover {
+      background: var(--terra-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(196,98,45,0.3);
+    }
+
+    /* Enhanced responsive design for modals */
+    @media (max-width: 768px) {
+      .modal-content {
+        max-width: 98%;
+        max-height: 98vh;
+        border-radius: 16px;
+      }
+      
+      .modal-header {
+        padding: 20px 25px;
+      }
+      
+      .modal-header h3 {
+        font-size: 1.5rem;
+      }
+      
+      .iframe-container {
+        min-height: 400px;
+      }
+      
+      .done-button,
+      .continue-button {
+        padding: 14px 28px;
+        font-size: 1rem;
+        margin-top: 20px;
+      }
+      
+      .supplies-option {
+        padding: 18px;
+      }
+      
+      .supplies-option-icon {
+        font-size: 2.2rem;
+        margin-right: 16px;
+      }
+      
+      .supplies-option-title {
+        font-size: 1.1rem;
+      }
+      
+      .supplies-option-description {
+        font-size: 0.95rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .modal-content {
+        max-width: 100%;
+        max-height: 100vh;
+        border-radius: 0;
+        height: 100%;
+      }
+      
+      .modal-header {
+        padding: 18px 20px;
+      }
+      
+      .modal-header h3 {
+        font-size: 1.375rem;
+      }
+      
+      .iframe-container {
+        min-height: 350px;
+      }
+      
+      .done-button,
+      .continue-button {
+        padding: 12px 24px;
+        font-size: 0.95rem;
+        margin-top: 18px;
+        border-radius: 10px;
+      }
+      
+      .supplies-options {
+        margin: 25px 0;
+      }
+      
+      .supplies-option {
+        padding: 16px;
+        border-radius: 14px;
+      }
+      
+      .supplies-option-icon {
+        font-size: 2rem;
+        margin-right: 14px;
+      }
+      
+      .supplies-option-title {
+        font-size: 1rem;
+      }
+      
+      .supplies-option-description {
+        font-size: 0.9rem;
+      }
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       .classes-grid { grid-template-columns: repeat(2, 1fr); }
@@ -501,7 +769,7 @@
   <a href="index.html">Home</a>
   <a href="classes.html" class="active">Classes</a>
   <a href="gallery.html">Gallery</a>
-  <a href="instructors.html">Book Now</a>
+  <a href="instructors.html" class="nav-cta">Book Now</a>
   <a href="about.html">Biography</a>
   <a href="contact.html">Contact</a>
 </div>
@@ -597,7 +865,7 @@
         </div>
         <div class="card-footer">
           <div class="card-price">$65 <span>/ session</span></div>
-          <a href="instructors.html" class="btn-enrol">Book Now</a>
+          <button class="btn-enrol" onclick="openOilPaintingBooking()">Book Now</button>
         </div>
       </div>
     </div>
@@ -726,6 +994,53 @@
 
 </div>
 
+<!-- Modal for Oil Painting Booking -->
+<div class="modal-overlay" id="oilPaintingModalOverlay">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Oil Painting Class</h3>
+      <button class="modal-close" onclick="closeOilPaintingModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <iframe class="iframe-container" src="https://cp.mystudio.io/m/?urlparams=8322874323/16404/89985//1766181600" allowfullscreen></iframe>
+      <button class="done-button" onclick="showSuppliesSelection()">DONE</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for Supplies Selection -->
+<div class="modal-overlay" id="suppliesModalOverlay">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Supplies Selection</h3>
+      <button class="modal-close" onclick="closeSuppliesModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <p>Would you like to bring your own supplies or get our unlimited oil paint package plus a free sketchbook and paintbrushes you get to keep?</p>
+      
+      <div class="supplies-options">
+        <div class="supplies-option" onclick="selectSuppliesOption('bring-own')">
+          <div class="supplies-option-icon">🎒</div>
+          <div class="supplies-option-details">
+            <div class="supplies-option-title">Bring Your Own Supplies</div>
+            <div class="supplies-option-description">Use your personal oil paints, brushes, and materials</div>
+          </div>
+        </div>
+        
+        <div class="supplies-option" onclick="selectSuppliesOption('unlimited-package')">
+          <div class="supplies-option-icon">🎨</div>
+          <div class="supplies-option-details">
+            <div class="supplies-option-title">Unlimited Oil Paint Package</div>
+            <div class="supplies-option-description">Get unlimited oil paint plus free sketchbook and paintbrushes to keep</div>
+          </div>
+        </div>
+      </div>
+      
+      <button class="continue-button" onclick="proceedWithSelection()">Continue</button>
+    </div>
+  </div>
+</div>
+
 <!-- Footer -->
 <footer>
   <div class="footer-inner">
@@ -739,15 +1054,15 @@
       <a href="classes.html">Classes</a>
       <a href="gallery.html">Gallery</a>
       <a href="instructors.html">Book Now</a>
-      <a href="about.html">Biography</a>
-      <a href="contact.html">Contact</a>
-    </div>
+      <li><a href="about.html">Biography</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
     <div class="footer-col">
       <h4>Services</h4>
-      <a href="contact.html">Private Events &amp; Classes</a>
-      <a href="contact.html">Special Party &amp; Meeting</a>
+      <a href="contact.html">Private Events & Classes</a>
+      <a href="contact.html">Special Party & Meeting</a>
       <a href="contact.html">Oil Painting Classes</a>
-      <a href="contact.html">Drawing &amp; Fine Art</a>
+      <a href="contact.html">Drawing & Fine Art</a>
       <a href="contact.html">Resin Art</a>
     </div>
     <div class="footer-col">
@@ -804,6 +1119,56 @@
       });
     }
   }
+
+  // Oil Painting Booking Functions
+  let selectedSuppliesOption = null;
+
+  function openOilPaintingBooking() {
+    document.getElementById('oilPaintingModalOverlay').style.display = 'flex';
+  }
+
+  function closeOilPaintingModal() {
+    document.getElementById('oilPaintingModalOverlay').style.display = 'none';
+  }
+
+  function showSuppliesSelection() {
+    document.getElementById('oilPaintingModalOverlay').style.display = 'none';
+    document.getElementById('suppliesModalOverlay').style.display = 'flex';
+  }
+
+  function closeSuppliesModal() {
+    document.getElementById('suppliesModalOverlay').style.display = 'none';
+  }
+
+  function selectSuppliesOption(option) {
+    // Deselect all options
+    document.querySelectorAll('.supplies-option').forEach(opt => {
+      opt.classList.remove('selected');
+    });
+    
+    // Select the clicked option
+    event.currentTarget.classList.add('selected');
+    selectedSuppliesOption = option;
+  }
+
+  function proceedWithSelection() {
+    if (!selectedSuppliesOption) {
+      alert('Please select an option');
+      return;
+    }
+    
+    if (selectedSuppliesOption === 'unlimited-package') {
+      // Open the iframe again for the unlimited package option
+      closeSuppliesModal();
+      document.getElementById('oilPaintingModalOverlay').style.display = 'flex';
+    } else {
+      // For bring your own supplies, just close the modal and return to classes.html
+      closeSuppliesModal();
+      // Optionally, you could show a confirmation message here
+      alert('Thanks for choosing to bring your own supplies! See you in class.');
+    }
+  }
+
   // Scroll reveal
   const revealItems = document.querySelectorAll('.class-card, .package-card, .info-box');
   if ('IntersectionObserver' in window) {
@@ -828,8 +1193,6 @@
       obs.observe(el);
     });
   }
-
 </script>
 </body>
 </html>
-
