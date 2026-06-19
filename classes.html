@@ -1158,8 +1158,10 @@
     }
     
     if (selectedSuppliesOption === 'unlimited-package') {
-      // Open the iframe again for the unlimited package option
+      // Open the iframe again for the unlimited package option with DIFFERENT URL
       closeSuppliesModal();
+      const iframe = document.querySelector('#oilPaintingModalOverlay .iframe-container');
+      iframe.src = 'https://cp.mystudio.io/m/?urlparams=8322874323/16404/93516//1777563253';
       document.getElementById('oilPaintingModalOverlay').style.display = 'flex';
     } else {
       // For bring your own supplies, just close the modal and return to classes.html
