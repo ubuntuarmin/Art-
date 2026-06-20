@@ -457,6 +457,12 @@
       font-family: Georgia, serif;
     }
 
+    .modal-header-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .modal-back,
     .modal-close {
       background: none;
       border: none;
@@ -472,6 +478,7 @@
       transition: all 0.25s;
     }
 
+    .modal-back:hover,
     .modal-close:hover {
       background: rgba(0,0,0,0.05);
       color: var(--terra);
@@ -487,7 +494,8 @@
       height: 100%;
       border: none;
       display: block;
-      min-height: 500px;
+      min-height: 70vh;
+      height: auto;
     }
 
     .done-button {
@@ -920,10 +928,10 @@
           <div class="schedule-time"><span class="day">Friday</span><span class="time">1:00 pm – 3:00 pm</span></div>
           <div class="spots-left">8 spots left</div>
         </div>
-        <div class="card-footer">
-          <div class="card-price">$45 <span>/ session</span></div>
-          <a href="instructors.html" class="btn-enrol">Book Now</a>
-        </div>
+      <div class="card-footer">
+        <div class="card-price">$45 <span>/ session</span></div>
+        <button class="btn-enrol" onclick="openDotMandalaBooking()">Book Now</button>
+      </div>
       </div>
     </div>
   </div>
@@ -951,10 +959,10 @@
         <div class="schedule-row">
           <div class="schedule-time"><span class="day">Mon - Fri</span><span class="time">9:00 am – 4:00 pm</span></div>
         </div>
-        <div class="card-footer">
-          <div class="card-price">$65 <span>/ day or $300 for 5 days</span></div>
-          <a href="instructors.html" class="btn-enrol">Book Now</a>
-        </div>
+      <div class="card-footer">
+        <div class="card-price">$65 <span>/ day or $300 for 5 days</span></div>
+        <button class="btn-enrol" onclick="openSummerCampBooking()">Book Now</button>
+      </div>
       </div>
     </div>
   </div>
@@ -971,7 +979,7 @@
         <div class="private-feat">Choose your own project — pottery, painting, or mixed</div>
         <div class="private-feat">Option to add refreshments package</div>
       </div>
-      <a href="instructors.html?class=event" class="btn-primary">Book a Private Event →</a>
+      <button class="btn-primary" onclick="openDateNightBooking()">Book a Private Event →</button>
     </div>
     <div class="private-packages">
       <div class="pkg-card">
@@ -999,12 +1007,15 @@
   <div class="modal-content">
     <div class="modal-header">
       <h3>Oil Painting Class</h3>
-      <button class="modal-close" onclick="closeOilPaintingModal()">&times;</button>
+      <div class="modal-header-buttons">
+        <button class="modal-back" onclick="closeOilPaintingModal()">&larr;</button>
+        <button class="modal-close" onclick="closeOilPaintingModal()">&times;</button>
+      </div>
     </div>
-    <div class="modal-body">
-      <iframe class="iframe-container" src="https://cp.mystudio.io/m/?urlparams=8322874323/16404/89985//1766181600" allowfullscreen></iframe>
-      <button class="done-button" onclick="showSuppliesSelection()">DONE</button>
-    </div>
+      <div class="modal-body">
+        <iframe class="iframe-container" src="https://cp.mystudio.io/m/?urlparams=8322874323/16404/89985//1766181600" allowfullscreen></iframe>
+        <button class="done-button" onclick="handleOilPaintingDone()">DONE</button>
+      </div>
   </div>
 </div>
 
@@ -1016,7 +1027,7 @@
       <button class="modal-close" onclick="closeSuppliesModal()">&times;</button>
     </div>
     <div class="modal-body">
-      <p>Would you like to bring your own supplies or get our unlimited oil paint package plus a free sketchbook and paintbrushes you get to keep?</p>
+      <p>Would you like to bring your own supplies or have us provide them for you?</p>
       
       <div class="supplies-options">
         <div class="supplies-option" onclick="selectSuppliesOption('bring-own')">
@@ -1030,8 +1041,8 @@
         <div class="supplies-option" onclick="selectSuppliesOption('unlimited-package')">
           <div class="supplies-option-icon">🎨</div>
           <div class="supplies-option-details">
-            <div class="supplies-option-title">Unlimited Oil Paint Package</div>
-            <div class="supplies-option-description">Get unlimited oil paint plus free sketchbook and paintbrushes to keep</div>
+            <div class="supplies-option-title">Studio supply program</div>
+            <div class="supplies-option-description">Get everything you need for oil painting plus free sketchbook and paintbrushes to keep</div>
           </div>
         </div>
       </div>
@@ -1122,8 +1133,10 @@
 
   // Oil Painting Booking Functions
   let selectedSuppliesOption = null;
+  let isUnlimitedPackageView = false;
 
   function openOilPaintingBooking() {
+    isUnlimitedPackageView = false;
     document.getElementById('oilPaintingModalOverlay').style.display = 'flex';
   }
 
@@ -1158,8 +1171,9 @@
     }
     
     if (selectedSuppliesOption === 'unlimited-package') {
-      // Open the iframe again for the unlimited package option with DIFFERENT URL
+      // Open the iframe again for the unlimited package option
       closeSuppliesModal();
+      isUnlimitedPackageView = true;
       const iframe = document.querySelector('#oilPaintingModalOverlay .iframe-container');
       iframe.src = 'https://cp.mystudio.io/m/?urlparams=8322874323/16404/93516//1777563253';
       document.getElementById('oilPaintingModalOverlay').style.display = 'flex';
@@ -1168,6 +1182,108 @@
       closeSuppliesModal();
       // Optionally, you could show a confirmation message here
       alert('Thanks for choosing to bring your own supplies! See you in class.');
+    }
+  }
+
+  // Dot Mandala Booking Functions
+  function openDotMandalaBooking() {
+    // Create modal overlay if it doesn't exist
+    if (!document.getElementById('dotMandalaModalOverlay')) {
+      const modalOverlay = document.createElement('div');
+      modalOverlay.className = 'modal-overlay';
+      modalOverlay.id = 'dotMandalaModalOverlay';
+      modalOverlay.innerHTML = `
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>Dot Mandala Class</h3>
+            <div class="modal-header-buttons">
+              <button class="modal-back" onclick="closeDotMandalaModal()">&larr;</button>
+              <button class="modal-close" onclick="closeDotMandalaModal()">&times;</button>
+            </div>
+          </div>
+          <div class="modal-body">
+            <iframe class="iframe-container" src="https://cp.mystudio.io/m/?urlparams=8322874323/16404/89985//1766181600" allowfullscreen></iframe>
+            <button class="done-button" onclick="closeDotMandalaModal()">DONE</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modalOverlay);
+    }
+    document.getElementById('dotMandalaModalOverlay').style.display = 'flex';
+  }
+
+  function closeDotMandalaModal() {
+    const modal = document.getElementById('dotMandalaModalOverlay');
+    if (modal) {
+      modal.style.display = 'none';
+    }
+  }
+
+  // Summer Camp Booking Functions
+  function openSummerCampBooking() {
+    // Create modal overlay if it doesn't exist
+    if (!document.getElementById('summerCampModalOverlay')) {
+      const modalOverlay = document.createElement('div');
+      modalOverlay.className = 'modal-overlay';
+      modalOverlay.id = 'summerCampModalOverlay';
+      modalOverlay.innerHTML = `
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>Summer Camp</h3>
+            <div class="modal-header-buttons">
+              <button class="modal-back" onclick="closeSummerCampModal()">&larr;</button>
+              <button class="modal-close" onclick="closeSummerCampModal()">&times;</button>
+            </div>
+          </div>
+          <div class="modal-body">
+            <iframe class="iframe-container" src="https://cp.mystudio.io/m/?urlparams=8322874323/16404/89985//1766181600" allowfullscreen></iframe>
+            <button class="done-button" onclick="closeSummerCampModal()">DONE</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modalOverlay);
+    }
+    document.getElementById('summerCampModalOverlay').style.display = 'flex';
+  }
+
+  function closeSummerCampModal() {
+    const modal = document.getElementById('summerCampModalOverlay');
+    if (modal) {
+      modal.style.display = 'none';
+    }
+  }
+
+  // Date Night Booking Functions
+  function openDateNightBooking() {
+    // Create modal overlay if it doesn't exist
+    if (!document.getElementById('dateNightModalOverlay')) {
+      const modalOverlay = document.createElement('div');
+      modalOverlay.className = 'modal-overlay';
+      modalOverlay.id = 'dateNightModalOverlay';
+      modalOverlay.innerHTML = `
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>Date Night Private Event</h3>
+            <div class="modal-header-buttons">
+              <button class="modal-back" onclick="closeDateNightModal()">&larr;</button>
+              <button class="modal-close" onclick="closeDateNightModal()">&times;</button>
+            </div>
+          </div>
+          <div class="modal-body">
+            <iframe class="iframe-container" src="https://cp.mystudio.io/m/?urlparams=8322874323/16404/89985//1766181600" allowfullscreen></iframe>
+            <button class="done-button" onclick="closeDateNightModal()">DONE</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modalOverlay);
+    }
+    document.getElementById('dateNightModalOverlay').style.display = 'flex';
+  }
+
+  function closeDateNightModal() {
+    const modal = document.getElementById('dateNightModalOverlay');
+    if (modal) {
+      modal.style.display = 'none';
     }
   }
 
@@ -1194,6 +1310,17 @@
       el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
       obs.observe(el);
     });
+  }
+
+  function handleOilPaintingDone() {
+    if (isUnlimitedPackageView) {
+      // If we just finished viewing the unlimited package iframe, return to classes.html
+      closeOilPaintingModal();
+      isUnlimitedPackageView = false;
+    } else {
+      // Otherwise, show the supplies selection
+      showSuppliesSelection();
+    }
   }
 </script>
 </body>
