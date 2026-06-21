@@ -60,7 +60,7 @@
       font-size: 0.5rem; font-weight: 700; color: var(--terra);
       background: rgba(196,98,45,0.1); letter-spacing: 0.5px; text-align: center; line-height: 1.3;
     }
-
+    
     .logo-name { font-size: 1.25rem; font-weight: 700; color: var(--white); letter-spacing: 0.5px; font-family: Georgia, serif; }
     .logo-name span { color: var(--terra); }
     .logo-tagline { font-size: 0.62rem; color: var(--gold); letter-spacing: 2.5px; text-transform: uppercase; margin-top: 1px; }
@@ -435,7 +435,7 @@
     .modal-content {
       background: var(--white);
       border-radius: 20px;
-      max-width: 90%;
+      max-width: 95%; /* Increased from 90% to 95% for wider modal */
       max-height: 90vh;
       overflow: hidden;
       position: relative;
@@ -487,15 +487,19 @@
     .modal-body {
       padding: 0;
       position: relative;
+      display: flex;
+      flex-direction: column;
+      height: 100%; /* Ensure modal-body takes full height */
     }
 
     .iframe-container {
       width: 100%;
-      height: 100%;
       border: none;
       display: block;
-      min-height: 80vh;
-      height: 100%;
+      flex: 1 1 auto; /* Allow iframe to grow and take available space */
+      min-height: 0; /* Allow shrinking */
+      /* Set a reasonable height for the iframe */
+      height: 70vh; /* Fixed height for the iframe, adjust as needed */
     }
 
     .done-button {
@@ -616,7 +620,7 @@
       }
       
       .iframe-container {
-        min-height: 60vh;
+        height: 50vh; /* Reduced height for tablets */
       }
       
       .done-button,
@@ -661,7 +665,7 @@
       }
       
       .iframe-container {
-        min-height: 70vh;
+        height: 50vh; /* Further reduced for mobile */
       }
       
       .done-button,
@@ -1013,10 +1017,10 @@
         <button class="modal-close" onclick="closeOilPaintingModal()">&times;</button>
       </div>
     </div>
-      <div class="modal-body">
-        <iframe class="iframe-container" src="https://cp.mystudio.io/m/?urlparams=8322874323/16404/89985//1766181600" allowfullscreen></iframe>
-        <button class="done-button" onclick="handleOilPaintingDone()">DONE</button>
-      </div>
+    <div class="modal-body">
+      <iframe class="iframe-container" src="https://cp.mystudio.io/m/?urlparams=8322874323/16404/89985//1766181600" allowfullscreen></iframe>
+      <button class="done-button" onclick="handleOilPaintingDone()">DONE</button>
+    </div>
   </div>
 </div>
 
