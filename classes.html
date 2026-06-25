@@ -418,6 +418,30 @@
     .social-link { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; text-decoration: none; transition: all 0.3s; }
     .social-link:hover { background: var(--terra); border-color: var(--terra); transform: translateY(-2px); }
 
+    .signature-image {
+      width: 257px; /* Default size */
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .signature-image img {
+      max-width: 100%; /* Ensure it\'s responsive */
+      height: auto;
+    }
+
+    /* Responsive adjustments for smaller screens */
+    @media (max-width: 768px) {
+      .signature-image {
+        width: 200px; /* Smaller size for tablets */
+      }
+    }
+
+    @media (max-width: 480px) {
+      .signature-image {
+        width: 150px; /* Even smaller for mobile */
+      }
+    }
+
     /* Enhanced Modal styles for the new functionality */
     .modal-overlay {
       position: fixed;
@@ -960,7 +984,7 @@
         <div class="private-feat">Choose your own project — pottery, painting, or mixed</div>
         <div class="private-feat">Option to add refreshments package</div>
       </div>
-      <button class="btn-primary" onclick="location.href=\'contact.html\'">Contact for Private Events →</button>
+      <button class="btn-primary" onclick="location.href='contact.html'">Contact for Private Events →</button>
     </div>
     <div class="private-packages">
       <div class="pkg-card">
@@ -1047,8 +1071,12 @@
       <a href="gallery.html">Gallery</a>
       <a href="instructors.html">Book Now</a>
       <li><a href="about.html">Biography</a></li>
+      <li><a href="about.html">Biography</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
+    <div class="signature-image">
+      <img src="images/signature (1).svg" alt="Farnaz Amin Signature" class="signature-img">
+    </div>
     <div class="footer-col">
       <h4>Services</h4>
       <a href="contact.html">Private Events & Classes</a>
@@ -1071,6 +1099,9 @@
       <a class="social-link" href="#" aria-label="Instagram">📸</a>
       <a class="social-link" href="#" aria-label="Facebook">📘</a>
       <a class="social-link" href="#" aria-label="Pinterest">📌</a>
+    </div>
+    <div class="signature-image">
+      <img src="images/signature (1).svg" alt="Farnaz Amin Signature" class="signature-img">
     </div>
   </div>
 </footer>

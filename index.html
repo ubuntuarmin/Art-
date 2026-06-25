@@ -1228,6 +1228,30 @@
 
     .social-link:hover { background: var(--terra); border-color: var(--terra); transform: translateY(-3px); }
 
+    .signature-image {
+      width: 257px; /* Default size */
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .signature-image img {
+      max-width: 100%; /* Ensure it's responsive */
+      height: auto;
+    }
+
+    /* Responsive adjustments for smaller screens */
+    @media (max-width: 768px) {
+      .signature-image {
+        width: 200px; /* Smaller size for tablets */
+      }
+    }
+
+    @media (max-width: 480px) {
+      .signature-image {
+        width: 150px; /* Even smaller for mobile */
+      }
+    }
+
     /* ── REVEAL ── */
     .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.75s ease, transform 0.75s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -1871,6 +1895,9 @@
       <a class="social-link" href="#" aria-label="Instagram">📸</a>
       <a class="social-link" href="#" aria-label="Facebook">📘</a>
       <a class="social-link" href="#" aria-label="Pinterest">📌</a>
+    </div>
+    <div class="signature-image">
+      <img src="images/signature (1).svg" alt="Farnaz Amin Signature" class="signature-img">
     </div>
   </div>
 </footer>
