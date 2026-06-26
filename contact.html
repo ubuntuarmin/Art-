@@ -7,6 +7,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function() {
+      // Initialized with your unique Public Key
+      emailjs.init({
+        publicKey: "gilnu2Kn8Z2iWJGqN", 
+      });
+    })();
+  </script>
+
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -388,7 +399,6 @@
   </div>
 </nav>
 
-<!-- Mobile overlay -->
 <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMenu()"></div>
 <div class="mobile-menu" id="mobileMenu">
   <button class="close-btn" onclick="toggleMenu()" aria-label="Close menu">✕</button>
@@ -400,7 +410,6 @@
   <a href="contact.html" class="active">Contact</a>
 </div>
 
-<!-- Page Hero -->
 <div class="page-hero">
   <div class="page-hero-inner">
     <div class="page-label">Get in Touch</div>
@@ -409,10 +418,8 @@
   </div>
 </div>
 
-<!-- Contact + Info -->
 <div class="contact-main">
 
-  <!-- Form -->
   <div class="form-section">
     <div class="form-title">Send Us a Message</div>
     <p class="form-subtitle">Fill in the form and we'll be in touch within one business day.</p>
@@ -476,7 +483,6 @@
     </div>
   </div>
 
-  <!-- Sidebar -->
   <div class="info-sidebar">
 
     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3464.1331454260744!2d-95.79674142283804!3d29.744859575075896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864121c24c2a2fcf%3A0x1e35f79d7cc547ff!2sBeyond%20The%20Canvas%20Art%20studio%20%26%20Gallery!5e0!3m2!1sen!2sus!4v1782492391087!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
@@ -529,7 +535,6 @@
   </div>
 </div>
 
-<!-- FAQ -->
 <div class="faq-section">
   <div class="faq-title">Frequently Asked Questions</div>
   <p class="faq-sub">Everything you need to know before your first session.</p>
@@ -619,7 +624,6 @@
   </div>
 </div>
 
-<!-- Footer -->
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
@@ -637,10 +641,10 @@
     </div>
     <div class="footer-col">
       <h4>Services</h4>
-      <a href="contact.html">Private Events &amp; Classes</a>
-      <a href="contact.html">Special Party &amp; Meeting</a>
+      <a href="contact.html">Private Events & Classes</a>
+      <a href="contact.html">Special Party & Meeting</a>
       <a href="contact.html">Oil Painting Classes</a>
-      <a href="contact.html">Drawing &amp; Fine Art</a>
+      <a href="contact.html">Drawing & Fine Art</a>
       <a href="contact.html">Resin Art</a>
     </div>
     <div class="footer-col">
@@ -652,7 +656,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <p>Copyright &copy; 2025 Beyond the Canvas Art Studio — Farnaz Amin. All rights reserved.</p>
+    <p>Copyright © 2025 Beyond the Canvas Art Studio — Farnaz Amin. All rights reserved.</p>
     <div class="social-links">
       <a class="social-link" href="#" aria-label="Instagram">📸</a>
       <a class="social-link" href="#" aria-label="Facebook">📘</a>
@@ -668,20 +672,46 @@
     document.querySelector('.hamburger').classList.toggle('open');
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    const form = document.getElementById('contactForm');
-    const msg  = document.getElementById('successMsg');
-    form.style.display = 'none';
-    msg.classList.add('show');
-    window.scrollTo({ top: document.querySelector('.form-section').offsetTop - 100, behavior: 'smooth' });
-  }
-
   function toggleFaq(btn) {
     const item = btn.closest('.faq-item');
     const isOpen = item.classList.contains('open');
     document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
     if (!isOpen) item.classList.add('open');
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    
+    // Mapping form data directly from the existing HTML inputs to your EmailJS parameters
+    var templateParams = {
+      first_name: document.getElementById('fname').value,
+      last_name: document.getElementById('lname').value,
+      email: document.getElementById('email').value,
+      phone: document.getElementById('phone').value || "None",
+      class: document.getElementById('interest').value,
+      level: document.getElementById('level').value,
+      days: document.getElementById('preferredDays').value,
+      message: document.getElementById('message').value || "No message",
+      promo: document.getElementById('newsletter').checked ? "Yes" : "No"
+    };
+
+    // Firing payload straight to your connected T-Mobile gateway
+    emailjs.send('service_jy22rsc', 'template_15ex3jn', templateParams)
+      .then(function(response) {
+         // Your original script's alert
+         alert('Enquiry sent straight to phone text!');
+         
+         // Trigger existing visual success styling from the site
+         const form = document.getElementById('contactForm');
+         const msg  = document.getElementById('successMsg');
+         form.style.display = 'none';
+         msg.classList.add('show');
+         window.scrollTo({ top: document.querySelector('.form-section').offsetTop - 100, behavior: 'smooth' });
+         
+         form.reset();
+      }, function(error) {
+         alert('Failed to send payload: ' + JSON.stringify(error));
+      });
   }
 </script>
 </body>
