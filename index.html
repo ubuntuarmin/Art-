@@ -560,6 +560,425 @@
 
     .section-desc { font-size: 1.02rem; color: var(--text-muted); max-width: 560px; margin: 16px auto 0; line-height: 1.8; }
 
+    /* ── HOME STORY SECTIONS ── */
+    .story-section {
+      padding: 118px 24px;
+      background: var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .story-section::before {
+      content: '';
+      position: absolute;
+      width: 460px;
+      height: 460px;
+      border-radius: 50%;
+      top: -140px;
+      right: -140px;
+      background: radial-gradient(circle, rgba(196,98,45,0.1), transparent 68%);
+      pointer-events: none;
+    }
+
+    .story-section.alt {
+      background: linear-gradient(180deg, var(--cream2) 0%, #eee6da 100%);
+    }
+
+    .story-section.alt::before {
+      background: radial-gradient(circle, rgba(122,158,126,0.12), transparent 68%);
+      left: -140px;
+      right: auto;
+    }
+
+    .story-layout {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 56px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .story-content .section-title { margin-bottom: 10px; }
+
+    .story-content p {
+      font-size: 0.98rem;
+      color: var(--text-mid);
+      line-height: 1.85;
+      margin-top: 14px;
+    }
+
+    .story-points {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 14px;
+      list-style: none;
+    }
+
+    .story-points li {
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(196,98,45,0.16);
+      border-radius: 10px;
+      padding: 10px 12px;
+    }
+
+    .story-kpis {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .story-kpi {
+      background: rgba(255,255,255,0.75);
+      border: 1px solid rgba(196,98,45,0.2);
+      border-radius: 12px;
+      padding: 14px 12px;
+      text-align: center;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.06);
+    }
+
+    .story-kpi strong {
+      display: block;
+      font-size: 1.3rem;
+      color: var(--terra);
+      font-family: Georgia, serif;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .story-kpi span {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+
+    .story-image-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .story-image-card {
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 14px 34px rgba(0,0,0,0.14);
+      background: var(--white);
+      border: 1px solid rgba(196,98,45,0.15);
+      position: relative;
+    }
+
+    .story-image-card img {
+      width: 100%;
+      height: 100%;
+      max-height: 360px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.45s ease;
+    }
+
+    .story-image-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(28,28,28,0.22), transparent 46%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .story-image-card:hover::after { opacity: 1; }
+    .story-image-card:hover img { transform: scale(1.05); }
+
+    .story-caption {
+      position: absolute;
+      left: 12px;
+      bottom: 10px;
+      z-index: 2;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.95);
+    }
+
+    .learn-section .story-layout {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .learn-main-image {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(196,98,45,0.18);
+      box-shadow: 0 14px 36px rgba(0,0,0,0.12);
+    }
+
+    .learn-main-image img {
+      width: 100%;
+      height: 100%;
+      min-height: 380px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .learn-main-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(28,28,28,0.25), transparent 52%);
+      pointer-events: none;
+    }
+
+    .class-cards {
+      max-width: 1200px;
+      margin: 48px auto 0;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .class-card {
+      background: var(--white);
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(196,98,45,0.14);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+      opacity: 0;
+      transform: translateX(-56px);
+      transition: opacity 0.65s ease, transform 0.65s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .class-card:nth-child(even) {
+      transform: translateX(56px);
+    }
+
+    .class-card.is-visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .class-card:hover {
+      box-shadow: 0 16px 36px rgba(0,0,0,0.12);
+      border-color: rgba(196,98,45,0.35);
+    }
+
+    .class-card-media {
+      position: relative;
+      height: 178px;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(196,98,45,0.12);
+    }
+
+    .class-card-media::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(28,28,28,0.42) 0%, rgba(28,28,28,0.02) 58%);
+    }
+
+    .class-card-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.45s ease;
+    }
+
+    .class-card:hover .class-card-media img { transform: scale(1.06); }
+
+    .class-card-chip {
+      position: absolute;
+      left: 12px;
+      bottom: 12px;
+      z-index: 1;
+      background: rgba(196,98,45,0.9);
+      color: var(--white);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 1.1px;
+      text-transform: uppercase;
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+
+    .class-card-body {
+      padding: 20px 18px 22px;
+    }
+
+    .class-card h3 {
+      font-size: 1.05rem;
+      color: var(--text-dark);
+      font-family: Georgia, serif;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .class-card p {
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      line-height: 1.7;
+    }
+
+    .class-card-tag {
+      display: inline-block;
+      margin-top: 14px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--terra);
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+    }
+
+    .bio-layout {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 56px;
+    }
+
+    .bio-image-wrap {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(196,98,45,0.2);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.12);
+      background: var(--white);
+    }
+
+    .bio-image-wrap img {
+      width: 100%;
+      max-height: 620px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .gallery-scroll-section {
+      padding: 110px 24px 80px;
+      background: var(--cream2);
+    }
+
+    .gallery-scroll-stage {
+      height: 190vh;
+      position: relative;
+      margin-top: 26px;
+    }
+
+    .gallery-scroll-sticky {
+      position: sticky;
+      top: 80px;
+      height: calc(100vh - 110px);
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .gallery-scroll-track {
+      display: flex;
+      gap: 16px;
+      will-change: transform;
+      transform: translate3d(0,0,0);
+    }
+
+    .gallery-scroll-item {
+      flex: 0 0 min(70vw, 430px);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 14px 34px rgba(0,0,0,0.12);
+      border: 1px solid rgba(196,98,45,0.16);
+      background: var(--white);
+      position: relative;
+      transform: scale(0.96);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .gallery-scroll-item img {
+      width: 100%;
+      height: clamp(280px, 56vh, 460px);
+      object-fit: cover;
+      display: block;
+    }
+
+    .gallery-scroll-item:nth-child(odd) { transform: scale(0.98) translateY(-8px); }
+    .gallery-scroll-item:hover { transform: scale(1); box-shadow: 0 20px 48px rgba(0,0,0,0.2); }
+
+    .gallery-scroll-cta {
+      text-align: center;
+      margin-top: 26px;
+      opacity: 0;
+      transform: translateY(18px);
+      pointer-events: none;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .gallery-scroll-cta.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .mini-testimonials {
+      padding: 94px 24px;
+      background: var(--cream);
+    }
+
+    .mini-testimonials-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .mini-testimonial-card {
+      background: var(--white);
+      border: 1px solid rgba(196,98,45,0.14);
+      border-radius: 14px;
+      padding: 24px 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    }
+
+    .mini-testimonial-card p {
+      font-size: 0.92rem;
+      color: var(--text-mid);
+      line-height: 1.75;
+      margin-bottom: 14px;
+      font-style: italic;
+    }
+
+    .mini-testimonial-card strong {
+      font-size: 0.82rem;
+      color: var(--terra);
+      letter-spacing: 1.1px;
+      text-transform: uppercase;
+    }
+
+    .start-journey-section {
+      padding: 100px 24px;
+      background: linear-gradient(135deg, var(--terra-dark) 0%, var(--terra) 45%, #B8582A 100%);
+      text-align: center;
+    }
+
+    .start-journey-title {
+      color: var(--white);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-family: Georgia, serif;
+      margin-bottom: 34px;
+    }
+
+    .start-journey-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
     /* ── ABOUT STUDIO SECTION ── */
     .about-studio-section { padding: 110px 24px; background: var(--cream); }
 
@@ -1257,6 +1676,12 @@
       .hero-stats { justify-content: center; }
       .hero-desc { margin: 0 auto 40px; }
       .hero-visual { order: -1; }
+      .story-layout { grid-template-columns: 1fr; gap: 34px; }
+      .story-points { grid-template-columns: 1fr 1fr; }
+      .story-kpis { grid-template-columns: 1fr 1fr 1fr; }
+      .bio-layout { grid-template-columns: 1fr; gap: 34px; }
+      .class-cards { grid-template-columns: repeat(2, 1fr); }
+      .mini-testimonials-grid { grid-template-columns: 1fr 1fr; }
       .farnaz-inner { grid-template-columns: 1fr; gap: 48px; }
       .farnaz-content .section-head { text-align: center; }
       .about-studio-inner { grid-template-columns: 1fr; gap: 48px; }
@@ -1282,6 +1707,20 @@
       .hero-buttons a { min-height: 48px; padding: 14px 24px; font-size: 0.95rem; }
       .hero-stats { flex-wrap: wrap; gap: 20px; }
       .stat-num { font-size: 1.6rem; }
+      .story-section { padding: 90px 18px; }
+      .story-image-grid { grid-template-columns: 1fr; }
+      .story-points { grid-template-columns: 1fr; }
+      .story-kpis { grid-template-columns: 1fr 1fr; }
+      .class-cards { grid-template-columns: 1fr; gap: 14px; margin-top: 30px; }
+      .class-card-media { height: 210px; }
+      .mini-testimonials { padding: 80px 18px; }
+      .mini-testimonials-grid { grid-template-columns: 1fr; }
+      .gallery-scroll-stage { height: auto; }
+      .gallery-scroll-sticky { position: relative; top: auto; height: auto; overflow-x: auto; padding-bottom: 8px; }
+      .gallery-scroll-track { transform: none !important; }
+      .gallery-scroll-item { flex: 0 0 min(84vw, 340px); }
+      .gallery-scroll-item img { height: 300px; }
+      .gallery-scroll-cta { opacity: 1; transform: none; pointer-events: auto; }
       .services-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
       .service-card { padding: 24px 20px; }
       .testimonials-grid { grid-template-columns: 1fr; }
@@ -1301,6 +1740,10 @@
       .hero-title { font-size: clamp(1.8rem, 9vw, 2.6rem); }
       .services-grid { grid-template-columns: 1fr; gap: 14px; }
       .service-card { padding: 22px 18px; }
+      .story-kpis { grid-template-columns: 1fr; }
+      .class-card-media { height: 190px; }
+      .start-journey-buttons { flex-direction: column; align-items: stretch; max-width: 320px; margin: 0 auto; }
+      .start-journey-buttons a { width: 100%; justify-content: center; }
       .gallery-mosaic { grid-template-columns: 1fr 1fr; gap: 6px; }
       .hero-stats { gap: 16px; }
       .hero-buttons { flex-direction: column; align-items: stretch; width: 100%; }
@@ -1331,6 +1774,9 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
       .reveal { opacity: 1; transform: none; }
+      .class-card { opacity: 1; transform: none; }
+      .gallery-scroll-track { transform: none !important; }
+      .gallery-scroll-cta { opacity: 1; transform: none; pointer-events: auto; }
     }
   </style>
 </head>
@@ -1503,344 +1949,218 @@
   </div>
 </div>
 
-<!-- About Studio -->
-<section class="about-studio-section">
-  <div class="about-studio-inner">
-    <div class="about-studio-visual reveal">
-      <div class="about-canvas-frame" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;border:2px dashed rgba(196,98,45,0.35);background:rgba(196,98,45,0.04);">
-        <span style="font-size:3rem;opacity:0.35;">📷</span>
-        <span style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:rgba(196,98,45,0.6);">Add studio / Farnaz photo here</span>
-        <span style="font-size:0.65rem;color:rgba(0,0,0,0.3);">Recommended: 600×500px</span>
-      </div>
-      <div class="about-accent-badge">
-        <span class="badge-num">25+</span>
-        <span class="badge-lbl">Years of Teaching</span>
+<!-- Inspiring artists of every age -->
+<section class="story-section">
+  <div class="story-layout">
+    <div class="story-content reveal">
+      <div class="section-label">Our Community</div>
+      <h2 class="section-title">Inspiring artists of every age</h2>
+      <p>Beyond the Canvas is open to everyone. We warmly welcome students of all ages and every skill level, from first-time beginners to experienced creatives returning to deepen their craft.</p>
+      <p>In each class, students are supported at their own pace in a friendly, encouraging studio environment where curiosity, confidence, and creativity can grow together.</p>
+      <ul class="story-points">
+        <li>Beginner-friendly guidance from day one</li>
+        <li>Advanced coaching for experienced artists</li>
+        <li>Small-group attention and personal feedback</li>
+        <li>Flexible programs for youth, teens, and adults</li>
+      </ul>
+      <div class="story-kpis">
+        <div class="story-kpi"><strong>All</strong><span>Ages Welcome</span></div>
+        <div class="story-kpi"><strong>25+</strong><span>Years Teaching</span></div>
+        <div class="story-kpi"><strong>100s</strong><span>Student Projects</span></div>
       </div>
     </div>
-    <div class="about-studio-content reveal">
-      <div class="section-label">Beyond the Canvas Art Studio</div>
-      <h2 class="about-studio-title">Beyond the Canvas<br>Art Studio by Farnaz</h2>
-      <p class="about-studio-subtitle">A creative space for all ages to explore and grow through Art.</p>
-      <p class="about-studio-desc">From oil painting and drawing to crafts, resin, and fine Art, we offer inspiring classes and hands-on art camps. Celebrate with us! We host unforgettable birthday parties, private events, and creative gatherings for both kids and adults.</p>
-      <p class="about-studio-desc">Let your creativity flow one brushstroke at a time.</p>
-      <a href="gallery.html" class="btn-primary" style="margin-top:8px;">View Portfolio →</a>
+    <div class="story-image-grid reveal">
+      <div class="story-image-card">
+        <img src="images/index/old_guy.webp" alt="Adult student painting in class">
+        <span class="story-caption">Adult Artist</span>
+      </div>
+      <div class="story-image-card">
+        <img src="images/index/young_man.webp" alt="Young student practicing painting techniques">
+        <span class="story-caption">Young Artist</span>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- Services -->
-<section class="services-section">
+<!-- Learn something New every class -->
+<section class="story-section alt learn-section">
+  <div class="story-layout">
+    <div class="learn-main-image reveal">
+      <img src="images/index/girl_young.webp" alt="Student focused on painting details">
+    </div>
+    <div class="story-content reveal">
+      <div class="section-label">Class Experience</div>
+      <h2 class="section-title">Learn something New every class</h2>
+      <p>At Beyond the Canvas, students train with a high level of detail and advanced techniques that build true artistic mastery. Every session is designed to move your skills forward with clear guidance and meaningful practice.</p>
+      <p>From composition and color harmony to confident brushwork and finishing methods, each class combines technical depth with practical studio habits that artists can apply immediately.</p>
+      <ul class="story-points">
+        <li>Structured lessons with real studio outcomes</li>
+        <li>Technique breakdowns and step clarity</li>
+        <li>Live demos, critique, and refinement</li>
+        <li>Mastery-focused progression across levels</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="class-cards">
+    <article class="class-card">
+      <div class="class-card-media">
+        <img src="images/Index_Icons/paint.webp" alt="Oil painting and drawing class">
+        <span class="class-card-chip">Studio Core</span>
+      </div>
+      <div class="class-card-body">
+        <h3>Oil Painting &amp; Drawing</h3>
+        <p>Develop strong foundations in line, proportion, shading, layering, and color control with structured, technique-focused instruction.</p>
+        <span class="class-card-tag">Foundational + Advanced</span>
+      </div>
+    </article>
+    <article class="class-card">
+      <div class="class-card-media">
+        <img src="images/Index_Icons/class.webp" alt="Watercolor and acrylic class type">
+        <span class="class-card-chip">Technique Lab</span>
+      </div>
+      <div class="class-card-body">
+        <h3>Watercolor &amp; Acrylic</h3>
+        <p>Learn brush control, composition, value, and blending to produce polished work while strengthening your personal visual language.</p>
+        <span class="class-card-tag">Skill Development</span>
+      </div>
+    </article>
+    <article class="class-card">
+      <div class="class-card-media">
+        <img src="images/Index_Icons/resin.webp" alt="Resin and mixed media workshop">
+        <span class="class-card-chip">Modern Media</span>
+      </div>
+      <div class="class-card-body">
+        <h3>Resin &amp; Mixed Media</h3>
+        <p>Explore modern processes and material techniques to create expressive pieces that combine depth, texture, and bold experimentation.</p>
+        <span class="class-card-tag">Creative Techniques</span>
+      </div>
+    </article>
+    <article class="class-card">
+      <div class="class-card-media">
+        <img src="images/Index_Icons/party.webp" alt="Private coaching and custom class sessions">
+        <span class="class-card-chip">1:1 Focus</span>
+      </div>
+      <div class="class-card-body">
+        <h3>Private Coaching</h3>
+        <p>Receive personalized direction, critique, and growth plans tailored to your goals, pace, and artistic strengths.</p>
+        <span class="class-card-tag">Personalized Learning</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- Let your creativity Soar -->
+<section class="story-section">
+  <div class="story-layout">
+    <div class="story-content reveal">
+      <div class="section-label">Personalized Growth</div>
+      <h2 class="section-title">Let your creativity Soar</h2>
+      <p>Each class is tailored to the individual student. You are guided with intention, then encouraged to push BEYOND step-by-step instruction so your own ideas, style, and artistic voice can fully thrive.</p>
+      <p>That balance of structure and freedom gives artists the room they need to grow with confidence and originality.</p>
+      <ul class="story-points">
+        <li>Personalized class pathways for your goals</li>
+        <li>Room to explore your own visual direction</li>
+        <li>Thoughtful critique that builds confidence</li>
+        <li>Creative freedom with expert mentorship</li>
+      </ul>
+    </div>
+    <div class="story-image-grid reveal">
+      <div class="story-image-card">
+        <img src="images/index/4.1.2.webp" alt="Student artwork and studio process">
+        <span class="story-caption">Technique in Practice</span>
+      </div>
+      <div class="story-image-card">
+        <img src="images/index/teen_1.webp" alt="Teen student creating artwork">
+        <span class="story-caption">Creative Confidence</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- The person behind all of it -->
+<section class="story-section alt">
+  <div class="bio-layout">
+    <div class="bio-image-wrap reveal">
+      <img src="images/index/farnaz.webp" alt="Portrait of Farnaz Amin">
+    </div>
+    <div class="story-content reveal">
+      <div class="section-label">Artist &amp; Mentor</div>
+      <h2 class="section-title">The person behind all of it</h2>
+      <p>Meet Farnaz Amin, a passionate, kind, and experienced artist.</p>
+      <p>With years of exhibition, teaching, and mentorship experience, Farnaz has helped students discover not just technique, but a creative identity that lasts beyond the classroom.</p>
+      <ul class="story-points">
+        <li>Award-winning artist and instructor</li>
+        <li>Warm, encouraging teaching approach</li>
+        <li>High standards with personal support</li>
+        <li>Dedicated to lifelong creative growth</li>
+      </ul>
+      <div style="margin-top:26px;">
+        <a href="about.html" class="btn-primary">Learn more</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Interactive Gallery Preview -->
+<section class="gallery-scroll-section" id="galleryScrollSection">
   <div class="section-inner">
     <div class="section-head reveal">
-      <div class="section-label">What We Offer</div>
-      <h2 class="section-title">Our <span class="accent">Services</span></h2>
-      <p class="section-desc">At Beyond the Canvas Art Studio &amp; Gallery, we offer a wide range of creative experiences for all ages.</p>
+      <div class="section-label">Gallery Preview</div>
+      <h2 class="section-title">A moving look at recent work</h2>
+      <p class="section-desc">Scroll down to explore featured pieces from the Beyond the Canvas gallery. This cinematic preview highlights texture, color, and artistic range across our latest student and studio works.</p>
     </div>
 
-    <div class="services-grid">
-      <div class="service-card reveal reveal-delay-1">
-        <div class="service-visual"><img src="images/Index_Icons/class.webp" alt="Classes Icon" style="width: 100%; height: 100%; object-fit: cover;"></div>
-        <div class="service-info">
-          <div class="service-name">Private Events &amp; Classes</div>
-          <p class="service-desc">At Beyond the Canvas Art Studio &amp; Gallery, we offer private events and personalized Art sessions designed for all occasions.</p>
-          <button class="learn-more-btn" onclick="openModal('modal-events')">Learn More</button>
+    <div class="gallery-scroll-stage">
+      <div class="gallery-scroll-sticky">
+        <div class="gallery-scroll-track" id="galleryScrollTrack">
+          <figure class="gallery-scroll-item"><img src="images/gallery/5.4.webp" alt="Gallery artwork preview 1"></figure>
+          <figure class="gallery-scroll-item"><img src="images/gallery/5.5.webp" alt="Gallery artwork preview 2"></figure>
+          <figure class="gallery-scroll-item"><img src="images/gallery/new1.webp" alt="Gallery artwork preview 3"></figure>
+          <figure class="gallery-scroll-item"><img src="images/gallery/new3.webp" alt="Gallery artwork preview 4"></figure>
+          <figure class="gallery-scroll-item"><img src="images/gallery/5.7.webp" alt="Gallery artwork preview 5"></figure>
         </div>
       </div>
+    </div>
 
-      <div class="service-card reveal reveal-delay-2">
-        <div class="service-visual"><img src="images/Index_Icons/party.webp" alt="Party Icon" style="width: 100%; height: 100%; object-fit: cover;"></div>
-        <div class="service-info">
-          <div class="service-name">Special Party &amp; Meeting</div>
-          <p class="service-desc">Beyond the Canvas Art Studio &amp; Gallery offers a unique, inspiring space for Art-themed parties, creative gatherings, and private meetings.</p>
-          <button class="learn-more-btn" onclick="openModal('modal-party')">Learn More</button>
-        </div>
-      </div>
-
-      <div class="service-card reveal reveal-delay-3">
-        <div class="service-visual"><img src="images/Index_Icons/paint.webp" alt="Painting Icon" style="width: 100%; height: 100%; object-fit: cover;"></div>
-        <div class="service-info">
-          <div class="service-name">Training Painting &amp; Drawing</div>
-          <p class="service-desc">Discover the timeless beauty of traditional Art. We offer professional Oil painting and drawing classes designed for all levels.</p>
-          <button class="learn-more-btn" onclick="openModal('modal-training')">Learn More</button>
-        </div>
-      </div>
-
-      <div class="service-card reveal reveal-delay-4">
-        <div class="service-visual"><img src="images/Index_Icons/resin.webp" alt="Resin Icon" style="width: 100%; height: 100%; object-fit: cover;"></div>
-        <div class="service-info">
-          <div class="service-name">Resin Art &amp; Craft Workshops</div>
-          <p class="service-desc">Explore the fluid, mesmerizing world of resin art. Create ocean waves, geodes, jewellery, and decorative pieces in our hands-on resin workshops. All levels welcome.</p>
-          <button class="learn-more-btn" onclick="openModal('modal-resin')">Learn More</button>
-        </div>
-      </div>
+    <div class="gallery-scroll-cta" id="galleryScrollCta">
+      <a href="gallery.html" class="btn-primary">See more</a>
     </div>
   </div>
 </section>
 
-<!-- Modal: Private Events & Classes -->
-<div class="modal-overlay" id="modal-events" onclick="closeModalOutside(event, 'modal-events')">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal('modal-events')" aria-label="Close">✕</button>
-    <div class="modal-label">Private Events &amp; Classes</div>
-    <h3 class="modal-title">Private Art Events &amp; Custom Classes</h3>
-    <div class="modal-body">
-      <p>Looking for a creative and meaningful way to celebrate or connect? At Beyond the Canvas Art Studio &amp; Gallery, we offer private events and personalized Art sessions designed for all occasions.</p>
-      <p>Host a Dot Mandala workshop, explore the beauty of Watercolor or Acrylic painting, or create stunning pieces in our resin art classes — all guided in a relaxed, inspiring space.</p>
-      <p><strong>Perfect for:</strong></p>
-      <ul>
-        <li>Birthdays</li>
-        <li>Team-building</li>
-        <li>Girls' night out</li>
-        <li>Family gatherings</li>
-        <li>Wellness and mindfulness events</li>
-      </ul>
-      <p class="modal-tagline">CREATE – CONNECT – CELEBRATE — YOUR WAY.</p>
-    </div>
-  </div>
-</div>
-
-<!-- Modal: Special Party & Meeting -->
-<div class="modal-overlay" id="modal-party" onclick="closeModalOutside(event, 'modal-party')">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal('modal-party')" aria-label="Close">✕</button>
-    <div class="modal-label">Special Party &amp; Meeting</div>
-    <h3 class="modal-title">Host with Artful Style</h3>
-    <div class="modal-body">
-      <p>Beyond the Canvas Art Studio &amp; Gallery offers a unique, inspiring space for Art-themed parties, creative gatherings, and private meetings.</p>
-      <p>Whether you're planning a birthday celebration, a team-building event, or an intimate Art talk, our gallery provides a warm and creative atmosphere to make it memorable. Let Art be the backdrop to your special moments.</p>
-      <p><strong>Available for:</strong></p>
-      <ul>
-        <li>Kids &amp; Adult Art Parties</li>
-        <li>Creative Workshops</li>
-        <li>Private Meetings &amp; Art Circles</li>
-      </ul>
-      <p class="modal-tagline">CELEBRATE – CONNECT – CREATE</p>
-    </div>
-  </div>
-</div>
-
-<!-- Modal: Training Painting & Drawing -->
-<div class="modal-overlay" id="modal-training" onclick="closeModalOutside(event, 'modal-training')">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal('modal-training')" aria-label="Close">✕</button>
-    <div class="modal-label">Training Painting &amp; Drawing</div>
-    <h3 class="modal-title">Oil Painting &amp; Drawing Classes</h3>
-    <div class="modal-body">
-      <p>Discover the timeless beauty of traditional Art at Beyond the Canvas Art Studio &amp; Gallery. We offer professional Oil painting and drawing classes designed for all levels — from beginners to advanced Artists.</p>
-      <p>Learn essential techniques, develop your style, and bring your imagination to life through line, light, and color. Whether you're exploring Art for the first time or refining your skills, our guided classes provide a creative space to grow, express, and create.</p>
-      <p>All ages welcome. Join us and paint your own masterpiece.</p>
-    </div>
-  </div>
-</div>
-
-<!-- Modal: Resin Art -->
-<div class="modal-overlay" id="modal-resin" onclick="closeModalOutside(event, 'modal-resin')">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal('modal-resin')" aria-label="Close">✕</button>
-    <div class="modal-label">Resin Art &amp; Craft Workshops</div>
-    <h3 class="modal-title">Create Stunning Resin Art</h3>
-    <div class="modal-body">
-      <p>Dive into the fluid, mesmerizing world of resin art at Beyond the Canvas Art Studio. Using epoxy resin, alcohol inks, pigments, mica powders, and gold leaf, you'll create pieces that are truly one of a kind.</p>
-      <p>Our resin workshops are suitable for all skill levels. No prior experience is needed — Farnaz will guide you through every step, from safety and mixing to achieving beautiful cells, ocean waves, and geode effects.</p>
-      <p><strong>Classes include:</strong></p>
-      <ul>
-        <li>Resin Art Workshop — fluid art, pour techniques (All Levels)</li>
-        <li>Ocean Resin &amp; Geode Art — advanced layering (Intermediate)</li>
-        <li>Resin Jewellery &amp; Small Objects — moulds and casting (Beginner)</li>
-      </ul>
-      <p>All safety equipment, resin, pigments, and materials are included. Take your masterpiece home the same day!</p>
-    </div>
-  </div>
-</div>
-
-<!-- Meet Farnaz Amin -->
-<section class="farnaz-section">
-  <div class="section-inner">
-    <div class="farnaz-inner">
-      <div class="farnaz-content">
-        <div class="section-head">
-          <div class="section-label">Meet the Artist</div>
-          <h2 class="section-title" style="color:#fff;">Meet <span style="color:var(--terra);font-style:italic;">Farnaz Amin</span></h2>
-        </div>
-        <p class="farnaz-bio-text">Born in Los Angeles to an Iranian family, Farnaz Amin has been immersed in Art since childhood. Trained in multiple countries and a graduate of Art school, she has exhibited her work internationally and won several awards.</p>
-        <p class="farnaz-bio-text">With over 25 years of teaching experience, Farnaz brings passion, creativity, and cultural depth to every class and canvas.</p>
-        <p class="farnaz-quote">"For her, Art isn't just a skill — it's a way of life."</p>
-        <div style="margin-top:36px;">
-          <a href="about.html" class="btn-primary">Read Biography →</a>
-        </div>
-      </div>
-
-      <div class="farnaz-stats-grid reveal">
-        <div class="farnaz-stat-card">
-          <div class="farnaz-stat-icon">🎨</div>
-          <div class="farnaz-stat-num">25+</div>
-          <div class="farnaz-stat-lbl">Years Teaching</div>
-        </div>
-        <div class="farnaz-stat-card">
-          <div class="farnaz-stat-icon">🌍</div>
-          <div class="farnaz-stat-num">Int'l</div>
-          <div class="farnaz-stat-lbl">Exhibitions</div>
-        </div>
-        <div class="farnaz-stat-card">
-          <div class="farnaz-stat-icon">🏆</div>
-          <div class="farnaz-stat-num">Award</div>
-          <div class="farnaz-stat-lbl">Winning Artist</div>
-        </div>
-        <div class="farnaz-stat-card">
-          <div class="farnaz-stat-icon">👩‍🎨</div>
-          <div class="farnaz-stat-num">All</div>
-          <div class="farnaz-stat-lbl">Ages Welcome</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Gallery Preview -->
-<section class="gallery-section">
+<!-- Student Voices -->
+<section class="mini-testimonials">
   <div class="section-inner">
     <div class="section-head reveal">
-      <div class="section-label">Portfolio</div>
-      <h2 class="section-title">Some of the <span class="accent">Works</span></h2>
-      <p class="section-desc">From oil painting and drawing to crafts, resin, and fine Art — a glimpse into the creative world of Beyond the Canvas.</p>
+      <div class="section-label">Student Voices</div>
+      <h2 class="section-title">More than lessons, a creative home</h2>
+      <p class="section-desc">Our students return for the growth, support, and artistic confidence they build in every class.</p>
     </div>
-
-    <div class="gallery-mosaic reveal">
-      <div class="gallery-tile">
-        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;opacity:0.45;">
-          <span style="font-size:2.8rem;">📷</span>
-          <span style="font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;">Add featured artwork photo</span>
-        </div>
-        <div class="gallery-tile-overlay">
-          <span class="gallery-tile-label">Oil on Canvas — Farnaz Amin</span>
-        </div>
-      </div>
-      <div class="gallery-tile">
-        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;opacity:0.45;">
-          <span style="font-size:2rem;">📷</span>
-          <span style="font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;">Add resin art photo</span>
-        </div>
-        <div class="gallery-tile-overlay">
-          <span class="gallery-tile-label">Resin Art Piece</span>
-        </div>
-      </div>
-      <div class="gallery-tile">
-        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;opacity:0.45;">
-          <span style="font-size:2rem;">📷</span>
-          <span style="font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;">Add watercolour photo</span>
-        </div>
-        <div class="gallery-tile-overlay">
-          <span class="gallery-tile-label">Watercolour Series</span>
-        </div>
-      </div>
-      <div class="gallery-tile">
-        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;opacity:0.45;">
-          <span style="font-size:2rem;">📷</span>
-          <span style="font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;">Add drawing photo</span>
-        </div>
-        <div class="gallery-tile-overlay">
-          <span class="gallery-tile-label">Fine Art Drawing</span>
-        </div>
-      </div>
-      <div class="gallery-tile">
-        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;opacity:0.45;">
-          <span style="font-size:2rem;">📷</span>
-          <span style="font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;">Add painting photo</span>
-        </div>
-        <div class="gallery-tile-overlay">
-          <span class="gallery-tile-label">Acrylic Painting</span>
-        </div>
-      </div>
-    </div>
-
-    <div style="text-align:center;margin-top:44px;" class="reveal">
-      <a href="gallery.html" class="btn-primary">View Full Gallery →</a>
+    <div class="mini-testimonials-grid">
+      <article class="mini-testimonial-card reveal">
+        <p>"I came in as a complete beginner and now I understand color and composition in a way I never thought possible."</p>
+        <strong>Oil Painting Student</strong>
+      </article>
+      <article class="mini-testimonial-card reveal reveal-delay-1">
+        <p>"The classes are detailed and professional, but still warm and encouraging. Every week I learn something real."</p>
+        <strong>Teen Program Parent</strong>
+      </article>
+      <article class="mini-testimonial-card reveal reveal-delay-2">
+        <p>"Farnaz teaches with care and high standards. You leave inspired and with artwork you're genuinely proud of."</p>
+        <strong>Private Coaching Student</strong>
+      </article>
     </div>
   </div>
 </section>
 
-<!-- Testimonials -->
-<section class="testimonials-section">
+<!-- Start your journey -->
+<section class="start-journey-section">
   <div class="section-inner">
-    <div class="section-head reveal">
-      <div class="section-label">Student Reviews</div>
-      <h2 class="section-title">What Our <span class="accent">Students</span> Say</h2>
-      <p class="section-desc">Hear from the people who have found their creative voice at Beyond the Canvas.</p>
-    </div>
-
-    <div class="testimonials-grid">
-      <div class="testimonial-card reveal reveal-delay-1">
-        <div class="stars">★★★★★</div>
-        <p class="testimonial-text">"I had never touched a paintbrush as an adult, and after just a few sessions I produced a piece I'm genuinely proud of. Farnaz makes you feel capable from day one."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar" style="background:linear-gradient(135deg,#C4622D,#A04E22);">R</div>
-          <div>
-            <div class="author-name">Rachel Thompson</div>
-            <div class="author-class">Oil Painting Student</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testimonial-card reveal reveal-delay-2">
-        <div class="stars">★★★★★</div>
-        <p class="testimonial-text">"The classes are the highlight of my week. There's something deeply inspiring about working with Farnaz. The studio itself is gorgeous — it really invites creativity."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar" style="background:linear-gradient(135deg,#7A9E7E,#5A7E5E);">M</div>
-          <div>
-            <div class="author-name">Marcus Delgado</div>
-            <div class="author-class">Pottery & Ceramics</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testimonial-card reveal reveal-delay-3">
-        <div class="stars">★★★★★</div>
-        <p class="testimonial-text">"We booked Beyond the Canvas for our team-building event and it was a massive hit. Everyone left with a piece they made and a big smile. Will absolutely book again!"</p>
-        <div class="testimonial-author">
-          <div class="author-avatar" style="background:linear-gradient(135deg,#D4A843,#B8882A);">S</div>
-          <div>
-            <div class="author-name">Sarah Kim</div>
-            <div class="author-class">Private Event Booking</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Newsletter Signup -->
-<section class="newsletter-section">
-  <div class="section-inner">
-    <div class="newsletter-inner reveal">
-      <div class="newsletter-content">
-        <div class="section-label" style="color:var(--gold);">Stay Inspired</div>
-        <h2 class="newsletter-title">Join Our Creative Community</h2>
-        <p class="newsletter-desc">Sign up for studio news, new class announcements, upcoming art camps, and exclusive early-bird discounts. No spam — only inspiration.</p>
-      </div>
-      <form class="newsletter-form" onsubmit="handleNewsletter(event)">
-        <div class="newsletter-input-row">
-          <input type="email" id="newsletterEmail" class="newsletter-input" placeholder="Your email address" required autocomplete="email">
-          <button type="submit" class="newsletter-btn">Subscribe 🎨</button>
-        </div>
-        <p class="newsletter-fine">We respect your privacy. Unsubscribe at any time.</p>
-        <div id="newsletterSuccess" class="newsletter-success" style="display:none;">
-          ✅ You're in! Welcome to the Beyond the Canvas community.
-        </div>
-      </form>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta-section">
-  <div class="cta-inner">
-    <span class="cta-emoji">🎨</span>
-    <h2 class="cta-title">Join Us and Bring Your<br><em>Imagination</em></h2>
-    <p class="cta-desc" style="font-size:1.05rem;font-weight:600;color:rgba(255,255,255,0.95);margin-bottom:10px;">Beyond the Canvas</p>
-    <p class="cta-desc">From oil painting and drawing to crafts, resin, and fine Art, we offer inspiring classes, sip &amp; paint nights, and hands-on Art camps. Celebrate with us! We host unforgettable birthday parties, private events, and creative gatherings for both kids and adults.</p>
-    <div class="cta-buttons">
-      <a href="classes.html" class="btn-white">🎨 Book a Class</a>
-      <a href="gallery.html" class="btn-outline-white">View Portfolio →</a>
+    <h2 class="start-journey-title">Start your journey</h2>
+    <div class="start-journey-buttons">
+      <a href="classes.html" class="btn-white">Browse Classes</a>
+      <a href="contact.html" class="btn-outline-white">Contact Us</a>
     </div>
   </div>
 </section>
@@ -1892,14 +2212,15 @@
 
 <script>
   let slideIndex = 1;
-  let slideInterval; // Variable to hold the timer ID for auto-sliding
+  let slideInterval;
 
-  // Call showSlides initially with a delay for the first slide
   document.addEventListener("DOMContentLoaded", function() {
-    // Initial slide display after 1.5 seconds
     slideInterval = setTimeout(function() {
       showSlides(slideIndex);
     }, 1500);
+    setupRevealAnimations();
+    setupClassCardAnimations();
+    setupHorizontalGalleryScroll();
   });
 
   // Next/previous controls
@@ -1917,13 +2238,11 @@
     let slides = document.getElementsByClassName("mySlides");
     let dots = document.getElementsByClassName("dot");
 
-    // Clear any existing timeout to prevent multiple timers running
     clearTimeout(slideInterval);
 
     if (n > slides.length) {slideIndex = 1}
     if (n < 1) {slideIndex = slides.length}
 
-    // Hide all slides and remove active class from dots
     for (i = 0; i < slides.length; i++) {
       slides[i].style.display = "none";
     }
@@ -1931,13 +2250,13 @@
       dots[i].className = dots[i].className.replace(" active-dot", "");
     }
 
-    // Display the current slide and add active class to the corresponding dot
     slides[slideIndex-1].style.display = "block";
-    dots[slideIndex-1].className += " active-dot";
+    if (dots[slideIndex-1]) {
+      dots[slideIndex-1].className += " active-dot";
+    }
 
-    // Set timeout for the next slide to appear after 3 seconds
     slideInterval = setTimeout(function() {
-      plusSlides(1); // Advance to the next slide
+      plusSlides(1);
     }, 3000);
   }
 
@@ -1945,9 +2264,9 @@
     e.preventDefault();
     const emailInput = document.getElementById("newsletterEmail");
     const successEl  = document.getElementById("newsletterSuccess");
+    if (!emailInput || !successEl) return;
     successEl.style.display = "block";
     emailInput.value = "";
-    // Keep the form visible but show success; reset after 4 seconds so user can add another email
     setTimeout(() => { successEl.style.display = "none"; }, 4000);
   }
 
@@ -1980,15 +2299,90 @@
     }
   });
 
-  // Scroll reveal
-  const reveals = document.querySelectorAll(".reveal");
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add("visible"); observer.unobserve(e.target); }
-    });
-  }, { threshold: 0.1 });
-  reveals.forEach(el => observer.observe(el));
+  function setupRevealAnimations() {
+    const reveals = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add("visible");
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+  }
+
+  function setupClassCardAnimations() {
+    const cards = document.querySelectorAll(".class-card");
+    if (!cards.length) return;
+
+    const cardObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          cardObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    cards.forEach((card) => cardObserver.observe(card));
+  }
+
+  function setupHorizontalGalleryScroll() {
+    const section = document.getElementById("galleryScrollSection");
+    const track = document.getElementById("galleryScrollTrack");
+    const cta = document.getElementById("galleryScrollCta");
+    const sticky = section ? section.querySelector(".gallery-scroll-sticky") : null;
+    if (!section || !track || !cta || !sticky) return;
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion || window.innerWidth <= 768) {
+      cta.classList.add("visible");
+      return;
+    }
+
+    let ticking = false;
+    let maxTranslate = 0;
+
+    const updateMaxTranslate = () => {
+      maxTranslate = Math.max(0, track.scrollWidth - sticky.clientWidth);
+    };
+
+    const updateGalleryScroll = () => {
+      const scrollTop = window.scrollY || window.pageYOffset;
+      const sectionTop = section.offsetTop;
+      const sectionScrollable = Math.max(1, section.offsetHeight - window.innerHeight);
+      const rawProgress = (scrollTop - sectionTop) / sectionScrollable;
+      const progress = Math.max(0, Math.min(1, rawProgress));
+      const x = -maxTranslate * progress;
+      track.style.transform = `translate3d(${x}px, 0, 0)`;
+
+      if (progress >= 0.98) {
+        cta.classList.add("visible");
+      } else {
+        cta.classList.remove("visible");
+      }
+
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateGalleryScroll);
+        ticking = true;
+      }
+    };
+
+    const onResize = () => {
+      updateMaxTranslate();
+      updateGalleryScroll();
+    };
+
+    updateMaxTranslate();
+    updateGalleryScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onResize);
+  }
 </script>
 </body>
 </html>
-
