@@ -1753,22 +1753,17 @@
       .class-card-media { height: 210px; }
       .mini-testimonials { padding: 80px 18px; }
       .mini-testimonials-grid { grid-template-columns: 1fr; }
-      .gallery-scroll-stage { height: auto; }
+      .gallery-scroll-stage { height: 220vh; }
       .gallery-scroll-sticky {
-        position: relative;
-        top: auto;
-        height: auto;
-        overflow-x: auto;
-        overflow-y: hidden;
-        -webkit-overflow-scrolling: touch;
-        overscroll-behavior-x: contain;
-        scroll-snap-type: x mandatory;
-        padding-bottom: 8px;
+        position: sticky;
+        top: 72px;
+        height: calc(100vh - 96px);
+        overflow: hidden;
+        border-radius: 14px;
       }
-      .gallery-scroll-track { transform: none !important; width: max-content; gap: 12px; padding: 4px 16px 10px; }
-      .gallery-scroll-item { flex: 0 0 min(86vw, 340px); scroll-snap-align: start; }
-      .gallery-scroll-item img { height: 300px; }
-      .gallery-scroll-cta { opacity: 1; transform: none; pointer-events: auto; }
+      .gallery-scroll-track { width: max-content; gap: 14px; padding: 4px 10px 10px; }
+      .gallery-scroll-item { flex: 0 0 min(90vw, 420px); scroll-snap-align: center; }
+      .gallery-scroll-item img { height: clamp(360px, 68vh, 560px); }
       .services-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
       .service-card { padding: 24px 20px; }
       .testimonials-grid { grid-template-columns: 1fr; }
@@ -2393,8 +2388,7 @@
     if (!section || !track || !cta || !sticky) return;
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const isTouchFirst = window.matchMedia("(pointer: coarse)").matches;
-    if (reduceMotion || isTouchFirst || window.innerWidth <= 900) {
+    if (reduceMotion) {
       track.style.transform = "translate3d(0,0,0)";
       cta.classList.add("visible");
       return;
@@ -2441,6 +2435,7 @@
     updateGalleryScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onResize);
+    window.addEventListener("load", onResize, { once: true });
   }
 </script>
 </body>
