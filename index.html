@@ -877,7 +877,7 @@
     }
 
     .gallery-scroll-stage {
-      height: 190vh;
+      height: 240vh;
       position: relative;
       margin-top: 26px;
     }
@@ -1753,7 +1753,7 @@
       .class-card-media { height: 210px; }
       .mini-testimonials { padding: 80px 18px; }
       .mini-testimonials-grid { grid-template-columns: 1fr; }
-      .gallery-scroll-stage { height: 220vh; }
+      .gallery-scroll-stage { height: 300vh; }
       .gallery-scroll-sticky {
         position: sticky;
         top: 72px;
@@ -2394,8 +2394,14 @@
       return;
     }
 
-    let ticking = false;
     let maxTranslate = 0;
+    let targetX = 0;
+    let currentX = 0;
+    let animationFrame = 0;
+
+    const easeInOutCubic = (t) => (
+      t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
+    );
 
     const updateMaxTranslate = () => {
       maxTranslate = Math.max(0, track.scrollWidth - sticky.clientWidth);
@@ -2407,32 +2413,54 @@
       const sectionScrollable = Math.max(1, section.offsetHeight - window.innerHeight);
       const rawProgress = (scrollTop - sectionTop) / sectionScrollable;
       const progress = Math.max(0, Math.min(1, rawProgress));
-      const x = -maxTranslate * progress;
-      track.style.transform = `translate3d(${x}px, 0, 0)`;
+      const easedProgress = easeInOutCubic(progress);
+      targetX = -maxTranslate * easedProgress;
 
       if (progress >= 0.98) {
         cta.classList.add("visible");
       } else {
         cta.classList.remove("visible");
       }
+    };
 
-      ticking = false;
+    const animateTrack = () => {
+      const delta = targetX - currentX;
+      if (Math.abs(delta) < 0.25) {
+        currentX = targetX;
+      } else {
+        currentX += delta * 0.09;
+      }
+
+      track.style.transform = `translate3d(${currentX}px, 0, 0)`;
+
+      if (Math.abs(targetX - currentX) > 0.25) {
+        animationFrame = window.requestAnimationFrame(animateTrack);
+      } else {
+        animationFrame = 0;
+      }
+    };
+
+    const requestAnimation = () => {
+      if (!animationFrame) {
+        animationFrame = window.requestAnimationFrame(animateTrack);
+      }
     };
 
     const onScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(updateGalleryScroll);
-        ticking = true;
-      }
+      updateGalleryScroll();
+      requestAnimation();
     };
 
     const onResize = () => {
       updateMaxTranslate();
       updateGalleryScroll();
+      requestAnimation();
     };
 
     updateMaxTranslate();
     updateGalleryScroll();
+    currentX = targetX;
+    track.style.transform = `translate3d(${currentX}px, 0, 0)`;
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onResize);
     window.addEventListener("load", onResize, { once: true });
