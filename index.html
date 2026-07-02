@@ -1838,7 +1838,155 @@
       .gallery-scroll-track { transform: none !important; }
       .gallery-scroll-cta { opacity: 1; transform: none; pointer-events: auto; }
     }
-  </style>
+      /* --- Testimonial Carousel Styles --- */
+    .testimonial-carousel-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      max-width: 850px;
+      margin: 40px auto 0 auto;
+      padding: 0 10px;
+    }
+    .testimonial-window {
+      overflow: hidden;
+      width: 100%;
+      background: var(--cream2, #F0EBE3);
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    }
+    .testimonial-slider-track {
+      display: flex;
+      transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+      width: 100%;
+    }
+    .testimonial-slide-item {
+      min-width: 100%;
+      box-sizing: border-box;
+      padding: 40px 50px;
+    }
+    .testimonial-quote-card {
+      text-align: center;
+    }
+    .quote-text {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: var(--charcoal, #1C1C1C);
+      font-family: 'Inter', sans-serif;
+      margin-bottom: 20px;
+    }
+    .quote-author {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.2rem;
+      color: var(--terra, #C4622D);
+      font-weight: 600;
+    }
+    .review-see-more {
+      color: var(--terra, #C4622D);
+      font-weight: 600;
+      text-decoration: underline;
+      cursor: pointer;
+      margin-left: 6px;
+      display: inline-block;
+      transition: opacity 0.2s ease;
+    }
+    .review-see-more:hover {
+      opacity: 0.8;
+    }
+    .testi-nav-btn {
+      background: transparent;
+      border: 2px solid var(--terra, #C4622D);
+      color: var(--terra, #C4622D);
+      font-size: 1.25rem;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s ease;
+      flex-shrink: 0;
+      user-select: none;
+    }
+    .testi-nav-btn:hover {
+      background: var(--terra, #C4622D);
+      color: #fff;
+      transform: scale(1.05);
+    }
+
+    /* --- Modals --- */
+    .review-modal-backdrop {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(28, 28, 28, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      padding: 20px;
+    }
+    .review-modal-backdrop.is-active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .review-modal-surface {
+      background: var(--cream, #FAF7F2);
+      border: 1px solid var(--cream2, #F0EBE3);
+      max-width: 600px;
+      width: 100%;
+      border-radius: 16px;
+      padding: 35px;
+      position: relative;
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+    .review-modal-backdrop.is-active .review-modal-surface {
+      transform: translateY(0);
+    }
+    .review-modal-close {
+      position: absolute;
+      top: 20px; right: 20px;
+      background: transparent;
+      border: none;
+      font-size: 1.75rem;
+      cursor: pointer;
+      color: var(--charcoal, #1C1C1C);
+      line-height: 1;
+      transition: color 0.2s ease;
+    }
+    .review-modal-close:hover {
+      color: var(--terra, #C4622D);
+    }
+    .modal-author-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      color: var(--terra, #C4622D);
+      font-size: 1.6rem;
+      margin-bottom: 15px;
+      border-bottom: 1px solid var(--cream2, #F0EBE3);
+      padding-bottom: 10px;
+    }
+    .modal-body-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--charcoal, #1C1C1C);
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 640px) {
+      .testimonial-carousel-container { gap: 12px; }
+      .testimonial-slide-item { padding: 30px 20px; }
+      .testi-nav-btn { width: 38px; height: 38px; font-size: 1rem; }
+      .quote-text { font-size: 1rem; }
+      .review-modal-surface { padding: 25px 20px; }
+    }
+</style>
 </head>
 <body>
 
@@ -2186,22 +2334,49 @@
   <div class="section-inner">
     <div class="section-head reveal">
       <div class="section-label">Student Voices</div>
-      <h2 class="section-title">More than lessons, a creative home</h2>
-      <p class="section-desc">Our students return for the growth, support, and artistic confidence they build in every class.</p>
+      <h2 class="section-title">What People Say</h2>
     </div>
-    <div class="mini-testimonials-grid">
-      <article class="mini-testimonial-card reveal">
-        <p>"I came in as a complete beginner and now I understand color and composition in a way I never thought possible."</p>
-        <strong>Oil Painting Student</strong>
-      </article>
-      <article class="mini-testimonial-card reveal reveal-delay-1">
-        <p>"The classes are detailed and professional, but still warm and encouraging. Every week I learn something real."</p>
-        <strong>Teen Program Parent</strong>
-      </article>
-      <article class="mini-testimonial-card reveal reveal-delay-2">
-        <p>"Farnaz teaches with care and high standards. You leave inspired and with artwork you're genuinely proud of."</p>
-        <strong>Private Coaching Student</strong>
-      </article>
+    
+    <div class="testimonial-carousel-container reveal">
+      <button class="testi-nav-btn prev" onclick="changeReview(-1)" aria-label="Previous review">&#10094;</button>
+      
+      <div class="testimonial-window">
+        <div class="testimonial-slider-track" id="testimonialTrack">
+          
+          <div class="testimonial-slide-item">
+            <div class="testimonial-quote-card">
+              <p class="quote-text">
+                "Beyond the canvas art studio is a wonderful place. My daughter has had a fantastic experience there. She has learned so much in such a short time..."
+                <span class="review-see-more" onclick="toggleReviewModal('modal-mitra', true)">See more</span>
+              </p>
+              <h4 class="quote-author">Mitra Moe</h4>
+            </div>
+          </div>
+          
+          <div class="testimonial-slide-item">
+            <div class="testimonial-quote-card">
+              <p class="quote-text">
+                "My children really enjoy attending this art studio. The teacher is very kind, patient, and truly talented at teaching. She makes the classes fun and helps..."
+                <span class="review-see-more" onclick="toggleReviewModal('modal-hoorinaz', true)">See more</span>
+              </p>
+              <h4 class="quote-author">hoorinaz mohtashami</h4>
+            </div>
+          </div>
+          
+          <div class="testimonial-slide-item">
+            <div class="testimonial-quote-card">
+              <p class="quote-text">
+                "I had such a wonderful experience at the resin class! The studio is brand new, very clean, and has a really welcoming atmosphere. Farnaz joon was incredibly..."
+                <span class="review-see-more" onclick="toggleReviewModal('modal-khatereh', true)">See more</span>
+              </p>
+              <h4 class="quote-author">Khatereh MoazemiGoudarzi</h4>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      
+      <button class="testi-nav-btn next" onclick="changeReview(1)" aria-label="Next review">&#10095;</button>
     </div>
   </div>
 </section>
@@ -2468,5 +2643,66 @@
     window.addEventListener("load", onResize, { once: true });
   }
 </script>
+<div class="review-modal-backdrop" id="modal-mitra" onclick="handleOutsideModalClick(event, 'modal-mitra')">
+  <div class="review-modal-surface">
+    <button class="review-modal-close" onclick="toggleReviewModal('modal-mitra', false)">&times;</button>
+    <h3 class="modal-author-title">Mitra Moe</h3>
+    <p class="modal-body-text">Beyond the canvas art studio is a wonderful place. My daughter has had a fantastic experience there. She has learned so much in such a short time. The owner and teacher, Ms. Farnaz, is very talented and experienced. Her teaching style is clear, patient, and encouraging, which has made my daughter love art and enjoy it immensely. The studio is filled with beautiful artwork, and the environment feels peaceful. Even the pleasant scent in the room adds to the calm atmosphere. She is kind, patient, generous, and humble, and cares for her students. Her studio is such a cozy and welcoming place.<br><br>I highly recommend it! 😀🙌</p>
+  </div>
+</div>
+
+<div class="review-modal-backdrop" id="modal-hoorinaz" onclick="handleOutsideModalClick(event, 'modal-hoorinaz')">
+  <div class="review-modal-surface">
+    <button class="review-modal-close" onclick="toggleReviewModal('modal-hoorinaz', false)">&times;</button>
+    <h3 class="modal-author-title">hoorinaz mohtashami</h3>
+    <p class="modal-body-text">My children really enjoy attending this art studio. The teacher is very kind, patient, and truly talented at teaching. She makes the classes fun and helps each child independently. We have seen real improvement in their skills, and they always look forward to coming each week. I highly recommend this studio to any family looking for a positive and inspiring art class experience.</p>
+  </div>
+</div>
+
+<div class="review-modal-backdrop" id="modal-khatereh" onclick="handleOutsideModalClick(event, 'modal-khatereh')">
+  <div class="review-modal-surface">
+    <button class="review-modal-close" onclick="toggleReviewModal('modal-khatereh', false)">&times;</button>
+    <h3 class="modal-author-title">Khatereh MoazemiGoudarzi</h3>
+    <p class="review-modal-body-text">I had such a wonderful experience at the resin class! The studio is brand new, very clean, and has a really welcoming atmosphere. Farnaz joon was incredibly patient and friendly, and she explained everything clearly step by step, which made it easy to follow even as a beginner.<br><br>I truly enjoyed the whole experience and learned a lot.</p>
+  </div>
+</div>
+
+<script>
+  let activeReviewIdx = 0;
+  
+  function changeReview(direction) {
+    const track = document.getElementById('testimonialTrack');
+    const slides = document.querySelectorAll('.testimonial-slide-item');
+    if (!track || slides.length === 0) return;
+    
+    activeReviewIdx += direction;
+    if (activeReviewIdx < 0) {
+      activeReviewIdx = slides.length - 1;
+    } else if (activeReviewIdx >= slides.length) {
+      activeReviewIdx = 0;
+    }
+    
+    track.style.transform = 	ranslateX(-%);
+  }
+
+  function toggleReviewModal(modalId, shouldOpen) {
+    const targetModal = document.getElementById(modalId);
+    if (!targetModal) return;
+    if (shouldOpen) {
+      targetModal.classList.add('is-active');
+      document.body.style.overflow = 'hidden';
+    } else {
+      targetModal.classList.remove('is-active');
+      document.body.style.overflow = '';
+    }
+  }
+
+  function handleOutsideModalClick(event, modalId) {
+    if (event.target.classList.contains('review-modal-backdrop')) {
+      toggleReviewModal(modalId, false);
+    }
+  }
+</script>
 </body>
 </html>
+
