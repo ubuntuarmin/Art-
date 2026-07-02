@@ -1990,6 +1990,13 @@
     #testimonialTrack { display: flex; transition: transform 0.4s ease-in-out; width: 100%; will-change: transform; }
     .testimonial-slide-item { flex: 0 0 100%; width: 100%; max-width: 100%; box-sizing: border-box; padding: 0 15px; }
     @media (max-width: 768px) { .testimonial-arrow { padding: 12px 16px; font-size: 18px; } }
+    /* Slider & Modal Optimizations Fix */
+    .testimonial-window { overflow: hidden; width: 100%; position: relative; }
+    #testimonialTrack { display: flex; flex-wrap: nowrap; transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); width: 100%; will-change: transform; }
+    .testimonial-slide-item { flex: 0 0 100%; width: 100%; box-sizing: border-box; }
+    
+    /* Fix Review Modal Overlay so it actually overlays the screen */
+    .review-modal-backdrop { position: fixed !important; inset: 0 !important; z-index: 9999 !important; background: rgba(0,0,0,0.75) !important; }
 </style>
 </head>
 <body>
@@ -2709,5 +2716,6 @@
 </script>
 </body>
 </html>
+
 
 
