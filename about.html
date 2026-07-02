@@ -91,46 +91,14 @@
     .stat-num  { font-size: 1.7rem; font-weight: 800; color: var(--terra); font-family: Georgia, serif; }
     .stat-label { font-size: 0.72rem; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 4px; }
 
-    /* Art canvas visual for hero */
-    .hero-visual {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .canvas-row { display: flex; gap: 14px; }
-
-    .canvas-block {
-      border-radius: 12px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      flex: 1;
-      gap: 6px;
-      border: 2px dashed rgba(255,255,255,0.2);
-      background: rgba(255,255,255,0.04);
-      position: relative;
-      overflow: hidden;
-      transition: all 0.3s;
-    }
-
-    .canvas-block:hover { background: rgba(196,98,45,0.1); border-color: rgba(196,98,45,0.4); }
-
-    .cb-1 { min-height: 180px; }
-    .cb-2 { min-height: 180px; flex: 0.7; }
-    .cb-3 { min-height: 140px; }
-    .cb-4 { min-height: 140px; flex: 0.6; }
-
-    .cb-icon { font-size: 2rem; opacity: 0.4; }
-    .cb-label {
-      font-size: 0.68rem;
-      font-weight: 700;
-      color: rgba(255,255,255,0.4);
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      text-align: center;
-      padding: 0 12px;
+    /* Hero visual */
+    .hero-visual { display: flex; align-items: center; justify-content: center; width: 100%; }
+    .hero-photo {
+      width: min(100%, 650px);
+      height: auto;
+      object-fit: contain;
+      border-radius: 16px;
+      filter: drop-shadow(0 15px 35px rgba(0,0,0,0.4));
     }
 
     /* STORY */
@@ -185,28 +153,17 @@
     .space-feat { display: flex; align-items: center; gap: 12px; font-size: 0.9rem; color: var(--text-mid); }
     .space-feat::before { content: '✓'; color: var(--terra); font-weight: 800; width: 22px; flex-shrink: 0; font-size: 1rem; }
 
-    .space-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-
-    .space-img {
-      border-radius: 12px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      border: 2px dashed rgba(0,0,0,0.1);
-      background: var(--cream2);
-      transition: all 0.3s;
+    .space-visual { width: 100%; }
+    .space-photo {
+      width: 100%;
+      min-height: 280px;
+      max-height: 520px;
+      object-fit: cover;
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.18);
+      border: 1px solid rgba(0,0,0,0.08);
+      display: block;
     }
-
-    .space-img:hover { border-color: var(--terra); background: rgba(196,98,45,0.05); }
-
-    .space-img-icon { font-size: 2.5rem; opacity: 0.35; }
-    .space-img-label { font-size: 0.68rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; text-align: center; padding: 0 12px; }
-
-    .si-1 { min-height: 160px; }
-    .si-2 { min-height: 160px; }
-    .si-3 { min-height: 160px; grid-column: span 2; }
 
     /* Community */
     .community-section {
@@ -272,7 +229,7 @@
       .nav-links { display: none; }
       .hamburger { display: flex; }
       .page-hero { padding: 48px 16px 36px; }
-      .hero-visual { display: none; }
+      .hero-visual { max-width: 520px; margin: 0 auto; }
       .hero-inner { padding: 0; gap: 24px; }
       .story-section { padding: 48px 16px; }
       .footer-inner { grid-template-columns: 1fr 1fr; gap: 28px; }
@@ -294,6 +251,7 @@
       .community-stats { gap: 24px; }
       .story-section { padding: 36px 12px; }
       .footer-inner { grid-template-columns: 1fr; gap: 20px; }
+      .space-photo { min-height: 220px; max-height: 380px; }
     }
 
     @media (max-width: 375px) {
@@ -358,37 +316,8 @@
         <div class="stat-card"><div class="stat-num">All Ages</div><div class="stat-label">Welcome</div></div>
       </div>
     </div>
-    <div class='hero-visual' style='display: flex; align-items: center; justify-content: center; width: 100%;'>
-      <img src='images/Bio/main_farnaz.webp' alt='Farnaz Amin' style='width: 100%; max-width: 650px; height: auto; object-fit: contain; filter: drop-shadow(0 15px 35px rgba(0,0,0,0.4)); border: none;'>
-    </div>
-  </div>
-</div>
-
- style='display: flex; align-items: center; justify-content: center;'><img src='images/Bio/main_farnaz.webp' alt='Farnaz Amin' style='width: 100%; max-height: 540px; object-fit: cover; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.08);'></div>
-    </div>
-  </div>
-
-
-      <div class="canvas-row">
-        <div class="canvas-block cb-1">
-          <div class="cb-icon">📷</div>
-          <div class="cb-label">Add photo of Farnaz painting</div>
-        </div>
-        <div class="canvas-block cb-2">
-          <div class="cb-icon">🖼️</div>
-          <div class="cb-label">Artwork photo</div>
-        </div>
-      </div>
-      <div class="canvas-row">
-        <div class="canvas-block cb-3">
-          <div class="cb-icon">🎨</div>
-          <div class="cb-label">Studio photo</div>
-        </div>
-        <div class="canvas-block cb-4">
-          <div class="cb-icon">📷</div>
-          <div class="cb-label">Class photo</div>
-        </div>
-      </div>
+    <div class="hero-visual">
+      <img src="images/Bio/main_farnaz.webp" alt="Farnaz Amin" class="hero-photo">
     </div>
   </div>
 </div>
@@ -503,18 +432,7 @@
       </div>
     </div>
     <div class="space-visual">
-      <div class="space-img si-1">
-        <div class="space-img-icon">📷</div>
-        <div class="space-img-label">Add studio interior photo</div>
-      </div>
-      <div class="space-img si-2">
-        <div class="space-img-icon">📷</div>
-        <div class="space-img-label">Add class-in-progress photo or</div>
-      </div>
-      <div class="space-img si-3">
-        <div class="space-img-icon">📷</div>
-        <div class="space-img-label">Add wide studio / gallery photo</div>
-      </div>
+      <img src="images/Bio/2_farnaz.webp" alt="Inside Beyond the Canvas studio" class="space-photo">
     </div>
   </div>
 
@@ -588,7 +506,5 @@
 </script>
 </body>
 </html>
-
-
 
 
