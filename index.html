@@ -2674,7 +2674,7 @@
   <div class="review-modal-surface">
     <button class="review-modal-close" onclick="toggleReviewModal('modal-khatereh', false)">&times;</button>
     <h3 class="modal-author-title">Khatereh MoazemiGoudarzi</h3>
-    <p class="review-modal-body-text">I had such a wonderful experience at the resin class! The studio is brand new, very clean, and has a really welcoming atmosphere. Farnaz joon was incredibly patient and friendly, and she explained everything clearly step by step, which made it easy to follow even as a beginner.<br><br>I truly enjoyed the whole experience and learned a lot.</p>
+    <p class="modal-body-text">I had such a wonderful experience at the resin class! The studio is brand new, very clean, and has a really welcoming atmosphere. Farnaz joon was incredibly patient and friendly, and she explained everything clearly step by step, which made it easy to follow even as a beginner.<br><br>I truly enjoyed the whole experience and learned a lot.</p>
   </div>
 </div>
 
@@ -2693,7 +2693,8 @@
       activeReviewIdx = 0;
     }
     
-    track.style.transform = 	ranslateX(-%);
+    const offset = -activeReviewIdx * 100;
+    track.style.transform = `translateX(${offset}%)`;
   }
 
   function toggleReviewModal(modalId, shouldOpen) {
