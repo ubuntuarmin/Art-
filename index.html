@@ -1699,6 +1699,24 @@
     .reveal-delay-5 { transition-delay: 0.5s; }
     .reveal-delay-6 { transition-delay: 0.6s; }
 
+    .reveal[data-direction="left"]  { transform: translateX(-60px); }
+    .reveal[data-direction="right"] { transform: translateX(60px); }
+    .reveal[data-direction="up"]    { transform: translateY(40px);  }
+    .reveal[data-direction="down"]  { transform: translateY(-40px); }
+    .reveal[data-animation="scale"] { transform: scale(0.85); }
+    .reveal[data-animation="rotate"] { transform: rotate(-8deg); opacity: 0; }
+    .reveal[data-animation="depth"] { transform: translateZ(-60px) scale(0.9); filter: blur(6px); opacity: 0; }
+
+    .reveal.visible[data-animation="scale"] { transform: scale(1); }
+    .reveal.visible[data-animation="rotate"] { transform: rotate(0deg); opacity: 1; }
+    .reveal.visible[data-animation="depth"] { transform: translateZ(0) scale(1); filter: blur(0px); opacity: 1; }
+
+    /* Combine transforms for reveal + direction */
+    .reveal.visible[data-direction] { transform: translateX(0) translateY(0) scale(1) rotate(0deg) translateZ(0) !important; }
+    .reveal.visible[data-animation="scale"][data-direction] { transform: scale(1) translateX(0) translateY(0) rotate(0deg) translateZ(0) !important; }
+    .reveal.visible[data-animation="rotate"][data-direction] { transform: rotate(0deg) translateX(0) translateY(0) scale(1) translateZ(0) !important; }
+    .reveal.visible[data-animation="depth"][data-direction] { transform: translateZ(0) scale(1) translateX(0) translateY(0) rotate(0deg) !important; filter: blur(0px) !important; }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 1024px) {
       .hero-inner { grid-template-columns: 1fr; gap: 48px; text-align: center; padding-top: 60px; }
@@ -2046,18 +2064,18 @@
 
   <div class="hero-inner">
     <div class="hero-content">
-      <h1 class="hero-title">
+      <h1 class="hero-title reveal" data-direction="up" data-delay="0.2">
         Creating<br>
         <span class="accent">Unforgettable Experiences</span>
       </h1>
-      <p class="hero-desc">
+      <p class="hero-desc reveal" data-direction="up" data-delay="0.4">
         A creative space for all ages to explore and grow through Art.
       </p>
-      <div class="hero-buttons">
+      <div class="hero-buttons reveal" data-direction="up" data-delay="0.6">
         <a href="classes.html" class="btn-primary">🎨 Book a Class</a>
         <a href="gallery.html" class="btn-outline">View Portfolio →</a>
       </div>
-      <div class="hero-stats">
+      <div class="hero-stats reveal" data-direction="up" data-delay="0.8">
         <div class="stat">
           <div class="stat-num">25+</div>
           <div class="stat-label">Years Teaching</div>
@@ -2171,7 +2189,7 @@
 <!-- Inspiring artists of every age -->
 <section class="story-section">
   <div class="story-layout">
-    <div class="story-content reveal">
+    <div class="story-content reveal" data-direction="left" data-delay="0.1">
       <div class="section-label">Our Community</div>
       <h2 class="section-title">Inspiring artists of every age</h2>
       <p>Beyond the Canvas is open to everyone. We warmly welcome students of all ages and every skill level, from first-time beginners to experienced creatives returning to deepen their craft.</p>
@@ -2188,11 +2206,11 @@
         <div class="story-kpi"><strong>100s</strong><span>Student Projects</span></div>
       </div>
     </div>
-    <div class="story-image-grid reveal">
-      <div class="story-image-card">
+    <div class="story-image-grid reveal" data-direction="right" data-delay="0.1">
+      <div class="story-image-card reveal" data-animation="depth" data-delay="0.2">
         <img src="images/index/old_guy.webp" alt="Adult student painting in class">
       </div>
-      <div class="story-image-card">
+      <div class="story-image-card reveal" data-animation="depth" data-delay="0.3">
         <img src="images/index/young_man.webp" alt="Young student practicing painting techniques">
       </div>
     </div>
@@ -2542,13 +2560,41 @@
   function setupRevealAnimations() {
     const reveals = document.querySelectorAll(".reveal");
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add("visible");
-          observer.unobserve(e.target);
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const target = entry.target;
+          const delay = target.dataset.delay ? parseFloat(target.dataset.delay) : 0;
+          const direction = target.dataset.direction;
+          const animation = target.dataset.animation;
+
+          if (direction) {
+            target.classList.add(`reveal-${direction}`);
+          }
+          if (animation) {
+            target.classList.add(`reveal-${animation}`);
+          }
+          // Apply delay using inline style to ensure it overrides general transition
+          if (delay > 0) {
+            target.style.transitionDelay = `${delay}s`;
+          } else if (target.classList.contains('reveal-delay-1')) {
+            target.style.transitionDelay = '0.1s';
+          } else if (target.classList.contains('reveal-delay-2')) {
+            target.style.transitionDelay = '0.2s';
+          } else if (target.classList.contains('reveal-delay-3')) {
+            target.style.transitionDelay = '0.3s';
+          } else if (target.classList.contains('reveal-delay-4')) {
+            target.style.transitionDelay = '0.4s';
+          } else if (target.classList.contains('reveal-delay-5')) {
+            target.style.transitionDelay = '0.5s';
+          } else if (target.classList.contains('reveal-delay-6')) {
+            target.style.transitionDelay = '0.6s';
+          }
+
+          target.classList.add("visible");
+          observer.unobserve(target);
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.15 }); // Slightly higher threshold for a more cinematic feel
     reveals.forEach(el => observer.observe(el));
   }
 
