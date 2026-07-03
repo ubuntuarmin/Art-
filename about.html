@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://fonts.gstatic.com">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Biography — Beyond the Canvas Art Studio | Farnaz Amin</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap"></noscript>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -271,7 +275,7 @@
 <nav>
   <div class="nav-inner">
     <a href="index.html" class="nav-logo" aria-label="Home">
-      <img src="images/byond--768x486.webp" alt="Beyond Logo" class="logo-img">
+      <img fetchpriority="high" loading="eager" decoding="async" src="images/byond--768x486.webp" alt="Beyond Logo" class="logo-img">
       <div class="logo-text">
         <span class="logo-name">Beyond</span>
         <span class="logo-tagline">The Canvas</span>
@@ -317,7 +321,7 @@
       </div>
     </div>
     <div class="hero-visual">
-      <img src="images/Bio/main_farnaz.webp" alt="Farnaz Amin" class="hero-photo">
+      <img fetchpriority="high" loading="eager" decoding="async" src="images/Bio/main_farnaz.webp" alt="Farnaz Amin" class="hero-photo">
     </div>
   </div>
 </div>
@@ -432,7 +436,7 @@
       </div>
     </div>
     <div class="space-visual">
-      <img src="images/Bio/2_farnaz.webp" alt="Inside Beyond the Canvas studio" class="space-photo">
+      <img loading="lazy" decoding="async" src="images/Bio/2_farnaz.webp" alt="Inside Beyond the Canvas studio" class="space-photo">
     </div>
   </div>
 
@@ -487,12 +491,12 @@
   <div class="footer-bottom">
     <p>Copyright &copy; 2025 Beyond the Canvas Art Studio — Farnaz Amin. All rights reserved.</p>
 <div class="social-links">
-  <a class="social-link" href="https://www.instagram.com/farnazartstudio" aria-label="Instagram"><img src="images/insta.webp" alt="Instagram"></a>
-  <a class="social-link" href="https://www.tiktok.com/@farnazart_studio" aria-label="TikTok"><img src="https://www.vectorlogo.zone/logos/tiktok/tiktok-icon.svg" alt="TikTok"></a>
-  <a class="social-link" href="https://www.youtube.com/@farnazartstudio" aria-label="YouTube"><img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube"></a>
+  <a class="social-link" href="https://www.instagram.com/farnazartstudio" aria-label="Instagram"><img loading="lazy" decoding="async" src="images/insta.webp" alt="Instagram"></a>
+  <a class="social-link" href="https://www.tiktok.com/@farnazart_studio" aria-label="TikTok"><img fetchpriority="high" loading="eager" decoding="async" src="https://www.vectorlogo.zone/logos/tiktok/tiktok-icon.svg" alt="TikTok"></a>
+  <a class="social-link" href="https://www.youtube.com/@farnazartstudio" aria-label="YouTube"><img loading="lazy" decoding="async" src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube"></a>
 </div>
     <div class="signature-image">
-      <img src="images/signature (1).svg" alt="Farnaz Amin Signature" class="signature-img">
+      <img loading="lazy" decoding="async" src="images/signature (1).svg" alt="Farnaz Amin Signature" class="signature-img">
     </div>
   </div>
 </footer>

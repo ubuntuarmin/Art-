@@ -3,12 +3,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://fonts.gstatic.com">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Beyond the Canvas Art Studio — Farnaz Amin</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap"></noscript>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -2022,7 +2026,7 @@
   <nav>
   <div class="nav-inner">
     <a href="index.html" class="nav-logo" aria-label="Home">
-      <img src="images/byond--768x486.webp" alt="Beyond Logo" class="logo-img">
+      <img fetchpriority="high" loading="eager" decoding="async" src="images/byond--768x486.webp" alt="Beyond Logo" class="logo-img">
       <div class="logo-text">
         <span class="logo-name">Beyond</span>
         <span class="logo-tagline">The Canvas</span>
@@ -2094,49 +2098,49 @@
     <div class="hero-visual">
       <div class="Slideshow-container">
         <div class="mySlides fade">
-          <img src="images/Slideshow/1.1.webp" alt="new updates">
+          <img loading="lazy" decoding="async" src="images/Slideshow/1.1.webp" alt="new updates">
         </div>
         <div class="mySlides fade">
-          <img src="images/Slideshow/1.webp" alt="new updates">
+          <img loading="lazy" decoding="async" src="images/Slideshow/1.webp" alt="new updates">
         </div>
         <div class="mySlides fade">
-          <img src="images/Slideshow/2.1.webp" alt="new updates">
+          <img loading="lazy" decoding="async" src="images/Slideshow/2.1.webp" alt="new updates">
         </div>
         <div class="mySlides fade">
-          <img src="images/Slideshow/2.2.webp" alt="new updates">
+          <img loading="lazy" decoding="async" src="images/Slideshow/2.2.webp" alt="new updates">
         </div>
         <div class="mySlides fade">
-          <img src="images/Slideshow/2.3.webp" alt="new updates">
+          <img loading="lazy" decoding="async" src="images/Slideshow/2.3.webp" alt="new updates">
         </div>
         <div class="mySlides fade">
-          <img src="images/Slideshow/2.4.webp" alt="new updates">
+          <img loading="lazy" decoding="async" src="images/Slideshow/2.4.webp" alt="new updates">
         </div>
         <div class="mySlides fade">
-          <img src="images/Slideshow/2.webp" alt="new updates">
+          <img loading="lazy" decoding="async" src="images/Slideshow/2.webp" alt="new updates">
         </div>
         <div class="mySlides fade">
-          <img src="images/Slideshow/3.1.1.webp" alt="new updates">
+          <img loading="lazy" decoding="async" src="images/Slideshow/3.1.1.webp" alt="new updates">
         </div>
         <div class="mySlides fade">
-          <img src="images/Slideshow/4.1.1.webp" alt="new updates">
+          <img loading="lazy" decoding="async" src="images/Slideshow/4.1.1.webp" alt="new updates">
         </div>
         <div class="mySlides fade">
-          <img src="images/Slideshow/4.1.2.webp" alt="new updates">
+          <img loading="lazy" decoding="async" src="images/Slideshow/4.1.2.webp" alt="new updates">
         </div>
         <div class="mySlides fade">
-          <img src="images/Slideshow/4.1.webp" alt="new updates">
+          <img loading="lazy" decoding="async" src="images/Slideshow/4.1.webp" alt="new updates">
         </div>
         <div class="mySlides fade">
-          <img src="images/Slideshow/4.2.1.webp" alt="new updates">
+          <img loading="lazy" decoding="async" src="images/Slideshow/4.2.1.webp" alt="new updates">
         </div>
         <div class="mySlides fade">
-          <img src="images/Slideshow/4.3.webp" alt="new updates">
+          <img loading="lazy" decoding="async" src="images/Slideshow/4.3.webp" alt="new updates">
         </div>
         <div class="mySlides fade">
-          <img src="images/Slideshow/5.1.webp" alt="new updates">
+          <img loading="lazy" decoding="async" src="images/Slideshow/5.1.webp" alt="new updates">
         </div>
         <div class="mySlides fade">
-          <img src="images/Slideshow/5.10.webp" alt="new updates">
+          <img loading="lazy" decoding="async" src="images/Slideshow/5.10.webp" alt="new updates">
         </div>
 
         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -2208,10 +2212,10 @@
     </div>
     <div class="story-image-grid reveal" data-direction="right" data-delay="0.1">
       <div class="story-image-card reveal" data-animation="depth" data-delay="0.2">
-        <img src="images/index/old_guy.webp" alt="Adult student painting in class">
+        <img loading="lazy" decoding="async" src="images/index/old_guy.webp" alt="Adult student painting in class">
       </div>
       <div class="story-image-card reveal" data-animation="depth" data-delay="0.3">
-        <img src="images/index/young_man.webp" alt="Young student practicing painting techniques">
+        <img loading="lazy" decoding="async" src="images/index/young_man.webp" alt="Young student practicing painting techniques">
       </div>
     </div>
   </div>
@@ -2221,7 +2225,7 @@
 <section class="story-section alt learn-section">
   <div class="story-layout">
     <div class="learn-main-image reveal">
-      <img src="images/index/girl_young.webp" alt="Student focused on painting details">
+      <img loading="lazy" decoding="async" src="images/index/girl_young.webp" alt="Student focused on painting details">
     </div>
     <div class="story-content reveal">
       <div class="section-label">Class Experience</div>
@@ -2240,7 +2244,7 @@
   <div class="class-cards">
     <article class="class-card">
       <div class="class-card-media">
-        <img src="images/Index_Icons/paint.webp" alt="Oil painting and drawing class">
+        <img loading="lazy" decoding="async" src="images/Index_Icons/paint.webp" alt="Oil painting and drawing class">
       </div>
       <div class="class-card-body">
         <h3>Oil Painting &amp; Drawing</h3>
@@ -2250,7 +2254,7 @@
     </article>
     <article class="class-card">
       <div class="class-card-media">
-        <img src="images/Index_Icons/class.webp" alt="Watercolor and acrylic class type">
+        <img loading="lazy" decoding="async" src="images/Index_Icons/class.webp" alt="Watercolor and acrylic class type">
       </div>
       <div class="class-card-body">
         <h3>Watercolor &amp; Acrylic</h3>
@@ -2260,7 +2264,7 @@
     </article>
     <article class="class-card">
       <div class="class-card-media">
-        <img src="images/Index_Icons/resin.webp" alt="Resin and mixed media workshop">
+        <img loading="lazy" decoding="async" src="images/Index_Icons/resin.webp" alt="Resin and mixed media workshop">
       </div>
       <div class="class-card-body">
         <h3>Resin &amp; Mixed Media</h3>
@@ -2270,7 +2274,7 @@
     </article>
     <article class="class-card">
       <div class="class-card-media">
-        <img src="images/Index_Icons/party.webp" alt="Private coaching and custom class sessions">
+        <img loading="lazy" decoding="async" src="images/Index_Icons/party.webp" alt="Private coaching and custom class sessions">
       </div>
       <div class="class-card-body">
         <h3>Private Events</h3>
@@ -2298,10 +2302,10 @@
     </div>
     <div class="story-image-grid reveal">
       <div class="story-image-card">
-        <img src="images/index/4.1.2.webp" alt="Student artwork and studio process">
+        <img loading="lazy" decoding="async" src="images/index/4.1.2.webp" alt="Student artwork and studio process">
       </div>
       <div class="story-image-card">
-        <img src="images/index/teen_1.webp" alt="Teen student creating artwork">
+        <img loading="lazy" decoding="async" src="images/index/teen_1.webp" alt="Teen student creating artwork">
       </div>
     </div>
   </div>
@@ -2311,7 +2315,7 @@
 <section class="story-section alt">
   <div class="bio-layout">
     <div class="bio-image-wrap reveal">
-      <img src="images/index/farnaz.webp" alt="Portrait of Farnaz Amin">
+      <img loading="lazy" decoding="async" src="images/index/farnaz.webp" alt="Portrait of Farnaz Amin">
     </div>
     <div class="story-content reveal">
       <div class="section-label">Artist &amp; Mentor</div>
@@ -2343,11 +2347,11 @@
     <div class="gallery-scroll-stage">
       <div class="gallery-scroll-sticky">
         <div class="gallery-scroll-track" id="galleryScrollTrack">
-          <figure class="gallery-scroll-item"><img src="images/gallery/5.4.webp" alt="Gallery artwork preview 1"></figure>
-          <figure class="gallery-scroll-item"><img src="images/gallery/5.5.webp" alt="Gallery artwork preview 2"></figure>
-          <figure class="gallery-scroll-item"><img src="images/gallery/new1.webp" alt="Gallery artwork preview 3"></figure>
-          <figure class="gallery-scroll-item"><img src="images/gallery/new3.webp" alt="Gallery artwork preview 4"></figure>
-          <figure class="gallery-scroll-item"><img src="images/gallery/5.7.webp" alt="Gallery artwork preview 5"></figure>
+          <figure class="gallery-scroll-item"><img loading="lazy" decoding="async" src="images/gallery/5.4.webp" alt="Gallery artwork preview 1"></figure>
+          <figure class="gallery-scroll-item"><img loading="lazy" decoding="async" src="images/gallery/5.5.webp" alt="Gallery artwork preview 2"></figure>
+          <figure class="gallery-scroll-item"><img loading="lazy" decoding="async" src="images/gallery/new1.webp" alt="Gallery artwork preview 3"></figure>
+          <figure class="gallery-scroll-item"><img loading="lazy" decoding="async" src="images/gallery/new3.webp" alt="Gallery artwork preview 4"></figure>
+          <figure class="gallery-scroll-item"><img loading="lazy" decoding="async" src="images/gallery/5.7.webp" alt="Gallery artwork preview 5"></figure>
         </div>
       </div>
     </div>
@@ -2456,12 +2460,12 @@
   <div class="footer-bottom">
     <p>Copyright &copy; 2025 Beyond the Canvas Art Studio — Farnaz Amin. All rights reserved.</p>
 <div class="social-links">
-  <a class="social-link" href="https://www.instagram.com/farnazartstudio" aria-label="Instagram"><img src="images/insta.webp" alt="Instagram"></a>
-  <a class="social-link" href="https://www.tiktok.com/@farnazart_studio" aria-label="TikTok"><img src="https://www.vectorlogo.zone/logos/tiktok/tiktok-icon.svg" alt="TikTok"></a>
-  <a class="social-link" href="https://www.youtube.com/@farnazartstudio" aria-label="YouTube"><img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube"></a>
+  <a class="social-link" href="https://www.instagram.com/farnazartstudio" aria-label="Instagram"><img loading="lazy" decoding="async" src="images/insta.webp" alt="Instagram"></a>
+  <a class="social-link" href="https://www.tiktok.com/@farnazart_studio" aria-label="TikTok"><img fetchpriority="high" loading="eager" decoding="async" src="https://www.vectorlogo.zone/logos/tiktok/tiktok-icon.svg" alt="TikTok"></a>
+  <a class="social-link" href="https://www.youtube.com/@farnazartstudio" aria-label="YouTube"><img loading="lazy" decoding="async" src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube"></a>
 </div>
     <div class="signature-image">
-      <img src="images/signature (1).svg" alt="Farnaz Amin Signature" class="signature-img">
+      <img loading="lazy" decoding="async" src="images/signature (1).svg" alt="Farnaz Amin Signature" class="signature-img">
     </div>
   </div>
 </footer>
