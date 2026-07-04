@@ -408,9 +408,26 @@
         <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000">
       </div>
 
-      <div class="form-group">
+            <div class="form-group">
         <label for="interest">Which class are you interested in? *</label>
-        <input type="text" id="interest" name="interest" placeholder="e.g., Oil Painting Fundamentals" required>
+        <select id="interest" name="interest" required onchange="toggleSpecify()">
+          <option value="" disabled selected>Select a class</option>
+          <option value="Oil painting">Oil painting</option>
+          <option value="Drawing">Drawing</option>
+          <option value="Dot mandala">Dot mandala</option>
+          <option value="Resin Art">Resin Art</option>
+          <option value="Acrylic">Acrylic</option>
+          <option value="Water color">Water color</option>
+          <option value="Charcoal">Charcoal</option>
+          <option value="Crafts">Crafts</option>
+          <option value="Private events">Private events</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group" id="specify-group" style="display: none;">
+        <label for="specify">Please specify *</label>
+        <input type="text" id="specify" name="specify" placeholder="Tell us more details...">
       </div>
 
       <div class="form-group">
@@ -641,6 +658,21 @@
     if (!isOpen) item.classList.add('open');
   }
 
+    function toggleSpecify() {
+    const val = document.getElementById('interest').value.toLowerCase();
+    const group = document.getElementById('specify-group');
+    const input = document.getElementById('specify');
+    
+    if (val === 'crafts' || val === 'private events' || val === 'other') {
+      group.style.display = 'block';
+      input.required = true;
+    } else {
+      group.style.display = 'none';
+      input.required = false;
+      input.value = ''; // Clears the input if they hide the box
+    }
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
     
@@ -650,7 +682,7 @@
       last_name: document.getElementById('lname').value,
       email: document.getElementById('email').value,
       phone: document.getElementById('phone').value || "None",
-      class: document.getElementById('interest').value,
+      class: document.getElementById('interest').value + (document.getElementById('specify') && document.getElementById('specify').value ? ' - ' + document.getElementById('specify').value : ''),
       level: document.getElementById('level').value,
       days: document.getElementById('preferredDays').value,
       message: document.getElementById('message').value || "No message",
