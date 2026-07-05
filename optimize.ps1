@@ -90,10 +90,8 @@ foreach ($file in $htmlFiles) {
         return $match.Value
     })
 
-    # 9. FIX ACCESSIBILITY: Main Landmark
-    if ($content -notmatch '(?i)role=["'']main["'']' -and $content -notmatch '(?i)<main\b') {
-        $content = $content -replace '(?i)<body([^>]*)>', '<body$1 role="main">'
-    }
+    # 9. FIX ACCESSIBILITY: Remove invalid body landmark role
+    $content = $content -replace '(?i)\srole=["'']main["'']', ''
 
     # Save only if changes were made
     if ($content -cne $originalContent) {
