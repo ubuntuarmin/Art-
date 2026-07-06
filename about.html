@@ -242,6 +242,7 @@
   </div>
   <div class="footer-bottom">
     <p>Copyright &copy; 2025 Beyond the Canvas Art Studio — Farnaz Amin. All rights reserved.</p>
+<a href="#" onclick="openDesignerOverlay(event)" style="color: #60a5fa; text-decoration: underline; text-underline-offset: 2px; margin-top: 8px; display: inline-block;">Designed by Armin Majidi</a>
 <div class="social-links">
 <a class="social-link" href="https://www.instagram.com/farnazartstudio" aria-label="Instagram"><img  loading="lazy" decoding="async" src="images/insta.webp" alt="Instagram" width="36" height="36"></a>
 <a class="social-link" href="https://www.tiktok.com/@farnazart_studio" aria-label="TikTok"><img  loading="lazy" decoding="async" src="images/tt.webp" alt="TikTok" width="36" height="36"></a>
@@ -299,6 +300,32 @@
     }, { threshold: 0.14, rootMargin: "0px 0px -10% 0px" });
     elements.forEach((el) => observer.observe(el));
   })();
+</script>
+<div id="designer-overlay" style="position: fixed; inset: 0; background: rgba(0, 0, 0, 0.7); display: none; align-items: center; justify-content: center; z-index: 9999;" onclick="closeDesignerOverlay(event)">
+  <div style="background: #1c1c1c; color: #faf7f2; border: 1px solid rgba(250, 247, 242, 0.2); border-radius: 10px; padding: 16px 24px;">
+    +1 (346) 876-4145
+  </div>
+</div>
+<script>
+  function openDesignerOverlay(event) {
+    if (event) event.preventDefault();
+    const overlay = document.getElementById('designer-overlay');
+    if (!overlay) return;
+    overlay.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeDesignerOverlay(event) {
+    const overlay = document.getElementById('designer-overlay');
+    if (!overlay) return;
+    if (event && event.target !== overlay) return;
+    overlay.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeDesignerOverlay();
+  });
 </script>
 </body>
 </html>
