@@ -1,6 +1,7 @@
 'use client'
 import { useRef, useEffect, useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
@@ -264,7 +265,7 @@ export default function HomePage() {
             <div data-art-type="hero-canvas"
                  className="parallax-container art-canvas-hero relative w-full aspect-[4/5] rounded-2xl shadow-2xl shadow-black/60 overflow-hidden">
               <div className="parallax-inner-auto scroll-scale-img absolute inset-0">
-                <Image src="/images/g8.jpg.jpeg" alt="Hero Artwork" layout="fill" objectFit="cover" />
+                <Image src="/images/g8-768x956.jpg.webp" alt="Hero Artwork" fill style={{ objectFit: 'cover' }} />
                 <div className="absolute inset-3 border border-[#C5B358]/20 rounded-xl pointer-events-none" />
                 <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-[#C5B358]/60 rounded-tl" />
                 <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 border-[#C5B358]/60 rounded-tr" />
@@ -302,7 +303,7 @@ export default function HomePage() {
             <div data-art-type="about-studio"
                  className="parallax-container art-canvas-hero relative w-full aspect-[3/4] rounded-2xl shadow-xl overflow-hidden">
               <div className="parallax-inner-auto scroll-scale-img absolute inset-0 flex flex-col items-center justify-center gap-2 opacity-25">
-                <Image src="/images/img-3-min.jpg.jpeg" alt="Studio Art" layout="fill" objectFit="cover" />
+                <Image src="/images/img-3-min.jpg.webp" alt="Studio Art" fill style={{ objectFit: 'cover' }} />
               </div>
             </div>
             <div className="absolute -top-5 -right-5 w-24 h-24 bg-[#C4622D] rounded-full flex flex-col items-center justify-center text-white shadow-lg">
@@ -418,7 +419,7 @@ export default function HomePage() {
             <div data-art-type="artist-portrait"
                  className="parallax-container art-canvas-portrait relative w-full aspect-[3/4] rounded-2xl border-2 border-[#C4622D]/30 overflow-hidden">
               <div className="parallax-inner-auto absolute inset-0 flex flex-col items-center justify-center gap-2 opacity-25">
-                <Image src="/images/Farnaz-1.jpeg" alt="Farnaz Amin" layout="fill" objectFit="cover" />
+                <Image src="/images/main_farnaz.webp" alt="Farnaz Amin" fill style={{ objectFit: 'cover' }} />
               </div>
             </div>
           </div>
@@ -506,4 +507,3 @@ export default function HomePage() {
     </>
   )
 }
-

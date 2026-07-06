@@ -23,9 +23,6 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  /* Close drawer on route change */
-  useEffect(() => { setOpen(false) }, [pathname])
-
   /* Prevent body scroll when drawer is open */
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : ''
@@ -135,6 +132,7 @@ export default function Nav() {
                   >
                     <Link
                       href={href}
+                      onClick={() => setOpen(false)}
                       className={`flex items-center justify-between py-3.5 px-2 text-base font-medium border-b border-cream/8 rounded-lg transition-colors ${
                         pathname === href
                           ? 'text-gold'
@@ -156,7 +154,7 @@ export default function Nav() {
                   transition={{ delay: 0.55, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                   className="mt-6 pt-6 border-t border-cream/10"
                 >
-                  <Link href="/classes" className="btn-terra w-full justify-center text-center text-sm">
+                  <Link href="/classes" onClick={() => setOpen(false)} className="btn-terra w-full justify-center text-center text-sm">
                     Book a Class
                   </Link>
                 </motion.div>
