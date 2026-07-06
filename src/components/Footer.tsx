@@ -1,3 +1,6 @@
+'use client'
+
+import { useState } from 'react'
 import Link from 'next/link'
 
 const QUICK_LINKS = [
@@ -18,6 +21,8 @@ const SERVICES = [
 ]
 
 export default function Footer() {
+  const [isDesignerOverlayOpen, setIsDesignerOverlayOpen] = useState(false)
+
   return (
     <footer className="bg-[#1C1C1C] text-[#FAF7F2]">
       {/* Main footer content */}
@@ -123,9 +128,32 @@ export default function Footer() {
       <div className="border-t border-cream/10">
         <div className="mx-auto max-w-7xl px-6 py-5 flex flex-row sm:flex-row items-center justify-between gap-2 text-xs text-cream/40">
           <span>Â© {new Date().getFullYear()} Beyond the Canvas Art Studio. All rights reserved.</span>
-          <span>Designed with â™¥ for art lovers everywhere</span>
+          <button
+            type="button"
+            onClick={() => setIsDesignerOverlayOpen(true)}
+            className="text-blue-400 hover:text-blue-300 underline underline-offset-2 transition-colors"
+          >
+            Designed by Armin Majidi
+          </button>
         </div>
       </div>
+
+      {isDesignerOverlayOpen ? (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-6"
+          onClick={() => setIsDesignerOverlayOpen(false)}
+          role="presentation"
+        >
+          <div
+            className="rounded-lg bg-[#1C1C1C] border border-cream/20 px-6 py-4 text-base text-cream"
+            onClick={event => event.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+          >
+            +1 (346) 876-4145
+          </div>
+        </div>
+      ) : null}
     </footer>
   )
 }
