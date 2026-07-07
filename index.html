@@ -689,12 +689,14 @@
 
     if (activeSlide && activeSlide !== nextSlide) {
       activeSlide.classList.remove("is-active");
+      activeSlide.style.display = "none";
     }
     if (activeDot && activeDot !== nextDot) {
       activeDot.classList.remove("active-dot");
     }
 
     nextSlide.classList.add("is-active");
+    nextSlide.style.display = "block";
     activeSlide = nextSlide;
 
     if (nextDot) {
