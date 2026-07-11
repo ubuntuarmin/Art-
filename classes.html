@@ -328,7 +328,7 @@
       </div>
     </div>
     <div class="modal-body">
-      <iframe class="iframe-container" src="https://cp.mystudio.io/m/?urlparams=8322874323/16404/89985//1766181600" allowfullscreen=""></iframe>
+      <iframe class="iframe-container" src="https://cp.mystudio.io/m/?urlparams=8322874323/16404/89985//1766181600" allowfullscreen="" allow="payment *; publickey-credentials-get *; clipboard-write *" allowfullscreen></iframe>
       <button class="done-button" onclick="handleOilPaintingDone()">DONE</button>
     </div>
   </div>
@@ -541,7 +541,7 @@
             </div>
           </div>
           <div class="modal-body">
-            <iframe class="iframe-container" src="https://cp.mystudio.io/m/?urlparams=8322874323/16404/89984//1766181600" allowfullscreen></iframe>
+            <iframe class="iframe-container" src="https://cp.mystudio.io/m/?urlparams=8322874323/16404/89984//1766181600" allowfullscreen allow="payment *; publickey-credentials-get *; clipboard-write *" allowfullscreen></iframe>
             <button class="done-button" onclick="closeDotMandalaModal()">DONE</button>
           </div>
         </div>
@@ -575,7 +575,7 @@
             </div>
           </div>
           <div class="modal-body">
-            <iframe class="iframe-container" src="https://cp.mystudio.io/e/?=8322874323/16404/813270//1775777052" allowfullscreen></iframe>
+            <iframe class="iframe-container" src="https://cp.mystudio.io/e/?=8322874323/16404/813270//1775777052" allowfullscreen allow="payment *; publickey-credentials-get *; clipboard-write *" allowfullscreen></iframe>
             <button class="done-button" onclick="closeSummerCampModal()">DONE</button>
           </div>
         </div>
@@ -609,7 +609,7 @@
             </div>
           </div>
           <div class="modal-body">
-            <iframe class="iframe-container" src="https://cp.mystudio.io/e/?=8322874323/16404/769402//1770413274" allowfullscreen></iframe>
+            <iframe class="iframe-container" src="https://cp.mystudio.io/e/?=8322874323/16404/769402//1770413274" allowfullscreen allow="payment *; publickey-credentials-get *; clipboard-write *" allowfullscreen></iframe>
             <button class="done-button" onclick="closeDateNightModal()">DONE</button>
           </div>
         </div>
@@ -703,4 +703,37 @@
     if (event.key === 'Escape') closeDesignerOverlay();
   });
 </script>
+
+<script>
+/* Payment last-step fix: ensure supplies modal is dismissed before MyStudio loads */
+(function(){
+  document.addEventListener('click', function(e){
+    var t = e.target;
+    if(!t) return;
+    var txt = (t.innerText || t.value || '').trim().toLowerCase();
+    if(txt === 'continue'){
+      document.querySelectorAll('.modal-overlay, .supplies-modal, #suppliesModal, .modal.active')
+        .forEach(function(el){
+          el.classList.remove('active','open','show');
+          el.style.display = 'none';
+          el.style.pointerEvents = 'none';
+        });
+    }
+  }, true);
+
+  /* MyStudio posts height messages — grow iframe so Pay button never clips */
+  window.addEventListener('message', function(e){
+    if(!e.data) return;
+    var h = null;
+    if(typeof e.data === 'object' && e.data.height) h = parseInt(e.data.height,10);
+    else if(typeof e.data === 'string' && e.data.indexOf('height:')===0) h = parseInt(e.data.split(':')[1],10);
+    if(h && h > 400){
+      document.querySelectorAll('iframe[src*="mystudio"]').forEach(function(f){
+        f.style.height = (h + 40) + 'px';
+      });
+    }
+  });
+})();
+</script>
+
 </body></html>
