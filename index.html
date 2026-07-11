@@ -595,10 +595,12 @@
     </div>
     <div class="footer-col">
       <h4>Studio Hours</h4>
-      <p style="color: rgba(255,255,255,0.45); font-size: 0.87rem; margin-bottom: 10px;">Mon–Fri: 10 AM–2 PM, 4–8 PM</p>
-      <p style="color: rgba(255,255,255,0.45); font-size: 0.87rem; margin-bottom: 10px;">Saturday: 10AM-4PM</p>
-      <p style="color: rgba(255,255,255,0.45); font-size: 0.87rem; margin-bottom: 10px;">Sunday: Closed</p>
-      <a href="contact.html" style="margin-top:10px;">📞 Contact Us</a>
+      <p class="footer-detail">Mon–Fri: 10 AM–2 PM, 4–8 PM</p>
+      <p class="footer-detail">Saturday: 10 AM–4 PM</p>
+      <p class="footer-detail">Sunday: Closed</p>
+      <p class="footer-detail-label">Studio Address</p>
+      <p class="footer-detail footer-address">25031 Westheimer Pkwy Ste 920<br>Katy, TX 77494</p>
+      <a href="contact.html" class="footer-contact-link">📞 Contact Us</a>
     </div>
   </div>
   <div class="footer-bottom">
@@ -631,6 +633,57 @@
   }
   .designer-link:hover { color: #93c5fd; }
   @media (prefers-reduced-motion: reduce) { .designer-link { animation: none; } }
+  footer {
+    background: radial-gradient(circle at top right, rgba(196, 98, 45, 0.2), rgba(28, 28, 28, 0.95) 40%), #1c1c1c;
+    border-top: 1px solid rgba(212, 168, 67, 0.45);
+    box-shadow: 0 -14px 34px rgba(0, 0, 0, 0.25);
+  }
+  .footer-inner {
+    gap: 2.5rem;
+  }
+  .footer-col {
+    padding: 0.25rem 0;
+  }
+  .footer-col a,
+  .footer-detail {
+    color: rgba(255, 255, 255, 0.72) !important;
+    font-size: 0.86rem;
+    line-height: 1.7;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  .footer-col a:hover {
+    color: #f2c26b;
+    transform: translateX(3px);
+  }
+  .footer-detail-label {
+    color: #d4a843;
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 1.8px;
+    margin: 0.9rem 0 0.4rem;
+    font-weight: 700;
+  }
+  .footer-address {
+    color: rgba(255, 255, 255, 0.8) !important;
+    margin-bottom: 0.85rem;
+  }
+  .footer-contact-link {
+    margin-top: 0.35rem;
+    display: inline-flex !important;
+    align-items: center;
+    gap: 0.35rem;
+    color: #f2c26b !important;
+    font-weight: 600;
+  }
+  .footer-bottom {
+    border-top-color: rgba(212, 168, 67, 0.2);
+  }
+  @media (max-width: 768px) {
+    .footer-inner {
+      gap: 1.6rem;
+    }
+  }
 </style>
 
 <script>
