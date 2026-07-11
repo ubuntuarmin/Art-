@@ -150,7 +150,10 @@
         </div>
         <div class="card-footer">
           <div class="card-price">$39-50 <span>/ session</span></div>
-          <button class="btn-enrol" onclick="openOilPaintingBooking()">Book Now</button>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button class="btn-enrol" onclick="openOilPaintingBooking()">Book Now</button>
+            <button class="btn-enrol" onclick="openSupplyProgramBooking()">Supply Program</button>
+          </div>
         </div>
       </div>
     </div>
@@ -329,40 +332,24 @@
     </div>
     <div class="modal-body">
       <iframe class="iframe-container" src="https://cp.mystudio.io/m/?urlparams=8322874323/16404/89985//1766181600" allowfullscreen="" allow="payment *; publickey-credentials-get *; clipboard-write *" allowfullscreen></iframe>
-      <button class="done-button" onclick="handleOilPaintingDone()">DONE</button>
+      <button class="done-button" onclick="closeOilPaintingModal()">DONE</button>
     </div>
   </div>
 </div>
 
-<!-- Modal for Supplies Selection -->
-<div class="modal-overlay" id="suppliesModalOverlay">
+<!-- Modal for Supply Program Booking -->
+<div class="modal-overlay" id="supplyProgramModalOverlay">
   <div class="modal-content">
     <div class="modal-header">
-      <h3>Supplies Selection</h3>
-      <button class="modal-close" onclick="closeSuppliesModal()">×</button>
+      <h3>Supply Program</h3>
+      <div class="modal-header-buttons">
+        <button class="modal-back" onclick="closeSupplyProgramModal()">←</button>
+        <button class="modal-close" onclick="closeSupplyProgramModal()">×</button>
+      </div>
     </div>
     <div class="modal-body">
-      <p>Would you like to bring your own supplies or have us provide them for you?</p>
-      
-      <div class="supplies-options">
-        <div class="supplies-option" onclick="selectSuppliesOption('bring-own')">
-          <div class="supplies-option-icon">🎒</div>
-          <div class="supplies-option-details">
-            <div class="supplies-option-title">Bring Your Own Supplies</div>
-            <div class="supplies-option-description">Use your personal oil paints, brushes, and materials</div>
-          </div>
-        </div>
-        
-        <div class="supplies-option" onclick="selectSuppliesOption('unlimited-package')">
-          <div class="supplies-option-icon">🎨</div>
-          <div class="supplies-option-details">
-            <div class="supplies-option-title">Studio supply program</div>
-            <div class="supplies-option-description">Get everything you need for oil painting plus free sketchbook and paintbrushes to keep</div>
-          </div>
-        </div>
-      </div>
-      
-      <button class="continue-button" onclick="proceedWithSelection()">Continue</button>
+      <iframe class="iframe-container" src="https://cp.mystudio.io/m/?urlparams=8322874323/16404/93516//1777563253" allowfullscreen="" allow="payment *; publickey-credentials-get *; clipboard-write *" allowfullscreen></iframe>
+      <button class="done-button" onclick="closeSupplyProgramModal()">DONE</button>
     </div>
   </div>
 </div>
@@ -524,11 +511,7 @@
   }
 
   // Oil Painting Booking Functions
-  let selectedSuppliesOption = null;
-  let isUnlimitedPackageView = false;
-
   function openOilPaintingBooking() {
-    isUnlimitedPackageView = false;
     document.getElementById('oilPaintingModalOverlay').style.display = 'flex';
   }
 
@@ -536,45 +519,12 @@
     document.getElementById('oilPaintingModalOverlay').style.display = 'none';
   }
 
-  function showSuppliesSelection() {
-    document.getElementById('oilPaintingModalOverlay').style.display = 'none';
-    document.getElementById('suppliesModalOverlay').style.display = 'flex';
+  function openSupplyProgramBooking() {
+    document.getElementById('supplyProgramModalOverlay').style.display = 'flex';
   }
 
-  function closeSuppliesModal() {
-    document.getElementById('suppliesModalOverlay').style.display = 'none';
-  }
-
-  function selectSuppliesOption(option) {
-    // Deselect all options
-    document.querySelectorAll('.supplies-option').forEach(opt => {
-      opt.classList.remove('selected');
-    });
-    
-    // Select the clicked option
-    event.currentTarget.classList.add('selected');
-    selectedSuppliesOption = option;
-  }
-
-  function proceedWithSelection() {
-    if (!selectedSuppliesOption) {
-      alert('Please select an option');
-      return;
-    }
-    
-    if (selectedSuppliesOption === 'unlimited-package') {
-      // Open the iframe again for the unlimited package option
-      closeSuppliesModal();
-      isUnlimitedPackageView = true;
-      const iframe = document.querySelector('#oilPaintingModalOverlay .iframe-container');
-      iframe.src = 'https://cp.mystudio.io/m/?urlparams=8322874323/16404/93516//1777563253';
-      document.getElementById('oilPaintingModalOverlay').style.display = 'flex';
-    } else {
-      // For bring your own supplies, just close the modal and return to classes.html
-      closeSuppliesModal();
-      // Optionally, you could show a confirmation message here
-      alert('Thanks for choosing to bring your own supplies! See you in class.');
-    }
+  function closeSupplyProgramModal() {
+    document.getElementById('supplyProgramModalOverlay').style.display = 'none';
   }
 
   // Dot Mandala Booking Functions
@@ -679,16 +629,6 @@
     }
   }
 
-  function handleOilPaintingDone() {
-    if (isUnlimitedPackageView) {
-      // If we just finished viewing the unlimited package iframe, return to classes.html
-      closeOilPaintingModal();
-      isUnlimitedPackageView = false;
-    } else {
-      // Otherwise, show the supplies selection
-      showSuppliesSelection();
-    }
-  }
 </script>
 <script>
   (function () {
