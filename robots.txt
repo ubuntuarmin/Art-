@@ -1,10 +1,5 @@
 User-agent: *
 Allow: /
-Allow: /index.html
-Allow: /classes.html
-Allow: /gallery.html
-Allow: /about.html
-Allow: /contact.html
 
 # Crawl-budget protection: block junk/system paths and parameterized duplicates
 Disallow: /cdn-cgi/
