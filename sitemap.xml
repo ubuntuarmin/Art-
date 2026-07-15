@@ -10,19 +10,19 @@
     <loc>https://farnazartstudio.com/classes</loc>
     <lastmod>2026-07-05</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>1.0</priority>
   </url>
   <url>
     <loc>https://farnazartstudio.com/contact</loc>
     <lastmod>2026-07-05</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://farnazartstudio.com/gallery</loc>
     <lastmod>2026-07-05</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://farnazartstudio.com/about</loc>
@@ -31,8 +31,26 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://farnazartstudio.com/oil-painting-sketching-katy-tx.html</loc>
+    <loc>https://farnazartstudio.com/acrylic-classes-katy-tx.html</loc>
     <lastmod>2026-07-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://farnazartstudio.com/celebration-art-party-katy-tx.html</loc>
+    <lastmod>2026-07-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://farnazartstudio.com/crafting-classes-katy-tx.html</loc>
+    <lastmod>2026-07-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://farnazartstudio.com/date-night-art-class-katy-tx.html</loc>
+    <lastmod>2026-07-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -40,7 +58,19 @@
     <loc>https://farnazartstudio.com/dot-mandala-katy-tx.html</loc>
     <lastmod>2026-07-12</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://farnazartstudio.com/oil-painting-sketching-katy-tx.html</loc>
+    <lastmod>2026-07-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://farnazartstudio.com/resin-art-classes-katy-tx.html</loc>
+    <lastmod>2026-07-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://farnazartstudio.com/summer-art-camp-katy-tx.html</loc>
@@ -49,20 +79,8 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://farnazartstudio.com/crafting-classes-katy-tx.html</loc>
-    <lastmod>2026-07-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://farnazartstudio.com/resin-art-classes-katy-tx.html</loc>
-    <lastmod>2026-07-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://farnazartstudio.com/acrylic-classes-katy-tx.html</loc>
-    <lastmod>2026-07-12</lastmod>
+    <loc>https://farnazartstudio.com/team-building-art-workshop-katy-tx.html</loc>
+    <lastmod>2026-07-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
