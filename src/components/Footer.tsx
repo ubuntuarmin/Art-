@@ -133,7 +133,7 @@ export default function Footer() {
             onClick={() => setIsDesignerOverlayOpen(true)}
             className="text-blue-400 hover:text-blue-300 underline underline-offset-2 transition-colors"
           >
-            Designed by Armin Majidi
+            Designed and developed by A&R Web Studio
           </button>
         </div>
       </div>
