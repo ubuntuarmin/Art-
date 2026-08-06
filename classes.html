@@ -250,8 +250,8 @@
         </div>
         <div class="card-footer">
           <div class="card-price">$45 <span>/ session · $50 each session is 2 hrs</span></div>
-          <a href="resin-art-classes-katy-tx.html" class="btn-enrol" style="width: 100%; text-align: center; display: block; margin-bottom:8px;">View class details</a>
-          <button class="btn-enrol" onclick="openResinBooking()" style="width: 100%; text-align: center; display: block;">Book Now</button>
+          <a href="resin-art-classes-katy-tx.html" class="btn-enrol">View class details</a>
+          <button class="btn-enrol" onclick="openResinBooking()">Book Now</button>
         </div>
       </div>
     </div>
@@ -273,8 +273,8 @@
         <div class="card-name">Crafting</div>
         <p class="card-desc">Explore hands-on creativity through custom textures, structural mediums, and mixed-media crafting designed for all skill levels.</p>
         <div class="card-footer">
-          <a href="crafting-classes-katy-tx.html" class="btn-enrol" style="width: 100%; text-align: center; display: block; margin-bottom:8px;">View class details</a>
-          <a href="contact.html" class="btn-enrol" style="width: 100%; text-align: center; display: block;">Contact for pricing and to book</a>
+          <a href="crafting-classes-katy-tx.html" class="btn-enrol">View class details</a>
+          <a href="contact.html" class="btn-enrol">Contact for pricing and to book</a>
         </div>
       </div>
     </div>
@@ -288,8 +288,8 @@
         <div class="card-name">Acrylic</div>
         <p class="card-desc">Work with bold, fast-drying mediums. Learn foundational color theory, heavy body layering techniques, and expressive brush strokes.</p>
         <div class="card-footer">
-          <a href="acrylic-classes-katy-tx.html" class="btn-enrol" style="width: 100%; text-align: center; display: block; margin-bottom:8px;">View class details</a>
-          <a href="contact.html" class="btn-enrol" style="width: 100%; text-align: center; display: block;">Contact for pricing and to book</a>
+          <a href="acrylic-classes-katy-tx.html" class="btn-enrol">View class details</a>
+          <a href="contact.html" class="btn-enrol">Contact for pricing and to book</a>
         </div>
       </div>
     </div>
@@ -303,8 +303,8 @@
         <div class="card-name">Watercolor</div>
         <p class="card-desc">Explore transparency and fluid transitions. Control wet-on-wet fields, luminosity washes, and intricate detailing techniques.</p>
         <div class="card-footer">
-          <a href="watercolor-classes-katy-tx.html" class="btn-enrol" style="width: 100%; text-align: center; display: block; margin-bottom:8px;">View class details</a>
-          <a href="contact.html" class="btn-enrol" style="width: 100%; text-align: center; display: block;">Contact for pricing and to book</a>
+          <a href="watercolor-classes-katy-tx.html" class="btn-enrol">View class details</a>
+          <a href="contact.html" class="btn-enrol">Contact for pricing and to book</a>
         </div>
       </div>
     </div>
@@ -491,9 +491,35 @@
   .footer-bottom {
     border-top-color: rgba(212, 168, 67, 0.2);
   }
+  #grid-resin-classes .card-footer,
+  #grid-more-classes .card-footer {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+  #grid-resin-classes .btn-enrol,
+  #grid-more-classes .btn-enrol {
+    width: 100% !important;
+    display: block !important;
+    text-align: center !important;
+    box-sizing: border-box;
+  }
+  #grid-resin-classes .card-price {
+    margin-bottom: 2px;
+  }
+  #grid-resin-classes .card-price span {
+    white-space: normal;
+  }
   @media (max-width: 768px) {
     .footer-inner {
       gap: 1.6rem;
+    }
+    #grid-resin-classes .btn-enrol,
+    #grid-more-classes .btn-enrol {
+      min-height: 44px;
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
     }
   }
 </style>
